@@ -3,8 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/DuAn1/AppQuanLyPhongTro/app/src/main/res/layout/activity_main.xml" value="0.10989583333333333" />
+        <entry key="..\:/DuAn1/AppQuanLyPhongTro/app/src/main/res/drawable-v24/home.xml" value="0.1635" />
+        <entry key="..\:/DuAn1/AppQuanLyPhongTro/app/src/main/res/layout/activity_main.xml" value="0.16799999999999998" />
+        <entry key="..\:/DuAn1/AppQuanLyPhongTro/app/src/main/res/layout/fragment_hoa_don.xml" value="0.25" />
+        <entry key="..\:/DuAn1/AppQuanLyPhongTro/app/src/main/res/layout/fragment_hop_dong.xml" value="0.25" />
+        <entry key="..\:/DuAn1/AppQuanLyPhongTro/app/src/main/res/layout/fragment_khach_thue.xml" value="0.25" />
+        <entry key="..\:/DuAn1/AppQuanLyPhongTro/app/src/main/res/layout/fragment_phong.xml" value="0.25" />
+        <entry key="..\:/DuAn1/AppQuanLyPhongTro/app/src/main/res/layout/header.xml" value="0.25" />
         <entry key="..\:/DuAn1/AppQuanLyPhongTro/app/src/main/res/layout/manhinhchao.xml" value="0.10989583333333333" />
+        <entry key="..\:/DuAn1/AppQuanLyPhongTro/app/src/main/res/menu/menu.xml" value="0.10989583333333333" />
       </map>
     </option>
   </component>
