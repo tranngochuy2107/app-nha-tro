@@ -1,91 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:padding="30dp"
-    android:layout_height="match_parent">
+    android:background="@color/white"
+    android:padding="15dp"
+    android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15sp"
-        android:textSize="25sp"
-        android:text="Chi tiết phòng"
-        android:gravity="center"
-        android:background="#19000000"
-        android:textColor="@android:color/black"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_phong"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Phòng:"
-            android:textSize="25dp" />
-        <TextView
-            android:id="@+id/tv_giaphong"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginLeft="10dp"
-            android:background="#19000000"
-            android:text="Giá Phòng:"
-            android:textSize="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/tv_phong"/>
+            android:padding="15sp"
+            android:text="Chi Tiết Phòng"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
 
-        <TextView
-            android:id="@+id/tv_giadien"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:gravity="start"
-            android:background="#19000000"
-            android:layout_marginLeft="10dp"
-            android:textSize="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_below="@+id/tv_giaphong"
-            android:text="Giá Điện: "/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_gianuoc"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:gravity="start"
-            android:background="#19000000"
-            android:layout_marginLeft="10dp"
-            android:textSize="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_below="@+id/tv_giadien"
-            android:text="Giá Nước:"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:gravity="start"
+                    android:textColor="@android:color/black"
+                    android:textSize="17dp"
+                    android:text="số phòng: " />
 
-        <TextView
-            android:id="@+id/tv_wifi"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:gravity="start"
-            android:background="#19000000"
-            android:layout_marginLeft="10dp"
-            android:textSize="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_below="@+id/tv_gianuoc"
-            android:text="Giá Wifi:"/>
+                <EditText
+                    android:id="@+id/ed_soPhong"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#34000000"
+                    android:hint="201"
+                    />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_trangthai"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
-            android:text="Tình Trạng:"
-            android:textSize="20dp"
-            android:layout_below="@+id/tv_wifi"/>
-    </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:gravity="start"
+                    android:text="Giá Phòng: "
+                    android:textColor="@android:color/black"
+                    android:textSize="17dp" />
 
-</LinearLayout>
+                <EditText
+                    android:id="@+id/ed_giaPhong"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#34000000"
+                    android:hint="201"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:gravity="start"
+                    android:text="Giá Điện: "
+                    android:textColor="@android:color/black"
+                    android:textSize="17dp" />
+
+                <EditText
+                    android:id="@+id/ed_giaDient"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#34000000"
+                    android:hint="201"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:gravity="start"
+                    android:textColor="@android:color/black"
+                    android:textSize="17dp"
+                    android:text="Giá Wifi: " />
+
+                <EditText
+                    android:id="@+id/ed_wifiPhong"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#34000000"
+                    android:hint="201"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:gravity="start"
+                    android:textColor="@android:color/black"
+                    android:textSize="17dp"
+                    android:text="Tinh Trạng: " />
+
+                <EditText
+                    android:id="@+id/ed_trinhTrang"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Đang cho thuê"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
