@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "QLPT";
-    private static final int DB_VERSION =1;
+    private static final int DB_VERSION =2;
     //---------------------------------
     static final String CREATE_TABLE_PHONG =
             "create table Phong (IdPhong integer primary key autoincrement,"+
@@ -17,6 +17,7 @@ public class DbHelper extends SQLiteOpenHelper {
                     "GiaDien INTEGER NOT NULL," +
                     "GiaNuoc INTEGER NOT NULL," +
                     "Wifi INTERGER NOT NULL," +
+                    "TrangThai TEXT NOT NULL," +
                     "IdHopDong INTEGER REFERENCES HopDong(IdHopDong)," +
                     "IdKhachThue INTEGER REFERENCES KhachThue(IdKhachThue))";
     //---------------------------------

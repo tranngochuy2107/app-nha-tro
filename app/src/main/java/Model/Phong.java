@@ -6,19 +6,22 @@ public class Phong {
     private int GiaPhong;
     private int GiaDien;
     private int GiaNuoc;
-    private int Wifi;
+    private int GiaWifi;
+    private String TrangThai;
 
     public Phong() {
     }
 
-    public Phong(int idPhong, int soPhong, int giaPhong, int giaDien, int giaNuoc, int wifi) {
+    public Phong(int idPhong, int soPhong, int giaPhong, int giaDien, int giaNuoc, int giaWifi, String trangThai) {
         IdPhong = idPhong;
         SoPhong = soPhong;
         GiaPhong = giaPhong;
         GiaDien = giaDien;
         GiaNuoc = giaNuoc;
-        Wifi = wifi;
+        GiaWifi = giaWifi;
+        TrangThai = trangThai;
     }
+
     public int getIdPhong() {
         return IdPhong;
     }
@@ -59,11 +62,19 @@ public class Phong {
         GiaNuoc = giaNuoc;
     }
 
-    public int getWifi() {
-        return Wifi;
+    public int getGiaWifi() {
+        return GiaWifi;
     }
 
-    public void setWifi(int wifi) {
-        Wifi = wifi;
+    public void setGiaWifi(int giaWifi) {
+        GiaWifi = giaWifi;
+    }
+
+    public String getTrangThai() {
+        return TrangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        TrangThai = trangThai;
     }
 }
