@@ -55,7 +55,7 @@
         android:id="@+id/edt_themgiawifi"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="Giá Phòng"
+        android:hint="Gia Wifi"
         android:background="@color/purple_200"
         android:layout_marginTop="20dp"
         />
