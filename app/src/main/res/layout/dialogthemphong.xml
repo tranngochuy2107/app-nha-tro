@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="12dp"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thêm Phòng"
+        android:textSize="36dp"
+        android:textColor="@color/black"
+        android:gravity="center"/>
+
+    <EditText
+        android:id="@+id/edt_themsophong"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Số Phòng"
+        android:background="@color/purple_200"
+        android:layout_marginTop="20dp"
+        />
+
+    <EditText
+        android:id="@+id/edt_themgiaphong"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Giá Phòng"
+        android:background="@color/purple_200"
+        android:layout_marginTop="20dp"
+        />
+
+    <EditText
+        android:id="@+id/edt_themgiadien"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Giá Điện"
+        android:background="@color/purple_200"
+        android:layout_marginTop="20dp"
+        />
+
+    <EditText
+        android:id="@+id/edt_themgianuoc"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Giá Nước"
+        android:background="@color/purple_200"
+        android:layout_marginTop="20dp"
+        />
+
+    <EditText
+        android:id="@+id/edt_themgiawifi"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Giá Phòng"
+        android:background="@color/purple_200"
+        android:layout_marginTop="20dp"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_them_phong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="76dp"
+            android:backgroundTint="@color/colorDividerView"
+            android:text="Thêm"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.119" />
+
+        <Button
+            android:id="@+id/btn_huy_phong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorDividerView"
+            android:text="Hủy"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.755"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.119" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+</LinearLayout>
