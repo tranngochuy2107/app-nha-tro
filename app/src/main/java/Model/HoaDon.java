@@ -8,11 +8,13 @@ public class HoaDon {
     private  int Tong;
     private String ChiPhiKhac;
     private String GhiChu;
+    private int IdPhong;
+    private int IdHopDong;
 
     public HoaDon() {
     }
 
-    public HoaDon(int idHoaDon, String ngay, int soDien, int soNuoc, int tong, String chiPhiKhac, String ghiChu) {
+    public HoaDon(int idHoaDon, String ngay, int soDien, int soNuoc, int tong, String chiPhiKhac, String ghiChu, int idPhong, int idHopDong) {
         IdHoaDon = idHoaDon;
         Ngay = ngay;
         SoDien = soDien;
@@ -20,6 +22,8 @@ public class HoaDon {
         Tong = tong;
         ChiPhiKhac = chiPhiKhac;
         GhiChu = ghiChu;
+        IdPhong = idPhong;
+        IdHopDong = idHopDong;
     }
 
     public int getIdHoaDon() {
@@ -76,5 +80,21 @@ public class HoaDon {
 
     public void setGhiChu(String ghiChu) {
         GhiChu = ghiChu;
+    }
+
+    public int getIdPhong() {
+        return IdPhong;
+    }
+
+    public void setIdPhong(int idPhong) {
+        IdPhong = idPhong;
+    }
+
+    public int getIdHopDong() {
+        return IdHopDong;
+    }
+
+    public void setIdHopDong(int idHopDong) {
+        IdHopDong = idHopDong;
     }
 }

@@ -10,30 +10,33 @@
         android:gravity="center"
         android:id="@+id/tvTitle"
         android:textStyle="bold"/>
+
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#A59AE8"
-        android:hint="Họ Tên"
-        android:layout_marginTop="40dp"
         android:id="@+id/edtHoTen"
-        android:layout_below="@id/tvTitle"/>
-    <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_below="@id/tvTitle"
         android:layout_marginTop="40dp"
         android:background="#A59AE8"
-        android:hint="Số Điện Thoại"
+        android:hint="Họ Tên" />
+
+    <EditText
         android:id="@+id/edtSDT"
-        android:layout_below="@id/edtHoTen"/>
-    <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_below="@id/edtHoTen"
         android:layout_marginTop="40dp"
         android:background="#A59AE8"
-        android:hint="CCCD"
+        android:hint="Số Điện Thoại" />
+
+    <EditText
         android:id="@+id/edtCCCD"
-        android:layout_below="@id/edtSDT"/>
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/edtSDT"
+        android:layout_marginTop="40dp"
+        android:background="#A59AE8"
+        android:hint="CCCD" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

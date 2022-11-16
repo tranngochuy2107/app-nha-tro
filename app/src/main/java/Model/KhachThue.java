@@ -5,15 +5,17 @@ public class KhachThue {
     private  String hoTen;
     private  int Sdt;
     private  int Cccd;
+    private int IdPhong;
 
     public KhachThue() {
     }
 
-    public KhachThue(int idKhachThue, String hoTen, int sdt, int cccd) {
+    public KhachThue(int idKhachThue, String hoTen, int sdt, int cccd, int idPhong) {
         IdKhachThue = idKhachThue;
         this.hoTen = hoTen;
         Sdt = sdt;
         Cccd = cccd;
+        IdPhong = idPhong;
     }
 
     public int getIdKhachThue() {
@@ -47,4 +49,13 @@ public class KhachThue {
     public void setCccd(int cccd) {
         Cccd = cccd;
     }
+
+    public int getIdPhong() {
+        return IdPhong;
+    }
+
+    public void setIdPhong(int idPhong) {
+        IdPhong = idPhong;
+    }
+
 }

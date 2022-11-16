@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "QLPT";
-    private static final int DB_VERSION =2;
+    private static final int DB_VERSION =3;
     //---------------------------------
     static final String CREATE_TABLE_PHONG =
             "create table Phong (IdPhong integer primary key autoincrement,"+
@@ -18,7 +18,6 @@ public class DbHelper extends SQLiteOpenHelper {
                     "GiaNuoc INTEGER NOT NULL," +
                     "Wifi INTERGER NOT NULL," +
                     "TrangThai TEXT NOT NULL," +
-                    "IdHopDong INTEGER REFERENCES HopDong(IdHopDong)," +
                     "IdKhachThue INTEGER REFERENCES KhachThue(IdKhachThue))";
     //---------------------------------
     String createTableKhachThue = " create table KhachThue (" +
@@ -26,8 +25,7 @@ public class DbHelper extends SQLiteOpenHelper {
             "HoTen TEXT NOT NULL," +
             "SoDienThoai INTERGER NOT NULL," +
             "Cccd INTERGER NOT NULL," +
-            "IdPhong INTEGER REFERENCES Phong(IdPhong)," +
-            "IdHopDong INTEGER REFERENCES HopDong(IdHopDong))";
+            "IdPhong INTEGER REFERENCES Phong(IdPhong))";
 
     //---------------------------------
 
@@ -51,8 +49,7 @@ public class DbHelper extends SQLiteOpenHelper {
                     "Tong INTEGER NOT NULL," +
                     "GhiChu TEXT NOT NULL," +
                     "IdPhong INTEGER REFERENCES Phong(IdPhong)," +
-                    "IdHopDong INTEGER REFERENCES HopDong(IdHopDong)," +
-                    "IdKhachThue INTEGER REFERENCES KhachThue(IdKhachThue))";
+                    "IdHopDong INTEGER REFERENCES HopDong(IdHopDong))";
 
     public DbHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);

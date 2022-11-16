@@ -8,11 +8,13 @@ public class HopDong {
     private int SoLuongXe;
     private int TiecCoc;
     private Boolean TrangThaiHD;
+    private int IdPhong;
+    private int IdKhachThue;
 
     public HopDong() {
     }
 
-    public HopDong(int idHopDong, String ngayBatDau, String ngayKetThuc, int soNguoi, int soLuongXe, int tiecCoc, Boolean trangThaiHD) {
+    public HopDong(int idHopDong, String ngayBatDau, String ngayKetThuc, int soNguoi, int soLuongXe, int tiecCoc, Boolean trangThaiHD, int idPhong, int idKhachThue) {
         IdHopDong = idHopDong;
         NgayBatDau = ngayBatDau;
         NgayKetThuc = ngayKetThuc;
@@ -20,6 +22,8 @@ public class HopDong {
         SoLuongXe = soLuongXe;
         TiecCoc = tiecCoc;
         TrangThaiHD = trangThaiHD;
+        IdPhong = idPhong;
+        IdKhachThue = idKhachThue;
     }
 
     public int getIdHopDong() {
@@ -76,6 +80,22 @@ public class HopDong {
 
     public void setTrangThaiHD(Boolean trangThaiHD) {
         TrangThaiHD = trangThaiHD;
+    }
+
+    public int getIdPhong() {
+        return IdPhong;
+    }
+
+    public void setIdPhong(int idPhong) {
+        IdPhong = idPhong;
+    }
+
+    public int getIdKhachThue() {
+        return IdKhachThue;
+    }
+
+    public void setIdKhachThue(int idKhachThue) {
+        IdKhachThue = idKhachThue;
     }
 }
 
