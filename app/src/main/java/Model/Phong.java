@@ -8,12 +8,11 @@ public class Phong {
     private int GiaNuoc;
     private int GiaWifi;
     private String TrangThai;
-    private int IdKhachThue;
 
     public Phong() {
     }
 
-    public Phong(int idPhong, int soPhong, int giaPhong, int giaDien, int giaNuoc, int giaWifi, String trangThai, int idKhachThue) {
+    public Phong(int idPhong, int soPhong, int giaPhong, int giaDien, int giaNuoc, int giaWifi, String trangThai) {
         IdPhong = idPhong;
         SoPhong = soPhong;
         GiaPhong = giaPhong;
@@ -21,7 +20,7 @@ public class Phong {
         GiaNuoc = giaNuoc;
         GiaWifi = giaWifi;
         TrangThai = trangThai;
-        IdKhachThue = idKhachThue;
+
     }
 
     public int getIdPhong() {
@@ -80,11 +79,5 @@ public class Phong {
         TrangThai = trangThai;
     }
 
-    public int getIdKhachThue() {
-        return IdKhachThue;
-    }
 
-    public void setIdKhachThue(int idKhachThue) {
-        IdKhachThue = idKhachThue;
-    }
 }
