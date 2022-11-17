@@ -36,7 +36,7 @@
                     android:layout_height="50dp"
                     android:gravity="start"
                     android:textColor="@android:color/black"
-                    android:textSize="17dp"
+                    android:textSize="18dp"
                     android:text="số phòng: " />
 
                 <EditText
@@ -60,7 +60,7 @@
                     android:gravity="start"
                     android:text="Giá Phòng: "
                     android:textColor="@android:color/black"
-                    android:textSize="17dp" />
+                    android:textSize="18dp" />
 
                 <EditText
                     android:id="@+id/ed_giaPhong"
@@ -84,7 +84,7 @@
                     android:gravity="start"
                     android:text="Giá Điện: "
                     android:textColor="@android:color/black"
-                    android:textSize="17dp" />
+                    android:textSize="18dp" />
 
                 <EditText
                     android:id="@+id/ed_giaDien"
@@ -106,7 +106,7 @@
                     android:layout_height="50dp"
                     android:gravity="start"
                     android:textColor="@android:color/black"
-                    android:textSize="17dp"
+                    android:textSize="18dp"
                     android:text="Giá Wifi: " />
 
                 <EditText
@@ -129,7 +129,7 @@
                     android:layout_height="50dp"
                     android:gravity="start"
                     android:textColor="@android:color/black"
-                    android:textSize="17dp"
+                    android:textSize="18dp"
                     android:text="Tình Trạng: " />
 
                 <EditText
