@@ -87,7 +87,7 @@
                     android:textSize="17dp" />
 
                 <EditText
-                    android:id="@+id/ed_giaDient"
+                    android:id="@+id/ed_giaDien"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="#34000000"
@@ -110,7 +110,7 @@
                     android:text="Giá Wifi: " />
 
                 <EditText
-                    android:id="@+id/ed_wifiPhong"
+                    android:id="@+id/ed_giaWifi"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="#34000000"
