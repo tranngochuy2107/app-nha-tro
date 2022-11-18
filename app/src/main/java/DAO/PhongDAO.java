@@ -23,11 +23,11 @@ public class PhongDAO {
     public long insertPhong(Phong obj){
         ContentValues values = new ContentValues();
         values.put("SoPhong",obj.getSoPhong());
-        values.put("Gia",obj.getGiaPhong());
+        values.put("GiaPhong",obj.getGiaPhong());
         values.put("GiaDien",obj.getGiaDien());
         values.put("GiaNuoc",obj.getGiaNuoc());
         values.put("GiaWifi",obj.getGiaWifi());
-        values.put("TrangThaii",obj.getTrangThai());
+        values.put("TrangThai",obj.getTrangThai());
         return db.insert("Phong",null,values);
     }
 
@@ -41,7 +41,7 @@ public class PhongDAO {
     public int updatePhong(Phong obj){
         ContentValues values = new ContentValues();
         values.put("SoPhong",obj.getSoPhong());
-        values.put("Gia",obj.getGiaPhong());
+        values.put("GiaPhong",obj.getGiaPhong());
         values.put("GiaDien",obj.getGiaDien());
         values.put("GiaNuoc",obj.getGiaNuoc());
         values.put("GiaWifi",obj.getGiaWifi());
@@ -70,6 +70,7 @@ public class PhongDAO {
         while (cursor.moveToNext()){
             Phong user= new Phong();
             user.setIdPhong(cursor.getInt(cursor.getColumnIndex("IdPhong")));
+            user.setSoPhong(cursor.getInt(cursor.getColumnIndex("SoPhong")));
             user.setGiaPhong(cursor.getInt(cursor.getColumnIndex("GiaPhong")));
             user.setGiaDien(cursor.getInt(cursor.getColumnIndex("GiaDien")));
             user.setGiaNuoc(cursor.getInt(cursor.getColumnIndex("GiaNuoc")));
