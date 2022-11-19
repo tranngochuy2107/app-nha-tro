@@ -15,13 +15,52 @@
         android:textSize="36dp"
         android:textColor="@color/black"
         android:gravity="center"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:background="#D4B2F1"
+        android:padding="16sp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Chọn tên khách thuê" />
+
+        <Spinner
+            android:id="@+id/spinner_tenKhach_HD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="#D4B2F1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:padding="16sp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Chọn số phòng" />
+
+        <Spinner
+            android:id="@+id/spinner_soPhong_HD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
     <EditText
+        android:textSize="16sp"
         android:id="@+id/edt_NgayBatDau"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Ngày Bắt đầu"
-        android:background="@color/purple_200"
+        android:background="#D4B2F1"
         android:layout_marginTop="20dp"
         />
 
@@ -30,7 +69,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Ngày hết hạn"
-        android:background="@color/purple_200"
+        android:textSize="16sp"
+        android:background="#D4B2F1"
         android:layout_marginTop="20dp"
         />
 
@@ -39,7 +79,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Số người"
-        android:background="@color/purple_200"
+        android:textSize="16sp"
+        android:background="#D4B2F1"
         android:layout_marginTop="20dp"
         />
 
@@ -48,7 +89,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Số lượng xe"
-        android:background="@color/purple_200"
+        android:textSize="16sp"
+        android:background="#D4B2F1"
         android:layout_marginTop="20dp"
         />
 
@@ -57,19 +99,20 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Tiền cọc"
-        android:background="@color/purple_200"
+        android:textSize="16sp"
+        android:background="#D4B2F1"
         android:layout_marginTop="20dp"
         />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/btn_sua"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorDividerView"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:text="Tạo"
             android:textColor="@color/black"
             app:iconPadding="16dp"
@@ -83,7 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:backgroundTint="@color/colorDividerView"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:text="Hủy"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -106,30 +149,6 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:orientation="horizontal">-->
-
-    <!--        <Button-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:text="Sửa"-->
-    <!--            android:textColor="@color/black"-->
-    <!--            android:layout_marginLeft="16dp"-->
-    <!--            android:backgroundTint="@color/colorDividerView"-->
-    <!--            android:layout_marginTop="20dp"-->
-    <!--            />-->
-
-    <!--        <Button-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_marginTop="20dp"-->
-    <!--            android:backgroundTint="@color/colorDividerView"-->
-    <!--            android:text="Hủy"-->
-    <!--            android:textColor="@color/black" />-->
-
-    <!--    </LinearLayout>-->
 
 
 
