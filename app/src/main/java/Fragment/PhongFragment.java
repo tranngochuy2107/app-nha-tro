@@ -89,22 +89,150 @@ public class PhongFragment extends Fragment implements interfaceDeleteClickdisti
 
             @Override
             public void onClick(View view) {
+                boolean check = true;
 
-                    phong = new Phong();
-                    phong.setSoPhong(Integer.parseInt(edt_themsophong.getText().toString()));
-                    phong.setGiaPhong(Integer.parseInt(edt_themgiaphong.getText().toString()));
-                    phong.setGiaDien(Integer.parseInt(edt_themgiadien.getText().toString()));
-                    phong.setGiaNuoc(Integer.parseInt(edt_themgianuoc.getText().toString()));
-                    phong.setGiaWifi(Integer.parseInt(edt_themgiawifi.getText().toString()));
-                    phong.setTrangThai("chua thue");
-                    phongDAO = new PhongDAO(context);
-                    phongDAO.insertPhong(phong);
-                    Toast.makeText(context,"thêm mới thành công",Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                    list.clear();
-                    list.addAll(phongDAO.getAll());
-                    phongAdapter.notifyDataSetChanged();
+                //---------- check so phong
+                String sop=edt_themsophong.getText().toString();
+                int soPhong=0;
 
+                if(sop.length()==0){
+                    Toast.makeText(context,"Số phòng không được để trống",Toast.LENGTH_SHORT).show();
+                    check=false;
+                }
+                else {
+                    try {
+                        soPhong = Integer.parseInt(sop);
+                        if(soPhong<0){
+                            Toast.makeText(context,"Số phòng phải lớn hơn 0",Toast.LENGTH_SHORT).show();
+                            check=false;
+                        }
+                    }catch (Exception e){
+                        Toast.makeText(context,"Số phòng phải là số nguyên",Toast.LENGTH_SHORT).show();
+                        check=false;
+                    }
+
+                }
+
+                try {
+                    for (int i = 0;i<phongDAO.getAll().size();i++)
+                    {
+                        Phong phong_ = phongDAO.getAll().get(i);
+                        if (soPhong == phong_.getSoPhong())
+                        {
+                            Toast.makeText(context, "Phòng "+soPhong+" đã có", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
+
+                }catch (Exception e){
+
+                }
+
+                //-------------------check gia phong
+                String giaphongS=edt_themgiaphong.getText().toString();
+                int giaphong=0;
+
+                if(giaphongS.length()==0){
+                    Toast.makeText(context,"Giá phòng không được để trống",Toast.LENGTH_SHORT).show();
+                    check=false;
+                }
+                else {
+                    try {
+                        giaphong = Integer.parseInt(giaphongS);
+                        if(giaphong<0){
+                            Toast.makeText(context,"Giá phòng phải lớn hơn 0",Toast.LENGTH_SHORT).show();
+                            check=false;
+                        }
+                    }catch (Exception e){
+                        Toast.makeText(context,"Giá phòng phải là số nguyên",Toast.LENGTH_SHORT).show();
+                        check=false;
+                    }
+
+                }
+
+                //-------------------check gia dien
+                String giadienS=edt_themgiadien.getText().toString();
+                int giadien=0;
+
+                if(giadienS.length()==0){
+                    Toast.makeText(context,"Giá điện không được để trống",Toast.LENGTH_SHORT).show();
+                    check=false;
+                }
+                else {
+                    try {
+                        giadien = Integer.parseInt(giadienS);
+                        if(giadien<0){
+                            Toast.makeText(context,"Giá điện phải lớn hơn 0",Toast.LENGTH_SHORT).show();
+                            check=false;
+                        }
+                    }catch (Exception e){
+                        Toast.makeText(context,"Giá điện phải là số nguyên",Toast.LENGTH_SHORT).show();
+                        check=false;
+                    }
+
+                }
+
+                //-------------------check gia dien
+                String gianuocS=edt_themgianuoc.getText().toString();
+                int gianuoc=0;
+
+                if(gianuocS.length()==0){
+                    Toast.makeText(context,"Giá nước không được để trống",Toast.LENGTH_SHORT).show();
+                    check=false;
+                }
+                else {
+                    try {
+                        gianuoc = Integer.parseInt(gianuocS);
+                        if(gianuoc<0){
+                            Toast.makeText(context,"Giá nước phải lớn hơn 0",Toast.LENGTH_SHORT).show();
+                            check=false;
+                        }
+                    }catch (Exception e){
+                        Toast.makeText(context,"Giá nước phải là số nguyên",Toast.LENGTH_SHORT).show();
+                        check=false;
+                    }
+
+                }
+
+                //-------------------check gia dien
+                String giawifiS=edt_themgianuoc.getText().toString();
+                int giawifi=0;
+
+                if(giawifiS.length()==0){
+                    Toast.makeText(context,"Giá wifi không được để trống",Toast.LENGTH_SHORT).show();
+                    check=false;
+                }
+                else {
+                    try {
+                        giawifi = Integer.parseInt(giawifiS);
+                        if(gianuoc<0){
+                            Toast.makeText(context,"Giá wifi phải lớn hơn 0",Toast.LENGTH_SHORT).show();
+                            check=false;
+                        }
+                    }catch (Exception e){
+                        Toast.makeText(context,"Giá wifi phải là số nguyên",Toast.LENGTH_SHORT).show();
+                        check=false;
+                    }
+
+                }
+
+                //--------
+                String trangthai= "chưa thuê";
+                edt_themgianuoc.setText(trangthai);
+
+                if (check == true) {
+
+                    if (phongDAO.insertPhong(soPhong,giaphong,giadien,gianuoc,giawifi,trangthai)){
+                        Toast.makeText(context, "thêm mới thành công", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                        list.clear();
+                        list.addAll(phongDAO.getAll());
+                        phongAdapter.notifyDataSetChanged();
+                    }else {
+                        Toast.makeText(context, "thêm mới k thành công", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
 
             }
         });
@@ -142,7 +270,7 @@ public class PhongFragment extends Fragment implements interfaceDeleteClickdisti
                 if(phongDAO.deletePhong(list.get(index))>0){
                     list.remove(index);
                     phongAdapter.setData(list);
-                    Toast.makeText(context,"xoa thành công",
+                    Toast.makeText(context,"xóa thành công",
                             Toast.LENGTH_LONG).show();
                 }else {
                     Toast.makeText(context,"xóa không thành công",
