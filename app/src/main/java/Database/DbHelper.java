@@ -41,7 +41,8 @@ public class DbHelper extends SQLiteOpenHelper {
                     "IdPhong INTEGER REFERENCES Phong(IdPhong))";
     //---------------------------------
     static final String CREATE_TABLE_HOA_DON =
-            "create table HoaDon (IdHoaDon INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "create table HoaDon (" +
+                    "IdHoaDon INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "Ngay TEXT NOT NULL, " +
                     "SoDien INTEGER NOT NULL, " +
                     "SoNuoc INTEGER NOT NULL," +
