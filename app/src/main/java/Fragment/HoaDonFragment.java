@@ -19,6 +19,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -36,7 +37,8 @@ import longvtph16016.poly.appquanlyphongtro.interfaceDeleteClickdistioner;
 
 public class HoaDonFragment extends Fragment implements interfaceDeleteClickdistioner {
 
-    EditText Ed_ChonSoPhong, Ed_NgayTao_HDon, Ed_NhapSoDien_HDon, Ed_NhapSoNuoc_HDon, Ed_ChiPhiKhac_HDon,Ed_TongTien_HDon,Ed_GhiChu_HDon;
+    EditText  Ed_NgayTao_HDon, Ed_NhapSoDien_HDon, Ed_NhapSoNuoc_HDon, Ed_ChiPhiKhac_HDon,Ed_TongTien_HDon,Ed_GhiChu_HDon;
+    Spinner  Ed_ChonSoPhong;
     Button Btn_huy_HDon, Btn_them_HDon;
     FloatingActionButton fab;
     ListView rcv_hoadon;
@@ -58,7 +60,7 @@ public class HoaDonFragment extends Fragment implements interfaceDeleteClickdist
         HoaDonAdapter = new HoaDonAdapter(context, this::OnClickDelete);
         HoaDonAdapter.setData(list);
         rcv_hoadon.setAdapter(HoaDonAdapter);
-        image_ngay= view.findViewById(R.id.image_NgayTao_HDon);
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +82,7 @@ public class HoaDonFragment extends Fragment implements interfaceDeleteClickdist
         Ed_ChiPhiKhac_HDon = view.findViewById(R.id.ed_ChiPhiKhac_HDon);
         Ed_TongTien_HDon = view.findViewById(R.id.ed_TongTien_HDon);
         Ed_GhiChu_HDon = view.findViewById(R.id.ed_GhiChu_HDon);
-
+        image_ngay= view.findViewById(R.id.image_NgayTao_HDon);
         Btn_them_HDon= view.findViewById(R.id.btn_them_HDon);
         Btn_huy_HDon= view.findViewById(R.id.btn_huy_HDon);
 
@@ -114,38 +116,8 @@ public class HoaDonFragment extends Fragment implements interfaceDeleteClickdist
                 boolean check = true;
 
                 //---------- check so phong
-                String sohoadons =  Ed_ChonSoPhong.getText().toString();
+
                 int sohoadon = 0;
-
-                if (sohoadons.length() == 0) {
-                    Toast.makeText(context, "Số phòng không được để trống", Toast.LENGTH_SHORT).show();
-                    check = false;
-                } else {
-                    try {
-                        sohoadon = Integer.parseInt(sohoadons);
-                        if (sohoadon< 0) {
-                            Toast.makeText(context, "Số phòng phải lớn hơn 0", Toast.LENGTH_SHORT).show();
-                            check = false;
-                        }
-                    } catch (Exception e) {
-                        Toast.makeText(context, "Số phòng phải là số nguyên", Toast.LENGTH_SHORT).show();
-                        check = false;
-                    }
-
-                }
-
-                try {
-                    for (int i = 0; i < HoaDonDao.getAll().size(); i++) {
-                        HoaDon hoadon_ = HoaDonDao.getAll().get(i);
-                        if (sohoadon == hoadon_.getIdPhong()) {
-                            Toast.makeText(context, "Hóa Đơn   " + sohoadons + " đã có", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                    }
-
-                } catch (Exception e) {
-
-                }
 
 //                //-------------------check ngay
                 String ngays = Ed_NgayTao_HDon.getText().toString();
