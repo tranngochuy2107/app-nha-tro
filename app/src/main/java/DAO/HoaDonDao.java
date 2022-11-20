@@ -23,20 +23,23 @@ public class HoaDonDao {
 
     //insert
 
-    public long insertHoaDon(HoaDon hoaDon){
+    public boolean insertHoaDon(int IdPhong,String Ngay, int SoDien,int SoNuoc, int Tong, int ChiPhiKhac,String GhiChu){
         ContentValues values = new ContentValues();
-        values.put("Ngay",hoaDon.getNgay());
-        values.put("SoDien",hoaDon.getSoDien());
-        values.put("SoNuoc",hoaDon.getSoNuoc());
-        values.put("Tong",hoaDon.getTong());
-        values.put("ChiPhiKhac",hoaDon.getChiPhiKhac());
-        values.put("GhiChu",hoaDon.getGhiChu());
-        return db.insert("HoaDon",null,values);
+        values.put("IdPhong",IdPhong);
+        values.put("Ngay",Ngay);
+        values.put("SoDien",SoDien);
+        values.put("SoNuoc",SoNuoc);
+        values.put("Tong",Tong);
+        values.put("ChiPhiKhac",ChiPhiKhac);
+        values.put("GhiChu",GhiChu);
+        long row = db.insert("HoaDon",null,values);
+        return(row>0);
     }
 
     //update
     public int updateHoaDon(HoaDon HoaDon){
         ContentValues values = new ContentValues();
+        values.put("IdPhong",HoaDon.getIdPhong());
         values.put("Ngay",HoaDon.getNgay());
         values.put("SoDien",HoaDon.getSoDien());
         values.put("SoNuoc",HoaDon.getSoNuoc());
@@ -47,8 +50,14 @@ public class HoaDonDao {
         return db.update("HoaDon",values,"IdHoaDon=?",new String[]{Id});
     }
 
+    //getAll
+    public List<HoaDon> getAll() {
+        String sql = "SELECT * FROM HoaDon";
+        return getData(sql);
+    }
+
     //delete by object
-    public int deletePhong(HoaDon obj){
+    public int deleteHoaDon(HoaDon obj){
         String Id = String.valueOf(obj.getIdPhong());
         return db.delete("HoaDon","IdHoaDon=?",new String[]{Id});
     }

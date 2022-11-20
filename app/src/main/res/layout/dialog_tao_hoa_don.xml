@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
     android:orientation="vertical">
 
     <LinearLayout
@@ -11,10 +10,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/teal_700"
+
             android:gravity="center"
             android:padding="15sp"
             android:text="Tạo hóa đơn"
@@ -24,25 +24,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16sp">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16sp">
+                android:gravity="start"
+                android:text="nhập số Phòng" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:text="chọn số phòng" />
+            <Spinner
+                android:id="@+id/ed_ChonSoPhong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="201"
+                android:padding="20sp" />
+        </LinearLayout>
 
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:id="@+id/spnChonSoPhong" />
-            </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
