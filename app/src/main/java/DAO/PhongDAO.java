@@ -20,15 +20,16 @@ public class PhongDAO {
         db= dbHelper.getWritableDatabase();
     }
     //insert
-    public long insertPhong(Phong obj){
+    public boolean insertPhong(int SoPhong, int GiaPhong, int GiaDien, int GiaNuoc, int GiaWifi, String TrangThai){
         ContentValues values = new ContentValues();
-        values.put("SoPhong",obj.getSoPhong());
-        values.put("Gia",obj.getGiaPhong());
-        values.put("GiaDien",obj.getGiaDien());
-        values.put("GiaNuoc",obj.getGiaNuoc());
-        values.put("GiaWifi",obj.getGiaWifi());
-        values.put("TrangThaii",obj.getTrangThai());
-        return db.insert("Phong",null,values);
+        values.put("SoPhong",SoPhong);
+        values.put("GiaPhong",GiaPhong);
+        values.put("GiaDien",GiaDien);
+        values.put("GiaNuoc",GiaNuoc);
+        values.put("GiaWifi",GiaWifi);
+        values.put("TrangThai",TrangThai);
+        long row = db.insert("Phong",null,values);
+        return(row>0);
     }
 
     //delete by object
@@ -41,7 +42,7 @@ public class PhongDAO {
     public int updatePhong(Phong obj){
         ContentValues values = new ContentValues();
         values.put("SoPhong",obj.getSoPhong());
-        values.put("Gia",obj.getGiaPhong());
+        values.put("GiaPhong",obj.getGiaPhong());
         values.put("GiaDien",obj.getGiaDien());
         values.put("GiaNuoc",obj.getGiaNuoc());
         values.put("GiaWifi",obj.getGiaWifi());
@@ -70,6 +71,7 @@ public class PhongDAO {
         while (cursor.moveToNext()){
             Phong user= new Phong();
             user.setIdPhong(cursor.getInt(cursor.getColumnIndex("IdPhong")));
+            user.setSoPhong(cursor.getInt(cursor.getColumnIndex("SoPhong")));
             user.setGiaPhong(cursor.getInt(cursor.getColumnIndex("GiaPhong")));
             user.setGiaDien(cursor.getInt(cursor.getColumnIndex("GiaDien")));
             user.setGiaNuoc(cursor.getInt(cursor.getColumnIndex("GiaNuoc")));

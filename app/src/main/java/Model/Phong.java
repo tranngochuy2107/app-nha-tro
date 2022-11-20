@@ -1,6 +1,8 @@
 package Model;
 
-public class Phong {
+import java.io.Serializable;
+
+public class Phong implements Serializable {
     private int IdPhong;
     private int SoPhong;
     private int GiaPhong;

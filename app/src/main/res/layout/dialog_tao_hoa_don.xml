@@ -36,6 +36,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"
+                    android:text="chọn số phòng" />
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:id="@+id/spnChonSoPhong" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16sp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
                     android:text="ngày tạo" />
                 <LinearLayout
                     android:layout_width="match_parent"
