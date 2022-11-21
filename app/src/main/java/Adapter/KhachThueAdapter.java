@@ -66,7 +66,7 @@ public class KhachThueAdapter extends BaseAdapter {
         } else {
             myViewHolder = (MyViewHolder) view.getTag();
         }
-        CardView ln_item_dv = view.findViewById(R.id.cardview_hopDong);
+        CardView ln_item_dv = view.findViewById(R.id.cardview_khachThue);
         myViewHolder.tv_KhachThue.setText("Khách Thuê"+": "+list.get(i).getHoTen());
         ln_item_dv.setOnClickListener(new View.OnClickListener() {
             @Override
