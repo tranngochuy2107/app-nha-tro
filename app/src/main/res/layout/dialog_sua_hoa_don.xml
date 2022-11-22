@@ -4,155 +4,151 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/TXT_SuaHoaDon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:rotationX="0"
-        android:text="Sửa Hóa Đơn"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.08" />
-
-    <EditText
-        android:id="@+id/edt_Ngay"
-        android:layout_width="333dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="30dp"
-        android:ems="10"
-        android:hint="Ngày"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/edt_soDien"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TXT_SuaHoaDon"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <EditText
-        android:id="@+id/edt_soDien"
-        android:layout_width="333dp"
-        android:layout_height="46dp"
-        android:layout_marginBottom="30dp"
-        android:ems="10"
-        android:hint="Số Điện"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/edt_soNuoc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_Ngay"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <EditText
-        android:id="@+id/edt_soNuoc"
-        android:layout_width="333dp"
-        android:layout_height="46dp"
-        android:layout_marginBottom="30dp"
-        android:ems="10"
-        android:hint="Số nước"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/edt_chiPhiKhac"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_soDien"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <EditText
-        android:id="@+id/edt_chiPhiKhac"
-        android:layout_width="333dp"
-        android:layout_height="46dp"
-        android:layout_marginBottom="30dp"
-        android:ems="10"
-        android:hint="Chi Phí Khác"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/edt_TongTien"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_soNuoc"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <EditText
-        android:id="@+id/edt_TongTien"
-        android:layout_width="333dp"
-        android:layout_height="46dp"
-        android:layout_marginBottom="30dp"
-        android:ems="10"
-        android:hint="Tổng Tiền"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/edt_ghiChu"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_chiPhiKhac"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <EditText
-        android:id="@+id/edt_ghiChu"
-        android:layout_width="333dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:hint="Ghi Chú"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_TongTien" />
-
     <LinearLayout
-        android:layout_width="415dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_ghiChu"
-        tools:ignore="MissingConstraints">
-
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:gravity="start"
-            android:text="Tình Trạng: "
-            android:textColor="@android:color/black"
-            android:textSize="18dp" />
+            android:text="Sửa hóa Đơn"
+            android:gravity="center"
+            android:textSize="30dp"
+            android:layout_marginBottom="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:id="@+id/line1"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="5dp"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:id="@+id/edit_suahd_ngay"
+                android:hint="Ngày"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:id="@+id/line2"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="5dp"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:id="@+id/edit_suahd_soDien"
+                android:hint="Số điện"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:id="@+id/line3"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="5dp"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:id="@+id/edit_suahd_soNuoc"
+                android:hint="Số Nước"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:id="@+id/line4"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="5dp"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:id="@+id/edit_suahd_ChiPhiKhac"
+                android:hint="Chi Phí Khác"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:id="@+id/line5"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="5dp"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:id="@+id/edit_suahd_TongTien"
+                android:hint="Tổng Tiền"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:id="@+id/line6"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="5dp"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:id="@+id/edit_suahd_GhiChu"
+                android:hint="Ghi Chú"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Trạng Thái:"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:id="@+id/line10"
 
-        <EditText
-            android:id="@+id/ed_tinhTrang"
-            android:layout_width="276dp"
-            android:layout_height="50dp"
-            android:hint="Đang cho thuê" />
+                android:layout_marginStart="10dp"
+                android:padding="5dp"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:id="@+id/edit_suahd_trangThai"
+                    android:hint="Chưa Thanh Toán"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btnSuaHoaDon"
+                android:text="Sửa "
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:text="hủy"
+                android:id="@+id/btnhuySua"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_suaHoaDon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sửa"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_huySuaHoaDon"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="660dp" />
-
-    <Button
-        android:id="@+id/btn_huySuaHoaDon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hủy"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_suaHoaDon"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="660dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
