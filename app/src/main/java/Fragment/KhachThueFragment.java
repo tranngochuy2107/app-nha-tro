@@ -31,7 +31,6 @@ public class KhachThueFragment extends Fragment {
     KhachThueDAO khachThueDAO;
 
     private List<KhachThue> list = new ArrayList<>();
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,10 +43,6 @@ public class KhachThueFragment extends Fragment {
         fab = view.findViewById(R.id.fab_addKhachTHue);
         rcv_khachThue = view.findViewById(R.id.rec_KhachThue);
         khachThueDAO=new KhachThueDAO(getContext());
-        khachThueDAO.insertKhachThue(new KhachThue(1,"nguyen van a",222222222,33333333,2));
-        khachThueDAO.insertKhachThue(new KhachThue(2,"nguyen van b",222222222,33333333,1));
-        khachThueDAO.insertKhachThue(new KhachThue(3,"nguyen van c",222222222,33333333,3));
-        khachThueDAO.insertKhachThue(new KhachThue(4,"nguyen van D",222222222,33333333,10));
         list=khachThueDAO.getAll();
         Log.d("'ssssssssssssss", "onViewCreated: "+list.size());
         khachThueAdapter=new KhachThueAdapter(getContext(),list);

@@ -22,12 +22,15 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import DAO.KhachThueDAO;
+import Model.KhachThue;
 import Model.Phong;
 import longvtph16016.poly.appquanlyphongtro.R;
 import longvtph16016.poly.appquanlyphongtro.interfaceDeleteClickdistioner;
 
 public class PhongAdapter extends BaseAdapter {
     private Context context;
+    KhachThueDAO khachThueDAO;
     private ArrayList<Phong> list;
     private interfaceDeleteClickdistioner interfaceDeleteClickdistioner;
 
@@ -82,9 +85,10 @@ public class PhongAdapter extends BaseAdapter {
                 final Dialog dialog = new Dialog(context);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.dialog_bottom_phong);
-                Log.d("ssssssssss", "onClick: "+list.get(i).getIdPhong());
+
                 LinearLayout editLayout = dialog.findViewById(R.id.edt_update_dv);
                 LinearLayout delete_layout = dialog.findViewById(R.id.edt_delete_dv);
+                LinearLayout ThemKhachThue = dialog.findViewById(R.id.edt_ThemKhachThue);
 
                 dialog.show();
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -92,17 +96,63 @@ public class PhongAdapter extends BaseAdapter {
                 dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
                 dialog.getWindow().setGravity(Gravity.BOTTOM);
 
+                ThemKhachThue.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+//                        if(!list.get(i).getTrangThai().equalsIgnoreCase("chưa thuê")){
+//                            Toast.makeText(context, "đã cho thuê", Toast.LENGTH_SHORT).show();
+//                            return;
+//                        }
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+                        View view = inflater.inflate(R.layout.themkhachthue_dialog, null);
+                        TextView edsophong = view.findViewById(R.id.tv_SoPhong_ThemKhachThu);
+                        int idphong=list.get(i).getIdPhong();
+                        EditText edtenKT = view.findViewById(R.id.edTenK);
+                        EditText edSdt = view.findViewById(R.id.edSd);
+                        EditText edCccd = view.findViewById(R.id.edCcc);
+                        Button btnCancel = view.findViewById(R.id.btnCance);
+                        Button btnSave = view.findViewById(R.id.btnSav);
+                        edsophong.setText(""+list.get(i).getSoPhong());
+                        builder.setView(view);
+                        Dialog dialog = builder.create();
+                        dialog.show();
+
+                        btnSave.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                khachThueDAO = new KhachThueDAO(context);
+                                KhachThue khach = new KhachThue();
+                                khach.setIdPhong(idphong);
+                                khach.setHoTen(edtenKT.getText().toString());
+                                khach.setSdt(Integer.parseInt(edSdt.getText().toString()));
+                                khach.setCccd(Integer.parseInt(edCccd.getText().toString()));
+                                if (khachThueDAO.insertKhachThue(khach)>0){
+                                    Toast.makeText(context, "thêm mới thành công", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+                                }else {
+                                    Toast.makeText(context, "thêm mới k thành công", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                        btnCancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
+                    }
+                });
 
                 delete_layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         interfaceDeleteClickdistioner.OnClickDelete(i);
+                        dialog.dismiss();
                     }
                 });
             }
         });
-
-
         return view;
     }
 }

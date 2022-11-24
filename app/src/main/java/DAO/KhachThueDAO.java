@@ -22,7 +22,6 @@ public class KhachThueDAO {
     //insert
     public long insertKhachThue(KhachThue obj){
         ContentValues values = new ContentValues();
-        values.put("IdKhachThue",obj.getIdKhachThue());
         values.put("HoTen",obj.getHoTen());
         values.put("SoDienThoai",obj.getSdt());
         values.put("Cccd",obj.getCccd());
@@ -53,14 +52,15 @@ public class KhachThueDAO {
         return getData(sql);
     }
     //get user by id
-    public KhachThue getPhongById(String Id){
-        String sql="SELECT * FROM Phong WHERE IdKhachThue=?";
+    public KhachThue getUserByIdPhong(String Id){
+        String sql="SELECT * FROM KhachThue WHERE IdPhong=?";
         List<KhachThue> list = getData(sql,Id);
-        if(list!=null){
+        if(list.size()>0){
             return list.get(0);
         }
         return null;
     }
+
     @SuppressLint("Range")
     public List<KhachThue>getData(String sql, String...SelectArgs){
         List<KhachThue> list= new ArrayList<>();
