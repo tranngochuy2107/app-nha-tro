@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,9 @@ import androidx.cardview.widget.CardView;
 
 import java.util.List;
 
+import DAO.PhongDAO;
 import Model.KhachThue;
+import Model.Phong;
 import longvtph16016.poly.appquanlyphongtro.R;
 
 public class KhachThueAdapter extends BaseAdapter {
@@ -76,7 +79,7 @@ public class KhachThueAdapter extends BaseAdapter {
                 dialog.setContentView(R.layout.bottom_layout_khachthue);
                 LinearLayout editLayout = dialog.findViewById(R.id.edit_layout_khachthue);
                 LinearLayout detailLayout = dialog.findViewById(R.id.view_layout_khachthue);
-                LinearLayout delete_layout = dialog.findViewById(R.id.delete_layout_khachthue);
+
                 dialog.show();
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -86,37 +89,7 @@ public class KhachThueAdapter extends BaseAdapter {
                 detailLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        detail();
-                    }
-                });
-                delete_layout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        androidx.appcompat.app.AlertDialog.Builder builder= new androidx.appcompat.app.AlertDialog.Builder(context);
-                        builder.setTitle("bạn có chắc chắn muốn xóa không?");
-                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                if(phongDAO.deletePhong(list.get(index))>0){
-//                                    list.remove(index);
-//                                    phongAdapter.setData(list);
-//                                    Toast.makeText(context,"xoa thành công",
-//                                            Toast.LENGTH_LONG).show();
-//                                }else {
-//                                    Toast.makeText(context,"xóa không thành công",
-//                                            Toast.LENGTH_LONG).show();
-//                                }
-                                dialogInterface.dismiss();
-
-                            }
-                        });
-                        builder.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        });
-                        builder.show();
+                        detail(i);
                     }
                 });
             }
@@ -131,14 +104,30 @@ public class KhachThueAdapter extends BaseAdapter {
         private TextView tv_KhachThue,giaphong,giadien,gianuoc,giawifi,trangthai;
 
     }
-    public void detail() {
+    public void detail(int i) {
         final Dialog dialog = new Dialog(context, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.detail_khachthue);
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        TextView tvname=dialog.findViewById(R.id.thongtinname);
+        TextView tvsdt=dialog.findViewById(R.id.thongtinsdt);
+        TextView tvcccd=dialog.findViewById(R.id.thongtincccd);
+        TextView tvophong=dialog.findViewById(R.id.thongtinophong);
+        tvname.setText("Họ và Tên: "+list.get(i).getHoTen());
+        tvcccd.setText("Số Điện Thoại: "+list.get(i).getCccd());
+        tvsdt.setText("Số CCCD: "+list.get(i).getSdt());
+        PhongDAO phongDAO=new PhongDAO(context);
+        Log.d("cccc", "detail: "+list.get(i).getIdKhachThue());
+        Phong phong=phongDAO.getUserById(String.valueOf(list.get(i).getIdPhong()));
+        if(phong==null){
+            tvophong.setText("Khách Chưa Thuê Phòng nào");
+        }else {
+            tvophong.setText("Phòng Ở: "+phong.getSoPhong());
+        }
+
+
+
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-        dialog.getWindow().setGravity(Gravity.BOTTOM);
+
         dialog.show();
     }
 }

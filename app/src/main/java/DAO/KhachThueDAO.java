@@ -65,14 +65,26 @@ public class KhachThueDAO {
     public List<KhachThue>getData(String sql, String...SelectArgs){
         List<KhachThue> list= new ArrayList<>();
         Cursor cursor= db.rawQuery(sql,SelectArgs);
-        while (cursor.moveToNext()){
+//        while (cursor.moveToNext()){
+//           KhachThue user= new KhachThue();
+//            user.setIdPhong(cursor.getInt(cursor.getColumnIndex("IdPhong")));
+//            user.setIdKhachThue(cursor.getInt(cursor.getColumnIndex("IdKhachThue")));
+//            user.setHoTen(String.valueOf(cursor.getInt(cursor.getColumnIndex("HoTen"))));
+//            user.setCccd(cursor.getInt(cursor.getColumnIndex("Cccd")));
+//            list.add(user);
+//        }
+        cursor.moveToFirst ();
+        while (!cursor.isAfterLast ()){
            KhachThue user= new KhachThue();
-            user.setIdPhong(cursor.getInt(cursor.getColumnIndex("IdPhong")));
-            user.setIdKhachThue(cursor.getInt(cursor.getColumnIndex("KhachThue")));
-            user.setHoTen(String.valueOf(cursor.getInt(cursor.getColumnIndex("HoTen"))));
-            user.setCccd(cursor.getInt(cursor.getColumnIndex("Cccd")));
-            list.add(user);
+            int idkhach = Integer.parseInt (cursor.getString (cursor.getColumnIndex ("IdKhachThue")));
+            int cccd = Integer.parseInt (cursor.getString (cursor.getColumnIndex ("Cccd")));
+            int sdt = Integer.parseInt (cursor.getString (cursor.getColumnIndex ("SoDienThoai")));
+            int idphong = Integer.parseInt (cursor.getString (cursor.getColumnIndex ("IdPhong")));
+            String tenkhach = cursor.getString (cursor.getColumnIndex ("HoTen"));
+            list.add(new KhachThue(idkhach,tenkhach,sdt,cccd,idphong));
+            cursor.moveToNext ();
         }
+        cursor.close ();
         if(list!=null||list.size()!=0){
             return list;
         }

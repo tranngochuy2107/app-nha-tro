@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:text="Thông tin"
+        android:gravity="center"
+        android:textSize="36dp"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"/>
 
     <TextView
-        android:id="@+id/txt_thongtinname"
-        android:layout_width="wrap_content"
+        android:layout_marginTop="20sp"
+        android:paddingLeft="50dp"
+        android:textSize="16sp"
+        android:id="@+id/thongtinname"
+        android:layout_gravity=""
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Tên:Ngô Mạnh Dũng"
         app:layout_constraintEnd_toEndOf="parent"
@@ -16,9 +28,12 @@
         tools:layout_editor_absoluteY="118dp" />
 
     <TextView
+        android:paddingLeft="50dp"
+        android:textSize="16sp"
+        android:layout_marginTop="20sp"
         android:id="@+id/thongtinsdt"
-        android:layout_width="165dp"
-        android:layout_height="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="SĐT:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,10 +42,13 @@
         app:layout_constraintVertical_bias="0.232" />
 
     <TextView
+        android:paddingLeft="50dp"
+        android:textSize="16sp"
         android:id="@+id/thongtincccd"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="CCCD"
+        android:layout_marginTop="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.328"
@@ -39,8 +57,11 @@
         app:layout_constraintVertical_bias="0.289" />
 
     <TextView
+        android:paddingLeft="50dp"
+        android:textSize="16sp"
+        android:layout_marginTop="20sp"
         android:id="@+id/thongtinophong"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Ở PHÒNG:"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,4 +70,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.355" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

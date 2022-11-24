@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,7 +82,7 @@ public class PhongAdapter extends BaseAdapter {
                 final Dialog dialog = new Dialog(context);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.dialog_bottom_phong);
-
+                Log.d("ssssssssss", "onClick: "+list.get(i).getIdPhong());
                 LinearLayout editLayout = dialog.findViewById(R.id.edt_update_dv);
                 LinearLayout delete_layout = dialog.findViewById(R.id.edt_delete_dv);
 
