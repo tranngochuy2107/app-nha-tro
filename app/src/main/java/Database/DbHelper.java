@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "QLPT";
-    private static final int DB_VERSION =11;
+    private static final int DB_VERSION =15;
     //---------------------------------
     static final String CREATE_TABLE_PHONG =
             "create table Phong (IdPhong INTEGER PRIMARY KEY AUTOINCREMENT,"+
@@ -25,7 +25,12 @@ public class DbHelper extends SQLiteOpenHelper {
             "SoDienThoai INTEGER NOT NULL," +
             "Cccd INTEGER NOT NULL," +
             "IdPhong INTEGER REFERENCES Phong(IdPhong))";
-
+    String INSERT_khach = "insert into KhachThue values" +
+            "(1, 'Nguyễn Văn A', 231,23212,1)," +
+            "(2, 'Nguyễn Văn B', 1232,12121,2), " +
+            "(3, 'Nguyễn Văn C', 1233,1212121,5), " +
+            "(4, 'Nguyễn Văn D', 1234,33333333,3), " +
+            "(5, 'Nguyễn Văn E', 1235,3111111,4)";
     //---------------------------------
 
     static final String CREATE_TABLE_HOP_DONG =
@@ -66,6 +71,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_HOP_DONG);
         //Tao bang Hoa Don
         db.execSQL(CREATE_TABLE_HOA_DON);
+//        db.execSQL(INSERT_khach);
     }
 
     @Override

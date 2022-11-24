@@ -2,13 +2,13 @@ package Fragment;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +17,11 @@ import android.widget.ListView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import Adapter.KhachThueAdapter;
-import Adapter.PhongAdapter;
 import DAO.KhachThueDAO;
-import DAO.PhongDAO;
 import Model.KhachThue;
-import Model.Phong;
 import longvtph16016.poly.appquanlyphongtro.R;
 
 public class KhachThueFragment extends Fragment {
@@ -32,7 +30,7 @@ public class KhachThueFragment extends Fragment {
     KhachThueAdapter khachThueAdapter;
     KhachThueDAO khachThueDAO;
 
-    private ArrayList<KhachThue> list = new ArrayList<>();
+    private List<KhachThue> list = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,12 +43,16 @@ public class KhachThueFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         fab = view.findViewById(R.id.fab_addKhachTHue);
         rcv_khachThue = view.findViewById(R.id.rec_KhachThue);
-        list.add(new KhachThue(1,"dsadas",0333333333,33333333,3));
-        list.add(new KhachThue(2,"dsada1ss",0333333333,33333333,3));
-        list.add(new KhachThue(3,"ffffffs",0333333333,33333333,3));
-        khachThueAdapter=new KhachThueAdapter(getContext(),list);
         khachThueDAO=new KhachThueDAO(getContext());
+        khachThueDAO.insertKhachThue(new KhachThue(1,"nguyen van a",222222222,33333333,2));
+        khachThueDAO.insertKhachThue(new KhachThue(2,"nguyen van b",222222222,33333333,1));
+        khachThueDAO.insertKhachThue(new KhachThue(3,"nguyen van c",222222222,33333333,3));
+        khachThueDAO.insertKhachThue(new KhachThue(4,"nguyen van D",222222222,33333333,10));
+        list=khachThueDAO.getAll();
+        Log.d("'ssssssssssssss", "onViewCreated: "+list.size());
+        khachThueAdapter=new KhachThueAdapter(getContext(),list);
         rcv_khachThue.setAdapter(khachThueAdapter);
+        khachThueAdapter.notifyDataSetChanged();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
