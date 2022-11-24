@@ -69,7 +69,7 @@ public class KhachThueAdapter extends BaseAdapter {
         } else {
             myViewHolder = (MyViewHolder) view.getTag();
         }
-        CardView ln_item_dv = view.findViewById(R.id.cardview_khachThue);
+        LinearLayout ln_item_dv = view.findViewById(R.id.ln_menu_khachthue);
         myViewHolder.tv_KhachThue.setText("Khách Thuê"+": "+list.get(i).getHoTen());
         ln_item_dv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,8 +94,6 @@ public class KhachThueAdapter extends BaseAdapter {
                 });
             }
         });
-
-
         return view;
     }
 
@@ -113,8 +111,8 @@ public class KhachThueAdapter extends BaseAdapter {
         TextView tvcccd=dialog.findViewById(R.id.thongtincccd);
         TextView tvophong=dialog.findViewById(R.id.thongtinophong);
         tvname.setText("Họ và Tên: "+list.get(i).getHoTen());
-        tvcccd.setText("Số Điện Thoại: "+list.get(i).getCccd());
-        tvsdt.setText("Số CCCD: "+list.get(i).getSdt());
+        tvcccd.setText("Số Điện Thoại: 0"+list.get(i).getSdt());
+        tvsdt.setText("Số CCCD: "+list.get(i).getCccd());
         PhongDAO phongDAO=new PhongDAO(context);
         Log.d("cccc", "detail: "+list.get(i).getIdKhachThue());
         Phong phong=phongDAO.getUserById(String.valueOf(list.get(i).getIdPhong()));
@@ -123,9 +121,6 @@ public class KhachThueAdapter extends BaseAdapter {
         }else {
             tvophong.setText("Phòng Ở: "+phong.getSoPhong());
         }
-
-
-
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 
         dialog.show();

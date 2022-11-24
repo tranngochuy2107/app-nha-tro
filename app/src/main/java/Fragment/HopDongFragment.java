@@ -43,8 +43,8 @@ public class HopDongFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         fab = view.findViewById(R.id.fab_addHopDong);
         hopDongDAO=new HopDongDAO(getContext());
-//        list=hopDongDAO.getAll();
-        list.add(new HopDong(1,"22/11/2022","22/10/2023",3,3,300000,true,1,1));
+          list=hopDongDAO.getAll();
+
         listViewHopDong=view.findViewById(R.id.rec_HopDong);
         hopDong_adapter= new HopDongAdapter(getContext(),list);
         listViewHopDong.setAdapter(hopDong_adapter);
@@ -59,6 +59,8 @@ public class HopDongFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = this.getLayoutInflater();
         View view = inflater.inflate(R.layout.tao_hop_dong, null);
+
+
         builder.setView(view);
         Dialog dialog = builder.create();
         dialog.show();

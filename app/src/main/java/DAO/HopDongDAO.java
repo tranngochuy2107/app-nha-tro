@@ -77,7 +77,7 @@ public class HopDongDAO {
             user.setSoNguoi(cursor.getInt(cursor.getColumnIndex("SoNguoi")));
             user.setSoLuongXe(cursor.getInt(cursor.getColumnIndex("SoLuongXe")));
             user.setTiecCoc(cursor.getInt(cursor.getColumnIndex("TienCoc")));
-           // user.setTrangThaiHD(cursor.getInt(cursor.getColumnIndex("TrangThaiHD")));
+            user.setTrangThaiHD(cursor.getString (cursor.getColumnIndex ("TrangThaiHD")));
             list.add(user);
         }
         if(list!=null||list.size()!=0){
