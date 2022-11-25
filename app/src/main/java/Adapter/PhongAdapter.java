@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -349,6 +350,7 @@ public class PhongAdapter extends BaseAdapter {
         Btn_huy_HDon= dialog.findViewById(R.id.btn_huy_HDon);
         btn_tongtien= dialog.findViewById(R.id.tinhtongtien);
         tvtongtien=dialog.findViewById(R.id.tvtongtien);
+        CheckBox checkBox=dialog.findViewById(R.id.checkboxTrangthai);
         //---------------- an voa anh chon ngay
         Calendar calendar = Calendar.getInstance();//Lay time
         final int year = calendar.get(Calendar.YEAR);
@@ -389,6 +391,10 @@ public class PhongAdapter extends BaseAdapter {
         Btn_them_HDon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(tongtien==0){
+                    Toast.makeText(context, "hãy tính tổng", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 //ínert
                 hoaDonDao=new HoaDonDao(context);
                 HoaDon hoaDon=new HoaDon();
@@ -399,7 +405,18 @@ public class PhongAdapter extends BaseAdapter {
                 hoaDon.setNgay(ngaytao);
                 hoaDon.setSoDien(sodien);
                 hoaDon.setSoNuoc(sonuoc);
-                hoaDon.setTrangThai(1);
+                boolean trangthai=checkBox.isChecked();
+                int trangTHai;
+                Log.d("sssssss", "onClick: "+trangthai);
+                if (trangthai){
+                    //đã thanh toán
+                   trangTHai=2;
+                }
+                else {
+//                    chưa thanh toan
+                    trangTHai=1;
+                }
+                hoaDon.setTrangThai(trangTHai);
                 hoaDon.setTong(tongtien);
 
                 if(hoaDonDao.insertHoaDon(hoaDon)){

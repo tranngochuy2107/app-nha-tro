@@ -32,7 +32,7 @@ public class HoaDonDao {
         values.put("SoNuoc",HoaDon.getSoNuoc());
         values.put("Tong",HoaDon.getTong());
         values.put("ChiPhiKhac",HoaDon.getChiPhiKhac());
-        values.put("TrangThai",HoaDon.getChiPhiKhac());
+        values.put("TrangThai",HoaDon.getTrangThai());
         values.put("GhiChu",HoaDon.getGhiChu());
         long row = db.insert("HoaDon",null,values);
         return(row>0);

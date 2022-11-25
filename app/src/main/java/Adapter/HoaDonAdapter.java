@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +13,15 @@ import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import DAO.KhachThueDAO;
 import Model.HoaDon;
+import Model.KhachThue;
+import Model.Phong;
 import longvtph16016.poly.appquanlyphongtro.R;
 import longvtph16016.poly.appquanlyphongtro.interfaceDeleteClickdistioner;
 
@@ -78,6 +83,7 @@ public class HoaDonAdapter extends BaseAdapter {
                 dialog.setContentView(R.layout.dialog_bottom_hoadon);
 
                 LinearLayout editLayout = dialog.findViewById(R.id.edt_update_hd);
+                LinearLayout edt_xem_hd = dialog.findViewById(R.id.edt_xem_hd);
                 LinearLayout delete_layout = dialog.findViewById(R.id.edt_delete_hd);
 
                 dialog.show();
@@ -93,11 +99,26 @@ public class HoaDonAdapter extends BaseAdapter {
                         interfaceDeleteClickdistioner.OnClickDelete(i);
                     }
                 });
+                edt_xem_hd.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ThongTinHoaDon(i);
+                        Log.d("ssssssssssss", "onClick: "+list.get(i).getTrangThai());
+                    }
+                });
             }
         });
 
 
         return view;
+    }
+    private void ThongTinHoaDon(int pos) {
+        final Dialog dialog = new Dialog(context, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_xemchitiet_hoadon);
+
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.show();
     }
 }
 
