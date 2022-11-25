@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:text="THÔNG TIN PHÒNG"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:background="@color/yellow"
+        android:textSize="30dp"
+
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:paddingLeft="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:id="@+id/tvsophong"
+        android:background="@color/colorDividerView"
+        android:gravity="center_vertical"
+        android:layout_marginTop="15sp"
+        android:text="Số Phòng: 201" />
+    <TextView
+        android:paddingLeft="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:id="@+id/tvGiaPhong"
+        android:background="@color/colorDividerView"
+        android:gravity="center_vertical"
+        android:layout_marginTop="15sp"
+        android:text="Giá Phòng: 201" />
+    <TextView
+        android:paddingLeft="30dp"
+        android:background="@color/colorDividerView"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:id="@+id/tvGiaDien"
+        android:gravity="center_vertical"
+        android:layout_marginTop="15sp"
+        android:text="Giá Điện: 201" />
+    <TextView
+        android:paddingLeft="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:id="@+id/tvGiaNuoc"
+        android:background="@color/colorDividerView"
+        android:gravity="center_vertical"
+        android:layout_marginTop="15sp"
+        android:text="Giá Nước: 201" />
+    <TextView
+        android:paddingLeft="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:id="@+id/tvGiaWifi"
+        android:background="@color/colorDividerView"
+        android:gravity="center_vertical"
+        android:layout_marginTop="15sp"
+        android:text="Giá Wifi: 201" />
+    <TextView
+        android:paddingLeft="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:id="@+id/tinhTrang"
+        android:layout_marginTop="15sp"
+        android:text="Tình Trạng: Đang cho thuê" />
+    <TextView
+        android:paddingLeft="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:id="@+id/tvnguoiThue"
+        android:layout_marginTop="15sp"
+         />
+</LinearLayout>
