@@ -2,6 +2,7 @@ package Adapter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import DAO.HopDongDAO;
 import DAO.KhachThueDAO;
@@ -163,12 +166,47 @@ public class PhongAdapter extends BaseAdapter {
                         TextView edtTenKhachThue = view.findViewById(R.id.edt_TenKhachThue_HopDong);
                         EditText edt_ngaybatdau_hopdong = view.findViewById(R.id.edt_NgayBatDau_HopDong);
                         EditText edt_ngayketthuc_hopdong = view.findViewById(R.id.edt_NgayKetThuc_HopDong);
+                        ImageView img_a = view.findViewById(R.id.img_ngay_bat_dau_HopDong);
+                        ImageView img_b = view.findViewById(R.id.img_Ngay_Ket_Thuc_HopDong);
                         EditText edt_songuoi = view.findViewById(R.id.edt_SoNguoi_HopDong);
                         EditText edt_soluongxe = view.findViewById(R.id.edt_SoLuongXe_HopDong);
                         EditText edt_tiencoc = view.findViewById(R.id.edt_TienCoc_HopDong);
                         TextView edt_trangthai = view.findViewById(R.id.edt_TrangThai_HopDong);
                         Button btnCancel = view.findViewById(R.id.btn_huy_HopDong);
                         Button btnSavet = view.findViewById(R.id.btn_Tao_HopDong);
+
+                        //----
+                        Calendar calendar = Calendar.getInstance();//Lay time
+                        final int year = calendar.get(Calendar.YEAR);
+                        final int month = calendar.get(Calendar.MONTH);
+                        final int day = calendar.get(calendar.DAY_OF_MONTH);
+
+                        //datePicker
+                        img_a.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                                    @Override
+                                    public void onDateSet(DatePicker view, int y, int m, int d) {
+                                        edt_ngaybatdau_hopdong.setText(d + "/" + (m + 1) + "/" + y);
+                                    }
+                                }, year, month, day);
+                                datePickerDialog.show();
+                            }
+                        });
+                        //datePicker
+                        img_b.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                                    @Override
+                                    public void onDateSet(DatePicker view, int y, int m, int d) {
+                                        edt_ngayketthuc_hopdong.setText(d + "/" + (m + 1) + "/" + y);
+                                    }
+                                }, year, month, day);
+                                datePickerDialog.show();
+                            }
+                        });
 
                         edsophong.setText(""+list.get(i).getSoPhong());
                         edtTenKhachThue.setText(khachThue.getHoTen());
