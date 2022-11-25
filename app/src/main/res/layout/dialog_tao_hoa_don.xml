@@ -20,7 +20,14 @@
             android:text="Tạo hóa đơn"
             android:textColor="@android:color/black"
             android:textSize="25sp"/>
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:id="@+id/tvsophong_hd"
+            android:paddingLeft="15sp"
+            android:textSize="25sp"
+            android:text="Phòng:" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,15 +38,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                android:text="nhập số Phòng" />
+                android:text="Tên Hóa Đơn" />
 
-            <Spinner
-                android:id="@+id/ed_ChonSoPhong"
+            <EditText
+                android:id="@+id/ed_tenHoaDon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="201"
+                android:hint="Hóa đơn tháng 11 phòng 101"
                 android:padding="20sp" />
         </LinearLayout>
+
 
 
 
@@ -142,25 +150,25 @@
                     android:padding="20sp" />
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:padding="16sp">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/tvtongtien"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:text="Tổng tiền" />
+                    android:text="Tổng tiền :"
+                    android:textSize="20sp" />
 
-                <EditText
-                    android:id="@+id/ed_TongTien_HDon"
-                    android:layout_width="match_parent"
+                <Button
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="2.000.000"
-                    android:padding="20sp" />
-            </LinearLayout>
+                    android:id="@+id/tinhtongtien"
+                    android:layout_alignParentRight="true"
+                    android:text="tổng tiền" />
+            </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

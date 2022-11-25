@@ -20,7 +20,7 @@ public class PhongDAO {
         db= dbHelper.getWritableDatabase();
     }
     //insert
-    public boolean insertPhong(int SoPhong, int GiaPhong, int GiaDien, int GiaNuoc, int GiaWifi, String TrangThai){
+    public boolean insertPhong(int SoPhong, int GiaPhong, int GiaDien, int GiaNuoc, int GiaWifi, int TrangThai){
         ContentValues values = new ContentValues();
         values.put("SoPhong",SoPhong);
         values.put("GiaPhong",GiaPhong);
@@ -46,7 +46,7 @@ public class PhongDAO {
         values.put("GiaDien",obj.getGiaDien());
         values.put("GiaNuoc",obj.getGiaNuoc());
         values.put("GiaWifi",obj.getGiaWifi());
-        values.put("TrangThaii",obj.getTrangThai());
+        values.put("TrangThai",obj.getTrangThai());
         String Id = String.valueOf(obj.getIdPhong());
         return db.update("Phong",values,"IdPhong=?",new String[]{Id});
     }
@@ -76,7 +76,7 @@ public class PhongDAO {
             user.setGiaDien(cursor.getInt(cursor.getColumnIndex("GiaDien")));
             user.setGiaNuoc(cursor.getInt(cursor.getColumnIndex("GiaNuoc")));
             user.setGiaWifi(cursor.getInt(cursor.getColumnIndex("GiaWifi")));
-            user.setTrangThai(String.valueOf(cursor.getInt(cursor.getColumnIndex("TrangThai"))));
+            user.setTrangThai(cursor.getInt(cursor.getColumnIndex("TrangThai")));
             list.add(user);
         }
         if(list!=null||list.size()!=0){
