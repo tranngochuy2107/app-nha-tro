@@ -23,8 +23,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -236,6 +239,7 @@ public class PhongAdapter extends BaseAdapter {
                                     @Override
                                     public void onDateSet(DatePicker view, int y, int m, int d) {
                                         edt_ngayketthuc_hopdong.setText(d + "/" + (m + 1) + "/" + y);
+
                                     }
                                 }, year, month, day);
                                 datePickerDialog.show();
@@ -254,27 +258,40 @@ public class PhongAdapter extends BaseAdapter {
                             btnSavet.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
+                                    SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+                                    try {
+                                        Date date1=sdf.parse(edt_ngaybatdau_hopdong.getText().toString());
+                                        Date date2=sdf.parse(edt_ngayketthuc_hopdong.getText().toString());
+                                        if(date1.compareTo(date2)<0){
+                                            HopDong hopDong = new HopDong();
+                                            hopDong.setIdPhong(idphong);
+                                            hopDong.setIdKhachThue(khachThue.getIdKhachThue());
+                                            hopDong.setNgayBatDau((edt_ngaybatdau_hopdong.getText().toString()));
+                                            hopDong.setNgayKetThuc((edt_ngayketthuc_hopdong.getText().toString()));
+                                            hopDong.setSoNguoi(Integer.parseInt(edt_songuoi.getText().toString()));
+                                            hopDong.setSoLuongXe(Integer.parseInt(edt_soluongxe.getText().toString()));
+                                            hopDong.setTiecCoc(Integer.parseInt(edt_tiencoc.getText().toString()));
 
+                                            hopDong.setTrangThaiHD("đang thuê");
 
-                                    HopDong hopDong = new HopDong();
-                                    hopDong.setIdPhong(idphong);
-                                    hopDong.setIdKhachThue(khachThue.getIdKhachThue());
-                                    hopDong.setNgayBatDau((edt_ngaybatdau_hopdong.getText().toString()));
-                                    hopDong.setNgayKetThuc((edt_ngayketthuc_hopdong.getText().toString()));
-                                    hopDong.setSoNguoi(Integer.parseInt(edt_songuoi.getText().toString()));
-                                    hopDong.setSoLuongXe(Integer.parseInt(edt_soluongxe.getText().toString()));
-                                    hopDong.setTiecCoc(Integer.parseInt(edt_tiencoc.getText().toString()));
+                                            if (hopDongDAO.insertHopDong(hopDong)>0){
 
-                                    hopDong.setTrangThaiHD("đang thuê");
-
-
-                                    if (hopDongDAO.insertHopDong(hopDong)>0){
-
-                                        Toast.makeText(context, "thêm mới thành công", Toast.LENGTH_SHORT).show();
-                                        dialog.dismiss();
-                                    }else {
-                                        Toast.makeText(context, "thêm mới k thành công", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(context, "thêm mới thành công", Toast.LENGTH_SHORT).show();
+                                                dialog.dismiss();
+                                            }else {
+                                                Toast.makeText(context, "thêm mới k thành công", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                        else {
+                                            Toast.makeText(context, "Ngày kết thúc lớn hơn ngày bắt đầu", Toast.LENGTH_SHORT).show();
+                                        }
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                        Log.d("ssssssss", "onClick: "+e);
                                     }
+
+
+
                                 }
                             });
                             btnCancel.setOnClickListener(new View.OnClickListener() {
