@@ -27,6 +27,7 @@ public class HopDong {
 
     }
 
+
     public int getIdHopDong() {
         return IdHopDong;
     }

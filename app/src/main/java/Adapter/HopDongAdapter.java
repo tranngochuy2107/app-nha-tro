@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DAO.HopDongDAO;
+import DAO.PhongDAO;
 import Model.HopDong;
 import Model.Phong;
 import longvtph16016.poly.appquanlyphongtro.R;
@@ -76,7 +77,9 @@ public class HopDongAdapter extends BaseAdapter {
             myViewHolder = (MyViewHolder) view.getTag();
         }
         CardView ln_item_dv = view.findViewById(R.id.cardview_hopDong);
-        myViewHolder.tv_HopDong.setText("Hợp Đồng"+": "+list.get(i).getIdPhong());
+        PhongDAO phongDAO = new PhongDAO(context);
+        Phong phong = phongDAO.getUserById(String.valueOf(list.get(i).getIdPhong()));
+        myViewHolder.tv_HopDong.setText("Hợp Đồng Phòng: "+phong.getSoPhong());
         ln_item_dv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -26,7 +26,6 @@ public class KhachThueDAO {
         values.put("SoDienThoai",obj.getSdt());
         values.put("Cccd",obj.getCccd());
         values.put("IdPhong",obj.getIdPhong());
-
         return db.insert("KhachThue",null,values);
     }
 

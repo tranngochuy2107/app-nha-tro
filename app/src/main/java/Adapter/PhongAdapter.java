@@ -22,7 +22,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import DAO.HopDongDAO;
 import DAO.KhachThueDAO;
+import Model.HopDong;
 import Model.KhachThue;
 import Model.Phong;
 import longvtph16016.poly.appquanlyphongtro.R;
@@ -87,6 +89,7 @@ public class PhongAdapter extends BaseAdapter {
                 dialog.setContentView(R.layout.dialog_bottom_phong);
 
                 LinearLayout editLayout = dialog.findViewById(R.id.edt_update_dv);
+                LinearLayout themhopdong = dialog.findViewById(R.id.edt_ThemHopDong);
                 LinearLayout delete_layout = dialog.findViewById(R.id.edt_delete_dv);
                 LinearLayout ThemKhachThue = dialog.findViewById(R.id.edt_ThemKhachThue);
 
@@ -121,6 +124,7 @@ public class PhongAdapter extends BaseAdapter {
                         btnSave.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+
                                 khachThueDAO = new KhachThueDAO(context);
                                 KhachThue khach = new KhachThue();
                                 khach.setIdPhong(idphong);
@@ -128,6 +132,71 @@ public class PhongAdapter extends BaseAdapter {
                                 khach.setSdt(Integer.parseInt(edSdt.getText().toString()));
                                 khach.setCccd(Integer.parseInt(edCccd.getText().toString()));
                                 if (khachThueDAO.insertKhachThue(khach)>0){
+                                    Toast.makeText(context, "thêm mới thành công", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+                                }else {
+                                    Toast.makeText(context, "thêm mới k thành công", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                        btnCancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
+                    }
+                });
+
+                themhopdong.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+                        View view = inflater.inflate(R.layout.tao_hop_dong, null);
+
+                        int idphong =list.get(i).getIdPhong();
+                        khachThueDAO = new KhachThueDAO(context);
+                        KhachThue khachThue = khachThueDAO.getUserByIdPhong(String.valueOf(idphong));
+
+                        TextView edsophong = view.findViewById(R.id.edt_SoPhong_HopDong);
+                        TextView edtTenKhachThue = view.findViewById(R.id.edt_TenKhachThue_HopDong);
+                        EditText edt_ngaybatdau_hopdong = view.findViewById(R.id.edt_NgayBatDau_HopDong);
+                        EditText edt_ngayketthuc_hopdong = view.findViewById(R.id.edt_NgayKetThuc_HopDong);
+                        EditText edt_songuoi = view.findViewById(R.id.edt_SoNguoi_HopDong);
+                        EditText edt_soluongxe = view.findViewById(R.id.edt_SoLuongXe_HopDong);
+                        EditText edt_tiencoc = view.findViewById(R.id.edt_TienCoc_HopDong);
+                        TextView edt_trangthai = view.findViewById(R.id.edt_TrangThai_HopDong);
+                        Button btnCancel = view.findViewById(R.id.btn_huy_HopDong);
+                        Button btnSavet = view.findViewById(R.id.btn_Tao_HopDong);
+
+                        edsophong.setText(""+list.get(i).getSoPhong());
+                        edtTenKhachThue.setText(khachThue.getHoTen());
+                        builder.setView(view);
+                        Dialog dialog = builder.create();
+                        dialog.show();
+
+
+                        edt_trangthai.setText("đang thuê");
+                        btnSavet.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                HopDongDAO hopDongDAO = new HopDongDAO(context);
+                                HopDong hopDong = new HopDong();
+                                hopDong.setIdPhong(idphong);
+                                hopDong.setIdKhachThue(khachThue.getIdKhachThue());
+                                hopDong.setNgayBatDau((edt_ngaybatdau_hopdong.getText().toString()));
+                                hopDong.setNgayKetThuc((edt_ngayketthuc_hopdong.getText().toString()));
+                                hopDong.setSoNguoi(Integer.parseInt(edt_songuoi.getText().toString()));
+                                hopDong.setSoLuongXe(Integer.parseInt(edt_soluongxe.getText().toString()));
+                                hopDong.setTiecCoc(Integer.parseInt(edt_tiencoc.getText().toString()));
+
+                                hopDong.setTrangThaiHD("đang thuê");
+
+
+                                if (hopDongDAO.insertHopDong(hopDong)>0){
+
                                     Toast.makeText(context, "thêm mới thành công", Toast.LENGTH_SHORT).show();
                                     dialog.dismiss();
                                 }else {
