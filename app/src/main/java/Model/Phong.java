@@ -9,12 +9,12 @@ public class Phong implements Serializable {
     private int GiaDien;
     private int GiaNuoc;
     private int GiaWifi;
-    private String TrangThai;
+    private int TrangThai;
 
     public Phong() {
     }
 
-    public Phong(int idPhong, int soPhong, int giaPhong, int giaDien, int giaNuoc, int giaWifi, String trangThai) {
+    public Phong(int idPhong, int soPhong, int giaPhong, int giaDien, int giaNuoc, int giaWifi, int trangThai) {
         IdPhong = idPhong;
         SoPhong = soPhong;
         GiaPhong = giaPhong;
@@ -22,7 +22,6 @@ public class Phong implements Serializable {
         GiaNuoc = giaNuoc;
         GiaWifi = giaWifi;
         TrangThai = trangThai;
-
     }
 
     public int getIdPhong() {
@@ -73,13 +72,11 @@ public class Phong implements Serializable {
         GiaWifi = giaWifi;
     }
 
-    public String getTrangThai() {
+    public int getTrangThai() {
         return TrangThai;
     }
 
-    public void setTrangThai(String trangThai) {
+    public void setTrangThai(int trangThai) {
         TrangThai = trangThai;
     }
-
-
 }

@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import Model.HoaDon;
 import longvtph16016.poly.appquanlyphongtro.R;
@@ -21,7 +22,7 @@ import longvtph16016.poly.appquanlyphongtro.interfaceDeleteClickdistioner;
 
 public class HoaDonAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<HoaDon> list;
+    private List<HoaDon> list;
     private longvtph16016.poly.appquanlyphongtro.interfaceDeleteClickdistioner interfaceDeleteClickdistioner;
 
 
@@ -31,7 +32,7 @@ public class HoaDonAdapter extends BaseAdapter {
         this.interfaceDeleteClickdistioner = interfaceDeleteClickdistioner;
     }
 
-    public void setData(ArrayList<HoaDon> arrayList){
+    public void setData(List<HoaDon> arrayList){
         this.list= arrayList;
         notifyDataSetChanged();// có tác dụng refresh lại data
     }
@@ -67,7 +68,7 @@ public class HoaDonAdapter extends BaseAdapter {
             myViewHolder = (MyViewHolder) view.getTag();
         }
         LinearLayout ln_item_dv = view.findViewById(R.id.ln_menu_hoadon);
-        myViewHolder.tv_sohoadon.setText("Hoa Don Phòng"+": "+list.get(i).getIdHoaDon());
+        myViewHolder.tv_sohoadon.setText(list.get(i).getTenHoaDOn());
 
         ln_item_dv.setOnClickListener(new View.OnClickListener() {
             @Override

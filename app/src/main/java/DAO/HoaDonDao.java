@@ -23,15 +23,17 @@ public class HoaDonDao {
 
     //insert
 
-    public boolean insertHoaDon(int IdPhong,String Ngay, int SoDien,int SoNuoc, int Tong, int ChiPhiKhac,String GhiChu){
+    public boolean insertHoaDon(HoaDon HoaDon){
         ContentValues values = new ContentValues();
-        values.put("IdPhong",IdPhong);
-        values.put("Ngay",Ngay);
-        values.put("SoDien",SoDien);
-        values.put("SoNuoc",SoNuoc);
-        values.put("Tong",Tong);
-        values.put("ChiPhiKhac",ChiPhiKhac);
-        values.put("GhiChu",GhiChu);
+        values.put("IdPhong",HoaDon.getIdPhong());
+        values.put("TenHoaDon",HoaDon.getTenHoaDOn());
+        values.put("Ngay",HoaDon.getNgay());
+        values.put("SoDien",HoaDon.getSoDien());
+        values.put("SoNuoc",HoaDon.getSoNuoc());
+        values.put("Tong",HoaDon.getTong());
+        values.put("ChiPhiKhac",HoaDon.getChiPhiKhac());
+        values.put("TrangThai",HoaDon.getChiPhiKhac());
+        values.put("GhiChu",HoaDon.getGhiChu());
         long row = db.insert("HoaDon",null,values);
         return(row>0);
     }
@@ -40,11 +42,13 @@ public class HoaDonDao {
     public int updateHoaDon(HoaDon HoaDon){
         ContentValues values = new ContentValues();
         values.put("IdPhong",HoaDon.getIdPhong());
+        values.put("TenHoaDon",HoaDon.getTenHoaDOn());
         values.put("Ngay",HoaDon.getNgay());
         values.put("SoDien",HoaDon.getSoDien());
         values.put("SoNuoc",HoaDon.getSoNuoc());
         values.put("Tong",HoaDon.getTong());
         values.put("ChiPhiKhac",HoaDon.getChiPhiKhac());
+        values.put("TrangThai",HoaDon.getChiPhiKhac());
         values.put("GhiChu",HoaDon.getGhiChu());
         String Id = String.valueOf(HoaDon.getIdPhong());
         return db.update("HoaDon",values,"IdHoaDon=?",new String[]{Id});
@@ -64,7 +68,7 @@ public class HoaDonDao {
 
     //get user by id
     public HoaDon getHoaDonById(String IdHoaDon){
-        String sql="SELECT * FROM Phong WHERE IdHoaDon=?";
+        String sql="SELECT * FROM HoaDon WHERE IdHoaDon=?";
         List<HoaDon> list = getData(sql,IdHoaDon);
         if(list != null){
             return list.get(0);
@@ -80,11 +84,13 @@ public class HoaDonDao {
             HoaDon hoaDon= new HoaDon();
             hoaDon.setIdPhong(cursor.getInt(cursor.getColumnIndex("IdPhong")));
             hoaDon.setNgay(cursor.getString(cursor.getColumnIndex("Ngay")));
+            hoaDon.setTenHoaDOn(cursor.getString(cursor.getColumnIndex("TenHoaDon")));
             hoaDon.setSoDien(cursor.getInt(cursor.getColumnIndex("SoDien")));
             hoaDon.setSoNuoc(cursor.getInt(cursor.getColumnIndex("SoNuoc")));
             hoaDon.setTong(cursor.getInt(cursor.getColumnIndex("Tong")));
+            hoaDon.setTrangThai(cursor.getInt(cursor.getColumnIndex("TrangThai")));
             hoaDon.setGhiChu(String.valueOf(cursor.getInt(cursor.getColumnIndex("GhiChu"))));
-            hoaDon.setChiPhiKhac(String.valueOf(cursor.getInt(cursor.getColumnIndex("ChiPhiKhac"))));
+            hoaDon.setChiPhiKhac(cursor.getInt(cursor.getColumnIndex("ChiPhiKhac")));
             list.add(hoaDon);
         }
         if(list!=null||list.size()!=0){

@@ -55,10 +55,10 @@ public class HopDongDAO {
         return getData(sql);
     }
     //get user by id
-    public HopDong getHopDongById(String Id){
-        String sql="SELECT * FROM HopDong WHERE IdHopDong=?";
+    public HopDong getHopDongByIdPhong(String Id){
+        String sql="SELECT * FROM HopDong WHERE IdPhong=?";
         List<HopDong> list = getData(sql,Id);
-        if(list!=null){
+        if(list.size()>0){
             return list.get(0);
         }
         return null;

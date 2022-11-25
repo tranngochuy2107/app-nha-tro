@@ -217,12 +217,12 @@ public class PhongFragment extends Fragment implements interfaceDeleteClickdisti
                 }
 
                 //--------
-                String trangthai= "chưa thuê";
-                edt_themgianuoc.setText(trangthai);
+//                String trangthai= "chưa thuê";
+//                edt_themgianuoc.setText(trangthai);
 
                 if (check == true) {
 
-                    if (phongDAO.insertPhong(soPhong,giaphong,giadien,gianuoc,giawifi,trangthai)){
+                    if (phongDAO.insertPhong(soPhong,giaphong,giadien,gianuoc,giawifi,1)){
                         Toast.makeText(context, "thêm mới thành công", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                         list.clear();
