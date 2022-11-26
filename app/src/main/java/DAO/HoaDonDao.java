@@ -62,7 +62,7 @@ public class HoaDonDao {
 
     //delete by object
     public int deleteHoaDon(HoaDon obj){
-        String Id = String.valueOf(obj.getIdPhong());
+        String Id = String.valueOf(obj.getIdHoaDon());
         return db.delete("HoaDon","IdHoaDon=?",new String[]{Id});
     }
 

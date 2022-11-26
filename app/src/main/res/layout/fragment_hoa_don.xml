@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:layout_margin="15dp"
     android:orientation="vertical"
-    android:background="@color/teal_700"
     tools:context="Fragment.HoaDonFragment">
     <RelativeLayout
         android:layout_width="match_parent"
