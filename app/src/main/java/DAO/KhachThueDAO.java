@@ -43,7 +43,7 @@ public class KhachThueDAO {
         values.put("SoDienThoai",obj.getSdt());
         values.put("Cccd",obj.getCccd());
         values.put("IdPhong",obj.getIdPhong());
-        return db.update("KhachThue",values,"IdKhachThue=?",new String[]{});
+        return db.update("KhachThue",values,"IdKhachThue=?",new String[]{String.valueOf(obj.getIdKhachThue())});
     }
     //getAll
     public List<KhachThue> getAll(){
