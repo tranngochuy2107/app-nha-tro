@@ -41,19 +41,14 @@ public class HopDongFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        fab = view.findViewById(R.id.fab_addHopDong);
+
         hopDongDAO=new HopDongDAO(getContext());
           list=hopDongDAO.getAll();
 
         listViewHopDong=view.findViewById(R.id.rec_HopDong);
         hopDong_adapter= new HopDongAdapter(getContext(),list);
         listViewHopDong.setAdapter(hopDong_adapter);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addHopDong(getContext());
-            }
-        });
+
     }
     private void addHopDong(Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);

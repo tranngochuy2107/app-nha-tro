@@ -40,7 +40,7 @@ public class KhachThueFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        fab = view.findViewById(R.id.fab_addKhachTHue);
+
         rcv_khachThue = view.findViewById(R.id.rec_KhachThue);
         khachThueDAO=new KhachThueDAO(getContext());
         list=khachThueDAO.getAll();
@@ -48,12 +48,7 @@ public class KhachThueFragment extends Fragment {
         khachThueAdapter=new KhachThueAdapter(getContext(),list);
         rcv_khachThue.setAdapter(khachThueAdapter);
         khachThueAdapter.notifyDataSetChanged();
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openDialogAddKhachTHue();
-            }
-        });
+
     }
 
     private void openDialogAddKhachTHue() {
