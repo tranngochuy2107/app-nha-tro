@@ -29,6 +29,8 @@
         android:background="#A59AE8"
         android:hint="Số Điện Thoại" />
 
+
+
     <EditText
         android:id="@+id/edtCCCD"
         android:layout_width="match_parent"
@@ -37,13 +39,18 @@
         android:layout_marginTop="40dp"
         android:background="#A59AE8"
         android:hint="CCCD" />
+
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/edtCCCD"
-        android:text="Thêm"
+        android:text="Sửa"
+
+
         android:layout_margin="40dp"
-        android:id="@+id/btnThemKhachThue"/>
+        android:id="@+id/btnSuaKhachThue"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,6 +59,11 @@
         android:layout_alignParentRight="true"
         android:text="Hủy"
         android:id="@+id/btnhuyThemKhachThue"/>
+
+
+
+
+
 </RelativeLayout>
 <!--    <?xml version="1.0" encoding="utf-8"?>-->
 <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->

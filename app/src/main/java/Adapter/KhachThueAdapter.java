@@ -12,13 +12,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 
 import java.util.List;
 
+import DAO.KhachThueDAO;
 import DAO.PhongDAO;
 import Model.KhachThue;
 import Model.Phong;
@@ -43,17 +47,21 @@ public class KhachThueAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         if(list!=null)
+
             return list.size();
+
         return 0;
     }
 
     @Override
     public Object getItem(int i) {
+
         return null;
     }
 
     @Override
     public long getItemId(int i) {
+
         return 0;
     }
 
@@ -61,8 +69,11 @@ public class KhachThueAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         KhachThueAdapter.MyViewHolder myViewHolder = null;
         if (view == null) {
+
             myViewHolder = new MyViewHolder();
+
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
             view = inflater.inflate(R.layout.item_khachthue, null);
             myViewHolder.tv_KhachThue = view.findViewById(R.id.txt_item_khachThue);
             view.setTag(myViewHolder);
@@ -92,14 +103,75 @@ public class KhachThueAdapter extends BaseAdapter {
                         detail(i);
                     }
                 });
+
+                editLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        editKhachTHue(i);
+                    }
+                });
             }
         });
         return view;
     }
 
+    private void editKhachTHue(int i) {
+        final  Dialog dialog=new Dialog(context, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
+
+        dialog.requestWindowFeature((Window.FEATURE_NO_TITLE));
+        dialog.setContentView(R.layout.dialog_sua_thong_tin_khach_thue);
+        dialog.getWindow().getAttributes().windowAnimations=R.style.DialogAnimation;
+
+        dialog.show();
+
+        EditText edtenkhachhang=dialog.findViewById(R.id.edtHoTen);
+        EditText edtsdt=dialog.findViewById(R.id.edtSDT);
+        EditText edtcccd=dialog.findViewById(R.id.edtCCCD);
+
+        Button btnsua=dialog.findViewById(R.id.btnSuaKhachThue);
+        Button btnhuy=dialog.findViewById(R.id.btnhuyThemKhachThue);
+
+        KhachThueDAO khachThueDAO =new KhachThueDAO(context);
+        btnsua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                String hoten=edtenkhachhang.getText().toString();
+                int sdt=Integer.parseInt(edtcccd.getText().toString());
+                int cccd=Integer.parseInt(edtcccd.getText().toString());
+
+                list.get(i).setHoTen(hoten);
+                list.get(i).setSdt(sdt);
+                list.get(i).setCccd(cccd);
+                long err=khachThueDAO.updateKhachThue(list.get(i));
+                if(err>0){
+
+                    Toast.makeText(context,"Sua thanh cong",Toast.LENGTH_LONG).show();
+                    dialog.dismiss();
+                    notifyDataSetChanged();
+
+
+                }
+                else {
+                    Toast.makeText(context,"Sua khong thanh cong",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        btnhuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+    }
+
     public  class MyViewHolder {
         //khai báo các thành phần view có trong layoutitem
         private TextView tv_KhachThue,giaphong,giadien,gianuoc,giawifi,trangthai;
+
+
 
     }
     public void detail(int i) {
@@ -116,12 +188,19 @@ public class KhachThueAdapter extends BaseAdapter {
         PhongDAO phongDAO=new PhongDAO(context);
         Log.d("cccc", "detail: "+list.get(i).getIdKhachThue());
         Phong phong=phongDAO.getUserById(String.valueOf(list.get(i).getIdPhong()));
-        if(phong==null){
+
+        if(phong==null)
+        {
             tvophong.setText("Khách Chưa Thuê Phòng nào");
-        }else {
+
+        }
+        else
+        {
             tvophong.setText("Phòng Ở: "+phong.getSoPhong());
+
         }
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+
 
         dialog.show();
     }
