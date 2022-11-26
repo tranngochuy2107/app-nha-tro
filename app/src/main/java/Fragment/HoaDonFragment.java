@@ -53,7 +53,7 @@ public class HoaDonFragment extends Fragment implements interfaceDeleteClickdist
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        fab = view.findViewById(R.id.fab_addHoaDon);
+
         rcv_hoadon = view.findViewById(R.id.rec_HoaDon);
         context = this.getActivity();
         hoaDonDao = new HoaDonDao(context);
@@ -63,12 +63,7 @@ public class HoaDonFragment extends Fragment implements interfaceDeleteClickdist
         rcv_hoadon.setAdapter(HoaDonAdapter);
 
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                openDialog(getContext());
-            }
-        });
+
     }
 
     private void openDialog(Context context) {
