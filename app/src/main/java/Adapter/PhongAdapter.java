@@ -177,6 +177,53 @@ public class PhongAdapter extends BaseAdapter {
                         });
                     }
                 });
+                editLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+                        View vieww = inflater.inflate(R.layout.dialog_sua_phong, null);
+                        EditText edt_update_sophong = vieww.findViewById(R.id.edt_themsophong_update);
+                        EditText edt_update_giaphong = vieww.findViewById(R.id.edt_themgiaphong_update);
+                        EditText edt_update_giadien = vieww.findViewById(R.id.edt_themgiadien_update);
+                        EditText edt_update_gianuoc = vieww.findViewById(R.id.edt_themgianuoc_update);
+                        EditText edt_update_wifi = vieww.findViewById(R.id.edt_themgiawifi_update);
+                        Button btn_Cancel = vieww.findViewById(R.id.btn_huy_phong_update);
+                        Button btn_update = vieww.findViewById(R.id.btn_them_phong_update);
+
+                        edt_update_sophong.setText(list.get(i).getSoPhong()+ "");
+                        edt_update_giaphong.setText(list.get(i).getGiaPhong()+ "");
+                        edt_update_giadien.setText(list.get(i).getGiaDien()+ "");
+                        edt_update_gianuoc.setText(list.get(i).getGiaNuoc()+ "");
+                        edt_update_wifi.setText(list.get(i).getGiaWifi()+ "");
+
+                        builder.setView(vieww);
+                        Dialog dialog = builder.create();
+                        dialog.show();
+                        btn_update.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                PhongDAO phongDAO = new PhongDAO(context);
+                                Phong phong;
+                                phong = list.get(i);
+                                phong.setSoPhong(Integer.parseInt(edt_update_sophong.getText().toString()));
+                                phong.setGiaPhong(Integer.parseInt(edt_update_giaphong.getText().toString()));
+                                phong.setGiaDien(Integer.parseInt(edt_update_giadien.getText().toString()));
+                                phong.setGiaNuoc(Integer.parseInt(edt_update_gianuoc.getText().toString()));
+                                phong.setGiaWifi(Integer.parseInt(edt_update_wifi.getText().toString()));
+                                if (phongDAO.updatePhong(phong)>0){
+                                    Toast.makeText(context,"Sửa thành công",Toast.LENGTH_LONG).show();
+                                    dialog.dismiss();
+                                    list.clear();
+                                    list.addAll(phongDAO.getAll());
+                                    notifyDataSetChanged();
+                                }else {
+                                    Toast.makeText(context,"Sửa ko thành công",Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+                    }
+                });
                 themhopdong.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
