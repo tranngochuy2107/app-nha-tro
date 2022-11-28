@@ -260,6 +260,16 @@ public class PhongAdapter extends BaseAdapter {
                                 @Override
                                 public void onClick(View v) {
                                     SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+                                    if( edt_ngaybatdau_hopdong.getText().toString().length()==0){
+                                        Toast.makeText(context, "Ngày bắt đầu không được để trống", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }if( edt_ngayketthuc_hopdong .getText().toString().length()==0){
+                                        Toast.makeText(context, "Ngày kết thúc không được để trống và ", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }if(edt_songuoi.getText().toString().length()==0){
+                                        Toast.makeText(context, "Số người không được để trống", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
                                     try {
                                         Date date1=sdf.parse(edt_ngaybatdau_hopdong.getText().toString());
                                         Date date2=sdf.parse(edt_ngayketthuc_hopdong.getText().toString());
@@ -274,6 +284,8 @@ public class PhongAdapter extends BaseAdapter {
                                             hopDong.setTiecCoc(Integer.parseInt(edt_tiencoc.getText().toString()));
 
                                             hopDong.setTrangThaiHD("đang thuê");
+
+
 
                                             if (hopDongDAO.insertHopDong(hopDong)>0){
 
