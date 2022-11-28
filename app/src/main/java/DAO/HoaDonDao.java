@@ -14,7 +14,7 @@ import Model.HoaDon;
 import Model.Phong;
 
 public class HoaDonDao {
-    private SQLiteDatabase db;
+    private static SQLiteDatabase db;
 
     public HoaDonDao(Context context){
         DbHelper dbHelper = new DbHelper(context);
@@ -39,7 +39,7 @@ public class HoaDonDao {
     }
 
     //update
-    public int updateHoaDon(HoaDon HoaDon){
+    public static int updateHoaDon(HoaDon HoaDon){
         ContentValues values = new ContentValues();
         values.put("IdPhong",HoaDon.getIdPhong());
         values.put("TenHoaDon",HoaDon.getTenHoaDOn());
