@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +32,13 @@ import longvtph16016.poly.appquanlyphongtro.interfaceDeleteClickdistioner;
 public class HopDongAdapter extends BaseAdapter {
     private Context context;
     private List<HopDong> list;
+
+    private Button btnthemHopDong;
+    EditText edtNgayBatDau;
+    EditText edtNgayKetThuc;
+    EditText edtSoLuongXe;
+    EditText edtTienCoc;
+    EditText edtSoNguoi;
 
 
     public HopDongAdapter(Context context, List<HopDong> list  ) {
@@ -89,6 +98,70 @@ public class HopDongAdapter extends BaseAdapter {
                 LinearLayout editLayout = dialog.findViewById(R.id.edit_layout_dh);
                 LinearLayout detailLayout = dialog.findViewById(R.id.view_layout_hd);
                 LinearLayout delete_layout = dialog.findViewById(R.id.delete_layout_hp);
+
+
+                btnthemHopDong = view.findViewById(R.id.btn_Tao_HopDong);
+                edtNgayBatDau = view.findViewById(R.id.edt_NgayBatDau_HopDong);
+                edtNgayKetThuc = view.findViewById(R.id.edt_NgayKetThuc_HopDong);
+                edtSoLuongXe = view.findViewById(R.id.edt_SoLuongXe_HopDong);
+                edtSoNguoi = view.findViewById(R.id.edt_SoNguoi_HopDong);
+                edtTienCoc = view.findViewById(R.id.edt_TienCoc_HopDong);
+
+                //check validate
+                btnthemHopDong.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Boolean check = true;
+                        String ngayBatDau = edtNgayBatDau.getText().toString();
+                        String ngayKetThuc = edtNgayKetThuc.getText().toString();
+                        String soLuongXe = edtSoLuongXe.getText().toString();
+                        String soNguoi =    edtSoNguoi.getText().toString();
+                        String tienCoc = edtTienCoc.getText().toString();
+
+                        if(ngayBatDau.length()==0){
+                            edtNgayBatDau.requestFocus();
+                            Toast.makeText(context, "Hãy nhập ngày bắt đầu", Toast.LENGTH_SHORT).show();
+                            check = false;
+                        }
+
+                        if(ngayKetThuc.length()==0){
+                            edtNgayKetThuc.requestFocus();
+                            Toast.makeText(context, "Hãy nhập ngày kết thúc", Toast.LENGTH_SHORT).show();
+                            check = false;
+                        }
+                        if(soLuongXe.length()==0){
+                            edtSoLuongXe.requestFocus();
+                            Toast.makeText(context, "Hãy nhập số lượng xe", Toast.LENGTH_SHORT).show();
+                            check = false;
+                        }
+                        if(soNguoi.length()==0){
+                            edtSoNguoi.requestFocus();
+                            Toast.makeText(context, "Hãy nhập số lượng người", Toast.LENGTH_SHORT).show();
+                            check = false;
+                        }
+                        if(tienCoc.length()==0){
+                            edtTienCoc.requestFocus();
+                            Toast.makeText(context, "Hãy nhập tiền cọc", Toast.LENGTH_SHORT).show();
+                            check = false;
+                        }
+//                        if(!tienCoc.matches("[0-99999]*")){
+//                            Toast.makeText(context, "Nhập sai, vui lòng nhập từ 0 trở lên", Toast.LENGTH_SHORT).show();
+//                            check = false;
+//                        }
+//                        if (tienCoc.length() >8) {
+//                            Toast.makeText(context, "Tiền cọc không vượt quá 8 ký tự", Toast.LENGTH_SHORT).show();
+//                            check = false;
+//                        }
+//                        if(soNguoi.matches("[0-99999]*")){
+//                            Toast.makeText(context, "Nhập sai, vui lòng nhập từ 0 trở lên", Toast.LENGTH_SHORT).show();
+//                            check = false;
+//                        }
+//                        if(soLuongXe.matches("[0-99999]*")){
+//                            Toast.makeText(context, "Nhập sai, vui lòng nhập từ 0 trở lên", Toast.LENGTH_SHORT).show();
+//                            check = false;
+//                        }
+                    }
+                });
                 dialog.show();
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

@@ -316,6 +316,8 @@ public class PhongAdapter extends BaseAdapter {
                                         Toast.makeText(context, "Số người không được để trống", Toast.LENGTH_SHORT).show();
                                         return;
                                     }
+
+
                                     try {
                                         Date date1=sdf.parse(edt_ngaybatdau_hopdong.getText().toString());
                                         Date date2=sdf.parse(edt_ngayketthuc_hopdong.getText().toString());

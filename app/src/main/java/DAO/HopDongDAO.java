@@ -5,6 +5,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,12 @@ import Model.KhachThue;
 
 public class HopDongDAO {
     private SQLiteDatabase db;
+//    private Button btnthemHopDong;
+//    EditText edtNgayBatDau;
+//    EditText edtNgayKetThuc;
+//    EditText edtSoLuongXe;
+//    EditText edtTienCoc;
+//    EditText edtSoNguoi;
 
     public HopDongDAO(Context mContext) {
         DbHelper dbHelper = new DbHelper(mContext);
