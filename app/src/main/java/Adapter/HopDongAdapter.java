@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -100,68 +101,68 @@ public class HopDongAdapter extends BaseAdapter {
                 LinearLayout delete_layout = dialog.findViewById(R.id.delete_layout_hp);
 
 
-                btnthemHopDong = view.findViewById(R.id.btn_Tao_HopDong);
-                edtNgayBatDau = view.findViewById(R.id.edt_NgayBatDau_HopDong);
-                edtNgayKetThuc = view.findViewById(R.id.edt_NgayKetThuc_HopDong);
-                edtSoLuongXe = view.findViewById(R.id.edt_SoLuongXe_HopDong);
-                edtSoNguoi = view.findViewById(R.id.edt_SoNguoi_HopDong);
-                edtTienCoc = view.findViewById(R.id.edt_TienCoc_HopDong);
+//                btnthemHopDong = view.findViewById(R.id.btn_Tao_HopDong);
+//                edtNgayBatDau = view.findViewById(R.id.edt_NgayBatDau_HopDong);
+//                edtNgayKetThuc = view.findViewById(R.id.edt_NgayKetThuc_HopDong);
+//                edtSoLuongXe = view.findViewById(R.id.edt_SoLuongXe_HopDong);
+//                edtSoNguoi = view.findViewById(R.id.edt_SoNguoi_HopDong);
+//                edtTienCoc = view.findViewById(R.id.edt_TienCoc_HopDong);
 
                 //check validate
-                btnthemHopDong.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Boolean check = true;
-                        String ngayBatDau = edtNgayBatDau.getText().toString();
-                        String ngayKetThuc = edtNgayKetThuc.getText().toString();
-                        String soLuongXe = edtSoLuongXe.getText().toString();
-                        String soNguoi =    edtSoNguoi.getText().toString();
-                        String tienCoc = edtTienCoc.getText().toString();
-
-                        if(ngayBatDau.length()==0){
-                            edtNgayBatDau.requestFocus();
-                            Toast.makeText(context, "Hãy nhập ngày bắt đầu", Toast.LENGTH_SHORT).show();
-                            check = false;
-                        }
-
-                        if(ngayKetThuc.length()==0){
-                            edtNgayKetThuc.requestFocus();
-                            Toast.makeText(context, "Hãy nhập ngày kết thúc", Toast.LENGTH_SHORT).show();
-                            check = false;
-                        }
-                        if(soLuongXe.length()==0){
-                            edtSoLuongXe.requestFocus();
-                            Toast.makeText(context, "Hãy nhập số lượng xe", Toast.LENGTH_SHORT).show();
-                            check = false;
-                        }
-                        if(soNguoi.length()==0){
-                            edtSoNguoi.requestFocus();
-                            Toast.makeText(context, "Hãy nhập số lượng người", Toast.LENGTH_SHORT).show();
-                            check = false;
-                        }
-                        if(tienCoc.length()==0){
-                            edtTienCoc.requestFocus();
-                            Toast.makeText(context, "Hãy nhập tiền cọc", Toast.LENGTH_SHORT).show();
-                            check = false;
-                        }
-//                        if(!tienCoc.matches("[0-99999]*")){
-//                            Toast.makeText(context, "Nhập sai, vui lòng nhập từ 0 trở lên", Toast.LENGTH_SHORT).show();
+//                btnthemHopDong.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Boolean check = true;
+//                        String ngayBatDau = edtNgayBatDau.getText().toString();
+//                        String ngayKetThuc = edtNgayKetThuc.getText().toString();
+//                        String soLuongXe = edtSoLuongXe.getText().toString();
+//                        String soNguoi =    edtSoNguoi.getText().toString();
+//                        String tienCoc = edtTienCoc.getText().toString();
+//
+//                        if(ngayBatDau.length()==0){
+//                            edtNgayBatDau.requestFocus();
+//                            Toast.makeText(context, "Hãy nhập ngày bắt đầu", Toast.LENGTH_SHORT).show();
 //                            check = false;
 //                        }
-//                        if (tienCoc.length() >8) {
-//                            Toast.makeText(context, "Tiền cọc không vượt quá 8 ký tự", Toast.LENGTH_SHORT).show();
+//
+//                        if(ngayKetThuc.length()==0){
+//                            edtNgayKetThuc.requestFocus();
+//                            Toast.makeText(context, "Hãy nhập ngày kết thúc", Toast.LENGTH_SHORT).show();
 //                            check = false;
 //                        }
-//                        if(soNguoi.matches("[0-99999]*")){
-//                            Toast.makeText(context, "Nhập sai, vui lòng nhập từ 0 trở lên", Toast.LENGTH_SHORT).show();
+//                        if(soLuongXe.length()==0){
+//                            edtSoLuongXe.requestFocus();
+//                            Toast.makeText(context, "Hãy nhập số lượng xe", Toast.LENGTH_SHORT).show();
 //                            check = false;
 //                        }
-//                        if(soLuongXe.matches("[0-99999]*")){
-//                            Toast.makeText(context, "Nhập sai, vui lòng nhập từ 0 trở lên", Toast.LENGTH_SHORT).show();
+//                        if(soNguoi.length()==0){
+//                            edtSoNguoi.requestFocus();
+//                            Toast.makeText(context, "Hãy nhập số lượng người", Toast.LENGTH_SHORT).show();
 //                            check = false;
 //                        }
-                    }
-                });
+//                        if(tienCoc.length()==0){
+//                            edtTienCoc.requestFocus();
+//                            Toast.makeText(context, "Hãy nhập tiền cọc", Toast.LENGTH_SHORT).show();
+//                            check = false;
+//                        }
+////                        if(!tienCoc.matches("[0-99999]*")){
+////                            Toast.makeText(context, "Nhập sai, vui lòng nhập từ 0 trở lên", Toast.LENGTH_SHORT).show();
+////                            check = false;
+////                        }
+////                        if (tienCoc.length() >8) {
+////                            Toast.makeText(context, "Tiền cọc không vượt quá 8 ký tự", Toast.LENGTH_SHORT).show();
+////                            check = false;
+////                        }
+////                        if(soNguoi.matches("[0-99999]*")){
+////                            Toast.makeText(context, "Nhập sai, vui lòng nhập từ 0 trở lên", Toast.LENGTH_SHORT).show();
+////                            check = false;
+////                        }
+////                        if(soLuongXe.matches("[0-99999]*")){
+////                            Toast.makeText(context, "Nhập sai, vui lòng nhập từ 0 trở lên", Toast.LENGTH_SHORT).show();
+////                            check = false;
+////                        }
+//                    }
+//                });
                 dialog.show();
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -172,6 +173,7 @@ public class HopDongAdapter extends BaseAdapter {
                     @Override
                     public void onClick(View view) {
                         detail();
+                        Log.d("TAG", "onClick: "+list.get(i).getIdHopDong());
                     }
                 });
                 delete_layout.setOnClickListener(new View.OnClickListener() {
@@ -213,6 +215,7 @@ public class HopDongAdapter extends BaseAdapter {
     public void detail() {
         final Dialog dialog = new Dialog(context, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
         dialog.setContentView(R.layout.detail_hop_dong);
+
         dialog.show();
     }
 }

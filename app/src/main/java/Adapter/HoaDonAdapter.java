@@ -124,7 +124,7 @@ public class HoaDonAdapter extends BaseAdapter {
                     @Override
                     public void onClick(View view) {
                         ThongTinHoaDon(i);
-                        Log.d("ssssssssssss", "onClick: "+list.get(i).getTrangThai());
+                        Log.d("ssssssssssss", "onClick: "+list.get(i).getIdHopDong());
                     }
                 });
             }

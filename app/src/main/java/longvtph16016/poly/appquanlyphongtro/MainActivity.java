@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                         getSupportActionBar().setTitle("Quản Lý Hóa Đơn");
                         break;
                     case R.id.nav_doanhthu:
-                     //   replaceFragment(new DoanhThuFragment());
+                        replaceFragment(new DoanhThuragment());
                         getSupportActionBar().setTitle("Doanh Thu");
                         break;
                 }

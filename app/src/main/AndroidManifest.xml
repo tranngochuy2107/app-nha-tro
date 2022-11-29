@@ -30,6 +30,8 @@
             android:name=".MainActivity"
             android:exported="true" >
         </activity>
+        <activity android:name=".DoanhThuThangActivity"/>
+        <activity android:name=".DoanhThuNamActivity"/>
     </application>
 
 </manifest>
