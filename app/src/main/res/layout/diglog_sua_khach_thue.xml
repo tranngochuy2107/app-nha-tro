@@ -44,12 +44,16 @@
         android:text="Thêm"
         android:layout_margin="40dp"
         android:id="@+id/btnThemKhachThue"/>
+
     <Button
+        android:id="@+id/btnhuyThemKhachThue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/edtCCCD"
-        android:layout_margin="40dp"
         android:layout_alignParentRight="true"
-        android:text="Hủy"
-        android:id="@+id/btnhuyThemKhachThue"/>
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="40dp"
+        android:text="Huy" />
 </RelativeLayout>
