@@ -1,6 +1,6 @@
 package Model;
 
-public class KhachThue {
+public class KhachThue extends Phong {
     private  int IdKhachThue;
     private  String hoTen;
     private  int Sdt;

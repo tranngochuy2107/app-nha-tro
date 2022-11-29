@@ -1,5 +1,7 @@
 package Adapter;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -116,20 +118,29 @@ public class KhachThueAdapter extends BaseAdapter {
     }
 
     private void editKhachTHue(int i) {
-        final  Dialog dialog=new Dialog(context, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
 
-        dialog.requestWindowFeature((Window.FEATURE_NO_TITLE));
-        dialog.setContentView(R.layout.dialog_sua_thong_tin_khach_thue);
-        dialog.getWindow().getAttributes().windowAnimations=R.style.DialogAnimation;
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+        View vieww = inflater.inflate(R.layout.diglog_sua_khach_thue, null);
 
+        builder.setView(vieww);
+        Dialog dialog = builder.create();
         dialog.show();
 
-        EditText edtenkhachhang=dialog.findViewById(R.id.edtHoTen);
-        EditText edtsdt=dialog.findViewById(R.id.edtSDT);
-        EditText edtcccd=dialog.findViewById(R.id.edtCCCD);
+        TextView tv_SoPhong_ThemKhachThue_update=dialog.findViewById(R.id.tv_SoPhong_ThemKhachThue_update);
+        TextView edTenK_update=dialog.findViewById(R.id.edTenK_update);
+        EditText edtsdt=dialog.findViewById(R.id.edSde_update);
+        EditText edtcccd=dialog.findViewById(R.id.edCcce_update);
+        Button btnsua=dialog.findViewById(R.id.btnSave_update);
+        Button btnhuy=dialog.findViewById(R.id.btnCancee_update);
 
-        Button btnsua=dialog.findViewById(R.id.btn_sua);
-        Button btnhuy=dialog.findViewById(R.id.btnhuyThemKhachThue);
+        PhongDAO phongDAO=new PhongDAO(context);
+
+        tv_SoPhong_ThemKhachThue_update.setText("Phòng: "+phongDAO.getUserById(String.valueOf(list.get(i).getIdPhong())).getSoPhong()+"");
+        edTenK_update.setText(list.get(i).getHoTen()+ "");
+        edtsdt.setText(list.get(i).getSdt()+ "");
+        edtcccd.setText(list.get(i).getCccd()+ "");
+
 
         KhachThueDAO khachThueDAO =new KhachThueDAO(context);
         btnsua.setOnClickListener(new View.OnClickListener() {
@@ -137,11 +148,12 @@ public class KhachThueAdapter extends BaseAdapter {
             public void onClick(View view) {
 
 
-                String hoten=edtenkhachhang.getText().toString();
-                int sdt=Integer.parseInt(edtcccd.getText().toString());
+                String edTenK =edTenK_update.getText().toString();
+                int sdt=Integer.parseInt(edtsdt.getText().toString());
                 int cccd=Integer.parseInt(edtcccd.getText().toString());
 
-                list.get(i).setHoTen(hoten);
+
+                list.get(i).setHoTen(edTenK);
                 list.get(i).setSdt(sdt);
                 list.get(i).setCccd(cccd);
                 long err=khachThueDAO.updateKhachThue(list.get(i));
