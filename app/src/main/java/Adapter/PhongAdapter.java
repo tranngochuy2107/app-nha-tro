@@ -422,7 +422,7 @@ public class PhongAdapter extends BaseAdapter {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int y, int m, int d) {
-                        Ed_NgayTao_HDon.setText(d + "/" + (m + 1) + "/" + y);
+                        Ed_NgayTao_HDon.setText( y+"-" + (m + 1) + "-"+d );
                     }
                 }, year, month, day);
                 datePickerDialog.show();
@@ -456,6 +456,8 @@ public class PhongAdapter extends BaseAdapter {
                     return;
                 }
                 //ínert
+                hopDongDAO=new HopDongDAO(context);
+                HopDong hopDong=hopDongDAO.getHopDongByIdPhong(String.valueOf(list.get(position).getIdPhong()));
                 hoaDonDao=new HoaDonDao(context);
                 HoaDon hoaDon=new HoaDon();
                 hoaDon.setIdPhong(list.get(position).getIdPhong());
@@ -465,6 +467,7 @@ public class PhongAdapter extends BaseAdapter {
                 hoaDon.setNgay(ngaytao);
                 hoaDon.setSoDien(sodien);
                 hoaDon.setSoNuoc(sonuoc);
+                hoaDon.setIdHopDong(hopDong.getIdHopDong());
                 boolean trangthai=checkBox.isChecked();
                 int trangTHai;
                 Log.d("sssssss", "onClick: "+trangthai);

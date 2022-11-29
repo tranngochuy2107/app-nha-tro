@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="15sp"
+        android:text="Doanh Thu Tháng"
+        android:textColor="@android:color/black"
+        android:textSize="25sp"
+        app:cornerRadius="20sp"/>
+
+    <TextView
+        android:layout_marginLeft="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="Chọn Tháng" />
+    <Spinner
+        android:id="@+id/id_spinner_thang"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+    </Spinner>
+    <TextView
+        android:layout_marginLeft="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="Chọn Năm" />
+    <Spinner
+        android:id="@+id/id_spinner_nam"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+    </Spinner>
+    <Button
+        android:id="@+id/btn_xemDTT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20sp"
+        android:backgroundTint="@color/black"
+        android:text="Xem" />
+</LinearLayout>

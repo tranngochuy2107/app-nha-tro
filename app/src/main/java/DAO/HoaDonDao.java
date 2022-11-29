@@ -75,7 +75,39 @@ public class HoaDonDao {
         }
         return null;
     }
+//    public List<HoaDon> gethoadonByNgay(String a, String b){
+//        String sql="SELECT * FROM HoaDon WHERE Ngay BETWEEN "+a+" AND "+b;
+//        List<HoaDon> list = getData(sql);
+//        if(list != null){
+//            return list;
+//        }
+//        return null;
+//    }
 
+    public List<HoaDon> gethoadonByNgay(String a, String b){
+        List<HoaDon> arrayList = new ArrayList<>();
+        String sql="SELECT * FROM HoaDon WHERE Ngay BETWEEN ? AND ?";
+        Cursor cursor = db.rawQuery (sql,new String[]{a,b});
+        cursor.moveToFirst ();
+        while (!cursor.isAfterLast ()){
+            HoaDon hoaDon= new HoaDon();
+            hoaDon.setIdHoaDon(Integer.parseInt(cursor.getString(0)));
+            hoaDon.setTenHoaDOn(cursor.getString(1));
+            hoaDon.setNgay(cursor.getString(2));
+            hoaDon.setSoDien(Integer.parseInt(cursor.getString(3)));
+            hoaDon.setSoNuoc(Integer.parseInt(cursor.getString(4)));
+            hoaDon.setChiPhiKhac(Integer.parseInt(cursor.getString(5)));
+            hoaDon.setTong(Integer.parseInt(cursor.getString(6)));
+            hoaDon.setTrangThai(Integer.parseInt(cursor.getString(7)));
+            hoaDon.setGhiChu(cursor.getString(8));
+            hoaDon.setIdPhong(Integer.parseInt(cursor.getString(9)));
+            hoaDon.setIdHopDong(cursor.getColumnIndex("IdHopDong"));
+            arrayList.add(hoaDon);
+            cursor.moveToNext ();
+        }
+        cursor.close ();
+        return arrayList;
+    }
     @SuppressLint("Range")
     public List<HoaDon>getData(String sql, String...SelectArgs){
         List<HoaDon> list= new ArrayList<>();
@@ -83,7 +115,8 @@ public class HoaDonDao {
         while (cursor.moveToNext()){
             HoaDon hoaDon= new HoaDon();
             hoaDon.setIdPhong(cursor.getInt(cursor.getColumnIndex("IdPhong")));
-            hoaDon.setNgay(cursor.getString(cursor.getColumnIndex("Ngay")));
+//            hoaDon.setNgay(cursor.getString(cursor.getColumnIndex("Ngay")));
+            hoaDon.setNgay(cursor.getString(2));
             hoaDon.setTenHoaDOn(cursor.getString(cursor.getColumnIndex("TenHoaDon")));
             hoaDon.setSoDien(cursor.getInt(cursor.getColumnIndex("SoDien")));
             hoaDon.setSoNuoc(cursor.getInt(cursor.getColumnIndex("SoNuoc")));
