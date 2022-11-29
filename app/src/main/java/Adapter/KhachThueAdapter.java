@@ -128,7 +128,7 @@ public class KhachThueAdapter extends BaseAdapter {
         EditText edtsdt=dialog.findViewById(R.id.edtSDT);
         EditText edtcccd=dialog.findViewById(R.id.edtCCCD);
 
-        Button btnsua=dialog.findViewById(R.id.btnSuaKhachThue);
+        Button btnsua=dialog.findViewById(R.id.btn_sua);
         Button btnhuy=dialog.findViewById(R.id.btnhuyThemKhachThue);
 
         KhachThueDAO khachThueDAO =new KhachThueDAO(context);

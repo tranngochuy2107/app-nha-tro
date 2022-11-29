@@ -151,7 +151,6 @@ public class PhongAdapter extends BaseAdapter {
                         btnSave.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
                                 khachThueDAO = new KhachThueDAO(context);
                                 KhachThue khach = new KhachThue();
                                 khach.setIdPhong(idphong);
