@@ -146,11 +146,34 @@ public class KhachThueAdapter extends BaseAdapter {
         btnsua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
+                //validate
+                Boolean check = true;
                 String edTenK =edTenK_update.getText().toString();
-                int sdt=Integer.parseInt(edtsdt.getText().toString());
-                int cccd=Integer.parseInt(edtcccd.getText().toString());
+                int sdt=0;
+                int cccd=0;
+                //validate
+                if(edTenK.length()==0){
+                    edTenK_update.requestFocus();
+                    Toast.makeText(context, "Hãy nhập tên chủ phòng", Toast.LENGTH_SHORT).show();
+                    check = false;
+                }
+                try {
+                    sdt=Integer.parseInt(edtsdt.getText().toString());
+                    cccd=Integer.parseInt(edtcccd.getText().toString());
+                }catch (Exception e){
+                    Toast.makeText(context, "Số điện thoại và cccd phải là số", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(edtsdt.getText().toString().length()!=10){
+                    Toast.makeText(context, "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(edtcccd.getText().toString().length()!=12){
+                    Toast.makeText(context, "Cccd không hợp lệ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String reg = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
+
 
 
                 list.get(i).setHoTen(edTenK);
