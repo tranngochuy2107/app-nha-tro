@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:background="@color/yellow"
             android:gravity="center"
             android:padding="15sp"
             android:text="Tạo hóa đơn"
@@ -27,6 +27,7 @@
             android:id="@+id/tvsophong_hd"
             android:paddingLeft="15sp"
             android:textSize="25sp"
+            android:textColor="@color/black"
             android:text="Phòng:" />
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,6 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start"
+                android:textColor="@color/black"
                 android:text="Tên Hóa Đơn" />
 
             <EditText
@@ -45,6 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Hóa đơn tháng 11 phòng 101"
+                android:textColor="@color/black"
                 android:padding="20sp" />
         </LinearLayout>
 
@@ -67,6 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"
+                    android:textColor="@color/black"
                     android:text="ngày tạo" />
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -85,6 +89,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="dd/mm/yyyy"
+                        android:textColor="@color/black"
                         android:padding="20sp" />
                 </LinearLayout>
 
@@ -100,13 +105,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"
+                    android:textColor="@color/black"
                     android:text="nhập số điện" />
 
                 <EditText
                     android:id="@+id/ed_NhapSoDien_HDon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="2.000.000"
+                    android:hint="123"
+                    android:textColor="@color/black"
                     android:padding="20sp" />
             </LinearLayout>
 
@@ -120,13 +127,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"
+                    android:textColor="@color/black"
                     android:text="nhập số nước" />
 
                 <EditText
                     android:id="@+id/ed_NhapSoNuoc_HDon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="2.000.000"
+                    android:hint="123"
+                    android:textColor="@color/black"
                     android:padding="20sp" />
             </LinearLayout>
 
@@ -140,13 +149,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"
+                    android:textColor="@color/black"
                     android:text="chi phí khác" />
 
                 <EditText
                     android:id="@+id/ed_ChiPhiKhac_HDon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="5.000.000"
+                    android:hint="500"
+                    android:textColor="@color/black"
                     android:padding="20sp" />
             </LinearLayout>
 
@@ -160,6 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tổng tiền :"
+                    android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <Button
@@ -179,13 +191,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"
+                    android:textColor="@color/black"
                     android:text="ghi chú" />
 
                 <EditText
                     android:id="@+id/ed_GhiChu_HDon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="2.000.000"
+                    android:textColor="@color/black"
+                    android:hint="abc"
                     android:padding="20sp" />
             </LinearLayout>
             <CheckBox

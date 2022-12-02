@@ -86,7 +86,7 @@ public class HopDongAdapter extends BaseAdapter {
         } else {
             myViewHolder = (MyViewHolder) view.getTag();
         }
-        CardView ln_item_dv = view.findViewById(R.id.cardview_hopDong);
+        LinearLayout ln_item_dv = view.findViewById(R.id.linear_item_hd);
         PhongDAO phongDAO = new PhongDAO(context);
         Phong phong = phongDAO.getUserById(String.valueOf(list.get(i).getIdPhong()));
         myViewHolder.tv_HopDong.setText("Hợp Đồng Phòng: "+phong.getSoPhong());

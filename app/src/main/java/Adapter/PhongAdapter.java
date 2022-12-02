@@ -114,6 +114,9 @@ public class PhongAdapter extends BaseAdapter {
                 LinearLayout delete_layout = dialog.findViewById(R.id.edt_delete_dv);
                 LinearLayout ThemKhachThue = dialog.findViewById(R.id.edt_ThemKhachThue);
 
+                TextView textView = dialog.findViewById(R.id.tv_title);
+                textView.setText("Phòng "+list.get(i).getSoPhong());
+
                 dialog.show();
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -385,7 +388,6 @@ public class PhongAdapter extends BaseAdapter {
     }
 
     private void ThemHoadon(int position) {
-
         final Dialog dialog = new Dialog(context, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_tao_hoa_don);
@@ -495,9 +497,16 @@ public class PhongAdapter extends BaseAdapter {
     }
 
     private void ThongTinPhong(int pos) {
-        final Dialog dialog = new Dialog(context, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
+        final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_thongtinphong);
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+
         TextView tvSophong=dialog.findViewById(R.id.tvsophong);
         TextView tvGiaPhong=dialog.findViewById(R.id.tvGiaPhong);
         TextView tvGiadien=dialog.findViewById(R.id.tvGiaDien);
@@ -505,6 +514,8 @@ public class PhongAdapter extends BaseAdapter {
         TextView tvWifi=dialog.findViewById(R.id.tvGiaWifi);
         TextView tvtrangthai=dialog.findViewById(R.id.tinhTrang);
         TextView tvnguoithue=dialog.findViewById(R.id.tvnguoiThue);
+        Button button = dialog.findViewById(R.id.btn_dissmiss_phong);
+
         Phong phong=list.get(pos);
         tvSophong.setText("Số phòng: "+phong.getSoPhong());
         tvGiaPhong.setText("Giá Phòng: "+phong.getGiaPhong());
@@ -521,9 +532,12 @@ public class PhongAdapter extends BaseAdapter {
             tvnguoithue.setText("Người Thuê: "+khachThue.getHoTen());
 
         }
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
 
-
-        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-        dialog.show();
     }
 }

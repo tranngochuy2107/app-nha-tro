@@ -210,9 +210,17 @@ public class KhachThueAdapter extends BaseAdapter {
 
     }
     public void detail(int i) {
-        final Dialog dialog = new Dialog(context, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
+        final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.detail_khachthue);
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+
+        Button button = dialog.findViewById(R.id.btn_dissmiss_khachthue);
         TextView tvname=dialog.findViewById(R.id.thongtinname);
         TextView tvsdt=dialog.findViewById(R.id.thongtinsdt);
         TextView tvcccd=dialog.findViewById(R.id.thongtincccd);
@@ -234,9 +242,11 @@ public class KhachThueAdapter extends BaseAdapter {
             tvophong.setText("Phòng Ở: "+phong.getSoPhong());
 
         }
-        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-
-
-        dialog.show();
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
     }
 }

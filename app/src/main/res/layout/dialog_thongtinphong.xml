@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
-
+    android:background="@color/white"
     android:layout_height="match_parent">
     <TextView
         android:layout_width="match_parent"
@@ -11,7 +11,6 @@
         android:textStyle="bold"
         android:background="@color/yellow"
         android:textSize="30dp"
-
         android:layout_height="wrap_content"/>
     <TextView
         android:paddingLeft="30dp"
@@ -20,7 +19,7 @@
         android:textSize="20sp"
         android:textColor="@color/black"
         android:id="@+id/tvsophong"
-        android:background="@color/colorDividerView"
+        android:background="@drawable/bg_white_conor_10_border_gary"
         android:gravity="center_vertical"
         android:layout_marginTop="15sp"
         android:text="Số Phòng: 201" />
@@ -31,13 +30,13 @@
         android:textSize="20sp"
         android:textColor="@color/black"
         android:id="@+id/tvGiaPhong"
-        android:background="@color/colorDividerView"
+        android:background="@drawable/bg_white_conor_10_border_gary"
         android:gravity="center_vertical"
         android:layout_marginTop="15sp"
         android:text="Giá Phòng: 201" />
     <TextView
         android:paddingLeft="30dp"
-        android:background="@color/colorDividerView"
+        android:background="@drawable/bg_white_conor_10_border_gary"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:textSize="20sp"
@@ -53,7 +52,7 @@
         android:textSize="20sp"
         android:textColor="@color/black"
         android:id="@+id/tvGiaNuoc"
-        android:background="@color/colorDividerView"
+        android:background="@drawable/bg_white_conor_10_border_gary"
         android:gravity="center_vertical"
         android:layout_marginTop="15sp"
         android:text="Giá Nước: 201" />
@@ -64,7 +63,7 @@
         android:textSize="20sp"
         android:textColor="@color/black"
         android:id="@+id/tvGiaWifi"
-        android:background="@color/colorDividerView"
+        android:background="@drawable/bg_white_conor_10_border_gary"
         android:gravity="center_vertical"
         android:layout_marginTop="15sp"
         android:text="Giá Wifi: 201" />
@@ -82,8 +81,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:text="Người Thuê: chưa ai thuê"
         android:textColor="@color/black"
         android:id="@+id/tvnguoiThue"
         android:layout_marginTop="15sp"
          />
+    <Button
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="quay lại"
+        android:id="@+id/btn_dissmiss_phong"
+        android:background="@drawable/bg_white_conor_10_border_gary"/>
+
 </LinearLayout>

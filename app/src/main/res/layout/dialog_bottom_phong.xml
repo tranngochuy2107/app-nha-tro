@@ -6,10 +6,11 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5sp"
-        android:text="Chọn"
+        android:text="Chọn Phòng"
         android:textAlignment="center"
         android:textSize="25sp"
         android:textStyle="bold" />
@@ -21,26 +22,7 @@
         android:layout_marginBottom="10sp"
         android:background="@color/colorDividerView"
         />
-    <LinearLayout
-        android:id="@+id/edt_detailphong"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8sp">
 
-        <ImageView
-            android:layout_width="30sp"
-            android:layout_height="30sp"
-            android:src="@drawable/ic_update" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30sp"
-            android:text="Thông tin"
-            android:textColor="@color/black"
-            android:textSize="22sp" />
-    </LinearLayout>
     <LinearLayout
         android:id="@+id/edt_ThemKhachThue"
         android:layout_width="match_parent"
@@ -51,7 +33,7 @@
         <ImageView
             android:layout_width="30sp"
             android:layout_height="30sp"
-            android:src="@drawable/ic_update" />
+            android:src="@drawable/add" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -71,7 +53,7 @@
         <ImageView
             android:layout_width="30sp"
             android:layout_height="30sp"
-            android:src="@drawable/ic_update" />
+            android:src="@drawable/add" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -91,7 +73,7 @@
         <ImageView
             android:layout_width="30sp"
             android:layout_height="30sp"
-            android:src="@drawable/ic_update" />
+            android:src="@drawable/add" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -139,6 +121,26 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30sp"
             android:text="Xóa Phòng"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/edt_detailphong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8sp">
+
+        <ImageView
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:src="@drawable/ic_eye_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30sp"
+            android:text="Xem Thông Tin Phòng"
             android:textColor="@color/black"
             android:textSize="22sp" />
     </LinearLayout>
