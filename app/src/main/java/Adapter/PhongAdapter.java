@@ -99,7 +99,6 @@ public class PhongAdapter extends BaseAdapter {
         }
         LinearLayout ln_item_dv = view.findViewById(R.id.ln_menu_phong);
         myViewHolder.tv_sophong.setText("Phòng"+": "+list.get(i).getSoPhong());
-
         ln_item_dv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,8 +157,8 @@ public class PhongAdapter extends BaseAdapter {
                                 KhachThue khach = new KhachThue();
                                 khach.setIdPhong(idphong);
                                 khach.setHoTen(edtenKT.getText().toString());
-                                khach.setSdt(Integer.parseInt(edSdt.getText().toString()));
-                                khach.setCccd(Integer.parseInt(edCccd.getText().toString()));
+                                khach.setSdt(edSdt.getText().toString());
+                                khach.setCccd(edCccd.getText().toString());
                                 if (khachThueDAO.insertKhachThue(khach)>0){
                                     Toast.makeText(context, "thêm mới thành công", Toast.LENGTH_SHORT).show();
                                     phong.setTrangThai(2);
@@ -434,12 +433,21 @@ public class PhongAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 // check vavidate
-                 tenhoadon=ed_tenhoaDon.getText().toString();
-                 ngaytao=Ed_NgayTao_HDon.getText().toString();
+
+
+
                  ghiChu=Ed_GhiChu_HDon.getText().toString();
-                 sodien= Integer.parseInt(Ed_NhapSoDien_HDon.getText().toString());
-                 sonuoc= Integer.parseInt(Ed_NhapSoDien_HDon.getText().toString());
-                 chiphikhac= Integer.parseInt(Ed_NhapSoDien_HDon.getText().toString());
+                try {
+                    sodien= Integer.parseInt(Ed_NhapSoDien_HDon.getText().toString());
+                    sonuoc= Integer.parseInt(Ed_NhapSoDien_HDon.getText().toString());
+                    chiphikhac= Integer.parseInt(Ed_NhapSoDien_HDon.getText().toString());
+                }
+                catch (Exception e){
+                    Toast.makeText(context, "số điện, nước, chi phí khác phải điền dạng số", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
                  phongDAO=new PhongDAO(context);
                  Phong phong=phongDAO.getUserById(String.valueOf(list.get(position).getIdPhong()));
                  int giadien=phong.getGiaDien();
@@ -453,6 +461,16 @@ public class PhongAdapter extends BaseAdapter {
         Btn_them_HDon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                tenhoadon=ed_tenhoaDon.getText().toString();
+                if(tenhoadon.length()==0){
+                    Toast.makeText(context, "Hãy điền tên hóa đơn", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                ngaytao=Ed_NgayTao_HDon.getText().toString();
+                if(ngaytao.length()==0){
+                    Toast.makeText(context, "Hãy điền tên hóa đơn", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if(tongtien==0){
                     Toast.makeText(context, "hãy tính tổng", Toast.LENGTH_SHORT).show();
                     return;
