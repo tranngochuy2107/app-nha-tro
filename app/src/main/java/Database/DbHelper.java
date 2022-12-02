@@ -22,15 +22,10 @@ public class DbHelper extends SQLiteOpenHelper {
     String createTableKhachThue = " create table KhachThue (" +
             "IdKhachThue INTEGER PRIMARY KEY autoincrement," +
             "HoTen TEXT NOT NULL," +
-            "SoDienThoai INTEGER NOT NULL," +
-            "Cccd INTEGER NOT NULL," +
+            "SoDienThoai TEXT NOT NULL," +
+            "Cccd TEXT NOT NULL," +
             "IdPhong INTEGER REFERENCES Phong(IdPhong))";
-    String INSERT_khach = "insert into KhachThue values" +
-            "(1, 'Nguyễn Văn A', 231,23212,1)," +
-            "(2, 'Nguyễn Văn B', 1232,12121,2), " +
-            "(3, 'Nguyễn Văn C', 1233,1212121,5), " +
-            "(4, 'Nguyễn Văn D', 1234,33333333,3), " +
-            "(5, 'Nguyễn Văn E', 1235,3111111,4)";
+
     //---------------------------------
 
     static final String CREATE_TABLE_HOP_DONG =

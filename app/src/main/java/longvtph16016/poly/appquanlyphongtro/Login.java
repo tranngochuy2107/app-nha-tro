@@ -33,7 +33,7 @@ public class Login extends AppCompatActivity {
                 input += "\n";
                 input = "PassWord: " + textInputPassWord.getEditText().getText().toString();
 
-                startActivity(new Intent(Login.this, SplashScreen.class));
+                startActivity(new Intent(Login.this, MainActivity.class));
                 return;
             }
         });

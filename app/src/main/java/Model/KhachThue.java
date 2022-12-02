@@ -3,14 +3,14 @@ package Model;
 public class KhachThue extends Phong {
     private  int IdKhachThue;
     private  String hoTen;
-    private  int Sdt;
-    private  int Cccd;
+    private  String Sdt;
+    private  String Cccd;
     private int IdPhong;
 
     public KhachThue() {
     }
 
-    public KhachThue(int idKhachThue, String hoTen, int sdt, int cccd, int idPhong) {
+    public KhachThue(int idKhachThue, String hoTen, String sdt, String cccd, int idPhong) {
         IdKhachThue = idKhachThue;
         this.hoTen = hoTen;
         Sdt = sdt;
@@ -34,19 +34,19 @@ public class KhachThue extends Phong {
         this.hoTen = hoTen;
     }
 
-    public int getSdt() {
+    public String getSdt() {
         return Sdt;
     }
 
-    public void setSdt(int sdt) {
+    public void setSdt(String sdt) {
         Sdt = sdt;
     }
 
-    public int getCccd() {
+    public String getCccd() {
         return Cccd;
     }
 
-    public void setCccd(int cccd) {
+    public void setCccd(String cccd) {
         Cccd = cccd;
     }
 

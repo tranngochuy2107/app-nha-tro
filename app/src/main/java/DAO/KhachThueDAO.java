@@ -76,8 +76,8 @@ public class KhachThueDAO {
         while (!cursor.isAfterLast ()){
            KhachThue user= new KhachThue();
             int idkhach = Integer.parseInt (cursor.getString (cursor.getColumnIndex ("IdKhachThue")));
-            int cccd = Integer.parseInt (cursor.getString (cursor.getColumnIndex ("Cccd")));
-            int sdt = Integer.parseInt (cursor.getString (cursor.getColumnIndex ("SoDienThoai")));
+            String cccd = cursor.getString (cursor.getColumnIndex ("Cccd"));
+            String sdt = cursor.getString (cursor.getColumnIndex ("SoDienThoai"));
             int idphong = Integer.parseInt (cursor.getString (cursor.getColumnIndex ("IdPhong")));
             String tenkhach = cursor.getString (cursor.getColumnIndex ("HoTen"));
             list.add(new KhachThue(idkhach,tenkhach,sdt,cccd,idphong));

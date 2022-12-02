@@ -149,30 +149,25 @@ public class KhachThueAdapter extends BaseAdapter {
                 //validate
                 Boolean check = true;
                 String edTenK =edTenK_update.getText().toString();
-                int sdt=0;
-                int cccd=0;
+                String sdt=edtsdt.getText().toString();
+                String cccd=edtcccd.getText().toString();
                 //validate
                 if(edTenK.length()==0){
                     edTenK_update.requestFocus();
                     Toast.makeText(context, "Hãy nhập tên chủ phòng", Toast.LENGTH_SHORT).show();
                     check = false;
                 }
-                try {
-                    sdt=Integer.parseInt(edtsdt.getText().toString());
-                    cccd=Integer.parseInt(edtcccd.getText().toString());
-                }catch (Exception e){
-                    Toast.makeText(context, "Số điện thoại và cccd phải là số", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if(edtsdt.getText().toString().length()!=10){
+                String reg = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
+                String regcccd="[0-9]{12}";
+                if(!sdt.matches(reg)){
                     Toast.makeText(context, "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(edtcccd.getText().toString().length()!=12){
+                if(!cccd.matches(regcccd)){
                     Toast.makeText(context, "Cccd không hợp lệ", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                String reg = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
+
 
 
 
@@ -205,9 +200,6 @@ public class KhachThueAdapter extends BaseAdapter {
     public  class MyViewHolder {
         //khai báo các thành phần view có trong layoutitem
         private TextView tv_KhachThue,giaphong,giadien,gianuoc,giawifi,trangthai;
-
-
-
     }
     public void detail(int i) {
         final Dialog dialog = new Dialog(context);
