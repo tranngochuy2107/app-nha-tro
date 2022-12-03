@@ -1,10 +1,12 @@
 package Adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
@@ -86,6 +88,7 @@ public class PhongAdapter extends BaseAdapter {
         return 0;
     }
 
+    @SuppressLint("ResourceAsColor")
     public View getView(int i, View view, ViewGroup viewGroup) {
         MyViewHolder myViewHolder = null;
         if (view == null) {
@@ -99,6 +102,13 @@ public class PhongAdapter extends BaseAdapter {
         }
         LinearLayout ln_item_dv = view.findViewById(R.id.ln_menu_phong);
         myViewHolder.tv_sophong.setText("Phòng"+": "+list.get(i).getSoPhong());
+        if(list.get(i).getTrangThai()==1) {
+            ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00FF2B")));
+
+        }
+        else if(list.get(i).getTrangThai()!=1){
+            ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFE5CC")));
+        }
         ln_item_dv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -277,7 +287,6 @@ public class PhongAdapter extends BaseAdapter {
                                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                                         calendar.set(y, m, d);
                                         String dateString = sdf.format(calendar.getTime());
-                                        Log.d("TAG", "onDateSet: "+dateString);
                                         edt_ngaybatdau_hopdong.setText(dateString);
                                     }
                                 }, year, month, day);
@@ -294,15 +303,12 @@ public class PhongAdapter extends BaseAdapter {
                                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                                         calendar.set(y, m, d);
                                         String dateString = sdf.format(calendar.getTime());
-                                        Log.d("TAG", "onDateSet: "+dateString);
                                         edt_ngayketthuc_hopdong.setText(dateString);
                                     }
                                 }, year, month, day);
                                 datePickerDialog.show();
                             }
                         });
-
-
                             edsophong.setText(""+list.get(i).getSoPhong());
                             edtTenKhachThue.setText(khachThue.getHoTen());
                             builder.setView(view);
@@ -314,7 +320,6 @@ public class PhongAdapter extends BaseAdapter {
                             btnSavet.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-
                                     if( edt_ngaybatdau_hopdong.getText().toString().length()==0){
                                         Toast.makeText(context, "Ngày bắt đầu không được để trống", Toast.LENGTH_SHORT).show();
                                         return;
@@ -325,8 +330,6 @@ public class PhongAdapter extends BaseAdapter {
                                         Toast.makeText(context, "Số người không được để trống", Toast.LENGTH_SHORT).show();
                                         return;
                                     }
-
-
                                     try {
                                         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
                                         Date date1=sdf.parse(edt_ngaybatdau_hopdong.getText().toString());
@@ -340,11 +343,7 @@ public class PhongAdapter extends BaseAdapter {
                                             hopDong.setSoNguoi(Integer.parseInt(edt_songuoi.getText().toString()));
                                             hopDong.setSoLuongXe(Integer.parseInt(edt_soluongxe.getText().toString()));
                                             hopDong.setTiecCoc(Integer.parseInt(edt_tiencoc.getText().toString()));
-
-                                            hopDong.setTrangThaiHD("đang thuê");
-
-
-
+                                            hopDong.setTrangThaiHD(1);
                                             if (hopDongDAO.insertHopDong(hopDong)>0){
 
                                                 Toast.makeText(context, "thêm mới thành công", Toast.LENGTH_SHORT).show();
@@ -379,7 +378,14 @@ public class PhongAdapter extends BaseAdapter {
                 themhoadon.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        ThemHoadon(i);
+                        HopDongDAO hopDongDAO=new HopDongDAO(context);
+                        if(hopDongDAO.getHopDongByIdPhong(String.valueOf(list.get(i).getIdPhong())).getTrangThaiHD()==1){
+                            ThemHoadon(i);
+                        }
+                        else {
+                            Toast.makeText(context, "Kiểm Tra hợp đồng của phòng", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                 });
                 delete_layout.setOnClickListener(new View.OnClickListener() {

@@ -68,17 +68,14 @@ public class DoanhThuNamActivity extends AppCompatActivity {
                 int doanhthu=0;
                 HoaDonDao donDao=new HoaDonDao(getApplicationContext());
                 list =donDao.gethoadonByNgay(daunam,cuoinam);
-                if (list.size()<0){
-                    textViewDoanhThu.setText("Doanh Thu Năm "+nams+": = 0 đ");
-                    return;
-                }
-                else{
+
 
                     for(int i=0; i<list.size();i++){
                         doanhthu=doanhthu+list.get(i).getTong();
                     }
-                }
+
                 textViewDoanhThu.setText("Doanh Thu Năm "+nams+": "+doanhthu+" đ");
+                textViewDoanhThu.setVisibility(View.INVISIBLE);
                 hoaonDoanhThuAdapter adapter=new hoaonDoanhThuAdapter(DoanhThuNamActivity.this,list);
                 listView.setAdapter(adapter);
             }

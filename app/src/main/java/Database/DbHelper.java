@@ -36,7 +36,7 @@ public class DbHelper extends SQLiteOpenHelper {
                     "SoNguoi INTEGER NOT NULL, " +
                     "SoLuongXe INTEGER NOT NULL, " +
                     "TienCoc INTEGER NOT NULL," +
-                    "TrangThaiHD TEXT NOT NULL," +
+                    "TrangThaiHD INTEGER NOT NULL," +
                     "IdKhachThue INTEGER REFERENCES KhachThue(IdKhachThue)," +
                     "IdPhong INTEGER REFERENCES Phong(IdPhong))";
     //---------------------------------

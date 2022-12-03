@@ -12,6 +12,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,14 +22,22 @@ import android.widget.EditText;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import DAO.HopDongDAO;
 import Fragment.PhongFragment;
 import Fragment.*;
+import Model.HopDong;
 
 public class MainActivity extends AppCompatActivity {
     MaterialToolbar toolbar;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     FragmentManager fragmentManager;
+    HopDongDAO hopDongDAO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
     }
 
 
@@ -116,5 +126,35 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    private void checkData(){
+        hopDongDAO=new HopDongDAO(MainActivity.this);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+        String date = sdf.format(new Date());
+        Log.d("sssss", "onCreate: "+date);
+
+
+        List<HopDong> hopDongList=hopDongDAO.getAll();
+        if(hopDongList.size()>0){
+            for(int i=0;i<hopDongList.size();i++){
+                String ngayhethan=hopDongList.get(i).getNgayKetThuc();
+                Log.d("TAG", "checkData: "+ngayhethan);
+                try {
+                    Date date1=sdf.parse(date);
+                    Date date2=sdf.parse(ngayhethan);
+                    if(date2.compareTo(date1)<0){
+                        hopDongList.get(i).setTrangThaiHD(2);
+                        Log.d("TAG", "checkData: "+"đã hết hạn");
+                        hopDongDAO.updateHopDong(hopDongList.get(i));
+                    }
+                    else {
+                        Log.d("TAG", "checkData: "+hopDongList.get(i).getTrangThaiHD()+hopDongList.get(i).getIdHopDong());
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    Log.d("TAG", "checkData: "+"lỗi check");
+                }
+            }
+        }
     }
 }
