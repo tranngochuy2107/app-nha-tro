@@ -21,5 +21,9 @@
             android:id="@+id/nav_doanhthu"
             android:icon="@drawable/doanhthu"
             android:title="Doanh thu" />
+        <item
+            android:id="@+id/nav_exitapp"
+            android:icon="@drawable/ic_exit_to_app_24"
+            android:title="Thoát ứng dụng" />
     </group>
 </menu>

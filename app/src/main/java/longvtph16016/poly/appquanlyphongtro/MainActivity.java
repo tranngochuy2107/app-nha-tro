@@ -7,8 +7,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
@@ -62,12 +70,38 @@ public class MainActivity extends AppCompatActivity {
                         replaceFragment(new DoanhThuragment());
                         getSupportActionBar().setTitle("Doanh Thu");
                         break;
+                    case R.id.nav_exitapp:
+                        onBackPressed();
+                        getSupportActionBar().setTitle("Thoát Ứng Dụng");
+                        break;
                 }
                 drawerLayout.closeDrawer(navigationView);
                 return false;
             }
         });
     }
+
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Exit App");
+        builder.setMessage("Do you want to exit app?");
+        builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finishAffinity();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+
     public void replaceFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_main, fragment, fragment.getClass().getSimpleName())
