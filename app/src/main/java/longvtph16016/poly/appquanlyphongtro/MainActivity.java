@@ -8,19 +8,30 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import DAO.HopDongDAO;
 import Fragment.PhongFragment;
 import Fragment.*;
+import Model.HopDong;
 
 public class MainActivity extends AppCompatActivity {
     MaterialToolbar toolbar;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     FragmentManager fragmentManager;
+    HopDongDAO hopDongDAO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolBar_);
         setSupportActionBar(toolbar);
-
+        checkData();
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Quản lý phòng");
@@ -82,5 +93,36 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    private void checkData(){
+         hopDongDAO=new HopDongDAO(MainActivity.this);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+        String date = sdf.format(new Date());
+        Log.d("sssss", "onCreate: "+date);
+
+
+        List<HopDong> hopDongList=hopDongDAO.getAll();
+        if(hopDongList.size()>0){
+            for(int i=0;i<hopDongList.size();i++){
+                String ngayhethan=hopDongList.get(i).getNgayKetThuc();
+                Log.d("TAG", "checkData: "+ngayhethan);
+                try {
+                    Date date1=sdf.parse(date);
+                    Date date2=sdf.parse(ngayhethan);
+                    if(date2.compareTo(date1)<0){
+                        hopDongList.get(i).setTrangThaiHD("hợp đồng đã hết hạn");
+                        Log.d("TAG", "checkData: "+"đã hết hạn");
+                        hopDongList.get(i).setIdPhong(-1);
+                        hopDongDAO.updateHopDong(hopDongList.get(i));
+                    }
+                    else {
+                        Log.d("TAG", "checkData: "+hopDongList.get(i).getTrangThaiHD()+hopDongList.get(i).getIdHopDong());
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    Log.d("TAG", "checkData: "+"lỗi check");
+                }
+            }
+        }
     }
 }

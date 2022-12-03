@@ -50,7 +50,7 @@ public class HopDongDAO {
         values.put("NgayKetThuc",obj.getNgayKetThuc());
         values.put("SoNguoi",obj.getSoNguoi());
         values.put("SoLuongXe",obj.getSoLuongXe());
-        values.put("TiecCoc",obj.getTiecCoc());
+        values.put("TienCoc",obj.getTiecCoc());
         values.put("TrangThaiHD",obj.getTrangThaiHD());
         values.put("IdKhachThue",obj.getIdKhachThue());
         values.put("IdPhong",obj.getIdPhong());

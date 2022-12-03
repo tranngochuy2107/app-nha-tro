@@ -274,7 +274,11 @@ public class PhongAdapter extends BaseAdapter {
                                 DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                                     @Override
                                     public void onDateSet(DatePicker view, int y, int m, int d) {
-                                        edt_ngaybatdau_hopdong.setText(d + "/" + (m + 1) + "/" + y);
+                                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                        calendar.set(y, m, d);
+                                        String dateString = sdf.format(calendar.getTime());
+                                        Log.d("TAG", "onDateSet: "+dateString);
+                                        edt_ngaybatdau_hopdong.setText(dateString);
                                     }
                                 }, year, month, day);
                                 datePickerDialog.show();
@@ -287,8 +291,11 @@ public class PhongAdapter extends BaseAdapter {
                                 DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                                     @Override
                                     public void onDateSet(DatePicker view, int y, int m, int d) {
-                                        edt_ngayketthuc_hopdong.setText(d + "/" + (m + 1) + "/" + y);
-
+                                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                        calendar.set(y, m, d);
+                                        String dateString = sdf.format(calendar.getTime());
+                                        Log.d("TAG", "onDateSet: "+dateString);
+                                        edt_ngayketthuc_hopdong.setText(dateString);
                                     }
                                 }, year, month, day);
                                 datePickerDialog.show();
@@ -307,7 +314,7 @@ public class PhongAdapter extends BaseAdapter {
                             btnSavet.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+
                                     if( edt_ngaybatdau_hopdong.getText().toString().length()==0){
                                         Toast.makeText(context, "Ngày bắt đầu không được để trống", Toast.LENGTH_SHORT).show();
                                         return;
@@ -321,6 +328,7 @@ public class PhongAdapter extends BaseAdapter {
 
 
                                     try {
+                                        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
                                         Date date1=sdf.parse(edt_ngaybatdau_hopdong.getText().toString());
                                         Date date2=sdf.parse(edt_ngayketthuc_hopdong.getText().toString());
                                         if(date1.compareTo(date2)<0){
