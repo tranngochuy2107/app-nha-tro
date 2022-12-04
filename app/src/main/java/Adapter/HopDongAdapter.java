@@ -243,8 +243,8 @@ public class HopDongAdapter extends BaseAdapter {
     }
     public void chamDutHd( HopDong hopDong){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Exit App");
-        builder.setMessage("Do you want to exit app?");
+        builder.setTitle("Chấm Dứt Hợp Đồng");
+        builder.setMessage("Bạn Có Chắc Chắn Muốn Chấm Dứt Hợp Đồng Không?");
         builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
