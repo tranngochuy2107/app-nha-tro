@@ -101,6 +101,17 @@ public class PhongAdapter extends BaseAdapter {
             myViewHolder = (MyViewHolder) view.getTag();
         }
         LinearLayout ln_item_dv = view.findViewById(R.id.ln_menu_phong);
+        ImageView imageView=view.findViewById(R.id.thHopDong);
+        try {
+            if(hopDongDAO.getHopDongByIdPhong(String.valueOf(list.get(i).getIdPhong())).getTrangThaiHD()==1){
+                imageView.setVisibility(View.VISIBLE);
+            }
+            else {
+                imageView.setVisibility(View.GONE);
+            }
+        }catch (Exception e){
+            imageView.setVisibility(View.GONE);
+        }
         myViewHolder.tv_sophong.setText("Phòng"+": "+list.get(i).getSoPhong());
         if(list.get(i).getTrangThai()==1) {
             ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00FF2B")));
@@ -163,18 +174,38 @@ public class PhongAdapter extends BaseAdapter {
                         btnSave.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                String edTenK =edtenKT.getText().toString();
+                                String sdt=edSdt.getText().toString();
+                                String cccd=edCccd.getText().toString();
+                                //validate
+                                if(edTenK.length()==0){
+
+                                    Toast.makeText(context, "Hãy nhập tên chủ phòng", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                String reg = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
+                                String regcccd="[0-9]{12}";
+                                if(!sdt.matches(reg)){
+                                    Toast.makeText(context, "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                if(!cccd.matches(regcccd)){
+                                    Toast.makeText(context, "Cccd không hợp lệ", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
                                 khachThueDAO = new KhachThueDAO(context);
                                 KhachThue khach = new KhachThue();
                                 khach.setIdPhong(idphong);
-                                khach.setHoTen(edtenKT.getText().toString());
-                                khach.setSdt(edSdt.getText().toString());
-                                khach.setCccd(edCccd.getText().toString());
+                                khach.setHoTen(edTenK);
+                                khach.setSdt(sdt);
+                                khach.setCccd(cccd);
                                 if (khachThueDAO.insertKhachThue(khach)>0){
                                     Toast.makeText(context, "thêm mới thành công", Toast.LENGTH_SHORT).show();
                                     phong.setTrangThai(2);
                                     phongDAO=new PhongDAO(context);
                                     phongDAO.updatePhong(phong);
                                     dialog.dismiss();
+                                    notifyDataSetChanged();
                                 }else {
                                     Toast.makeText(context, "thêm mới k thành công", Toast.LENGTH_SHORT).show();
                                 }
@@ -347,6 +378,7 @@ public class PhongAdapter extends BaseAdapter {
                                             if (hopDongDAO.insertHopDong(hopDong)>0){
 
                                                 Toast.makeText(context, "thêm mới thành công", Toast.LENGTH_SHORT).show();
+                                                notifyDataSetChanged();
                                                 dialog.dismiss();
                                             }else {
                                                 Toast.makeText(context, "thêm mới k thành công", Toast.LENGTH_SHORT).show();
@@ -379,11 +411,18 @@ public class PhongAdapter extends BaseAdapter {
                     @Override
                     public void onClick(View view) {
                         HopDongDAO hopDongDAO=new HopDongDAO(context);
-                        if(hopDongDAO.getHopDongByIdPhong(String.valueOf(list.get(i).getIdPhong())).getTrangThaiHD()==1){
-                            ThemHoadon(i);
-                        }
-                        else {
-                            Toast.makeText(context, "Kiểm Tra hợp đồng của phòng", Toast.LENGTH_SHORT).show();
+
+
+
+
+
+                        try {
+                            if(hopDongDAO.getHopDongByIdPhong(String.valueOf(list.get(i).getIdPhong())).getTrangThaiHD()==1){
+                                ThemHoadon(i);
+                                notifyDataSetChanged();
+                            }
+                        }catch (Exception e){
+                        Toast.makeText(context, "Kiểm Tra hợp đồng của phòng", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -525,7 +564,12 @@ public class PhongAdapter extends BaseAdapter {
                 }
             }
         });
-
+        Btn_huy_HDon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
     }
 
     private void ThongTinPhong(int pos) {
