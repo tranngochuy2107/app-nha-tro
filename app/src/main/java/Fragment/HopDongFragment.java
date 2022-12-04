@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +20,16 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import Adapter.HopDongAdapter;
 import DAO.HopDongDAO;
 import Model.HopDong;
+import longvtph16016.poly.appquanlyphongtro.MainActivity;
 import longvtph16016.poly.appquanlyphongtro.R;
 
 public class HopDongFragment extends Fragment {
@@ -53,59 +58,14 @@ public class HopDongFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
+        checkData();
         hopDongDAO=new HopDongDAO(getContext());
           list=hopDongDAO.getAll();
 
         listViewHopDong=view.findViewById(R.id.rec_HopDong);
         hopDong_adapter= new HopDongAdapter(getContext(),list);
         listViewHopDong.setAdapter(hopDong_adapter);
-//        btnthemHopDong = view.findViewById(R.id.btn_Tao_HopDong);
-//        edtNgayBatDau = view.findViewById(R.id.edt_NgayBatDau_HopDong);
-//        edtNgayKetThuc = view.findViewById(R.id.edt_NgayKetThuc_HopDong);
-//        edtSoLuongXe = view.findViewById(R.id.edt_SoLuongXe_HopDong);
-//        edtSoNguoi = view.findViewById(R.id.edt_SoNguoi_HopDong);
-//        edtTienCoc = view.findViewById(R.id.edt_TienCoc_HopDong);
 
-//        btnthemHopDong.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Boolean check = true;
-//                String ngayBatDau = edtNgayBatDau.getText().toString();
-//                String ngayKetThuc = edtNgayKetThuc.getText().toString();
-//                String soLuongXe = edtSoLuongXe.getText().toString();
-//                String soNguoi =    edtSoNguoi.getText().toString();
-//                String tienCoc = edtTienCoc.getText().toString();
-//
-//                if(ngayBatDau.length()==0){
-//                    edtNgayBatDau.requestFocus();
-//                    Toast.makeText(getContext(), "Hãy nhập ngày bắt đầu", Toast.LENGTH_SHORT).show();
-//                    check = false;
-//                }
-//
-//                if(ngayKetThuc.length()==0){
-//                    edtNgayKetThuc.requestFocus();
-//                    Toast.makeText(getContext(), "Hãy nhập ngày kết thúc", Toast.LENGTH_SHORT).show();
-//                    check = false;
-//                }
-//                if(!tienCoc.matches("[0-99999]*")){
-//                    Toast.makeText(getContext(), "Nhập sai, vui lòng nhập từ 0 trở lên", Toast.LENGTH_SHORT).show();
-//                    check = false;
-//                }
-//                if (tienCoc.length() >8) {
-//                    Toast.makeText(getContext(), "Tiền cọc không vượt quá 8 ký tự", Toast.LENGTH_SHORT).show();
-//                    check = false;
-//                }
-//                if(soNguoi.matches("[0-99999]*")){
-//                    Toast.makeText(getContext(), "Nhập sai, vui lòng nhập từ 0 trở lên", Toast.LENGTH_SHORT).show();
-//                    check = false;
-//                }
-//                if(soLuongXe.matches("[0-99999]*")){
-//                    Toast.makeText(getContext(), "Nhập sai, vui lòng nhập từ 0 trở lên", Toast.LENGTH_SHORT).show();
-//                    check = false;
-//                }
-//            }
-//        });
     }
     private void addHopDong(Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -116,5 +76,39 @@ public class HopDongFragment extends Fragment {
         builder.setView(view);
         Dialog dialog = builder.create();
         dialog.show();
+    }
+    private void checkData(){
+        hopDongDAO=new HopDongDAO(getContext());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+        String date = sdf.format(new Date());
+        Log.d("sssss", "onCreate: "+date);
+
+
+        List<HopDong> hopDongList=hopDongDAO.getAll();
+        if(hopDongList.size()>0){
+            for(int i=0;i<hopDongList.size();i++){
+                String ngayhethan=hopDongList.get(i).getNgayKetThuc();
+                Log.d("TAG", "checkData: "+ngayhethan);
+                try {
+                    Date date1=sdf.parse(date);
+                    Date date2=sdf.parse(ngayhethan);
+                    if(date2.compareTo(date1)<0){
+                        if(hopDongList.get(i).getTrangThaiHD()==1){
+                            hopDongList.get(i).setTrangThaiHD(2);
+                            Log.d("TAG", "checkData: "+"đã hết hạn");
+                            hopDongDAO.updateHopDong(hopDongList.get(i));
+                        }
+
+                    }
+                    else {
+                        Log.d("TAG", "checkData: "+hopDongList.get(i).getTrangThaiHD()+hopDongList.get(i).getIdHopDong());
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    Log.d("TAG", "checkData: "+"lỗi check");
+                }
+            }
+        }
+
     }
 }

@@ -62,12 +62,20 @@ public class HopDongDAO {
         String sql="SELECT * FROM HopDong";
         return getData(sql);
     }
-    //get user by id
+    //get hợp đồng by id
     public HopDong getHopDongByIdPhong(String Id){
-        String sql="SELECT * FROM HopDong WHERE IdPhong=?";
+        String sql="SELECT * FROM HopDong WHERE IdPhong=? AND TrangThaiHD = 1";
         List<HopDong> list = getData(sql,Id);
         if(list.size()>0){
             return list.get(0);
+        }
+        return null;
+    }
+    public List<HopDong> getAllHopDOngByid(String Id){
+        String sql="SELECT * FROM HopDong WHERE IdPhong=?";
+        List<HopDong> list = getData(sql,Id);
+        if(list.size()>0){
+            return list;
         }
         return null;
     }
@@ -85,7 +93,7 @@ public class HopDongDAO {
             int songuoi = Integer.parseInt (cursor.getString (cursor.getColumnIndex ("SoNguoi")));
             int soluongxe = Integer.parseInt (cursor.getString (cursor.getColumnIndex ("SoLuongXe")));
             int tiencoc = Integer.parseInt (cursor.getString (cursor.getColumnIndex ("TienCoc")));
-            String trangthai = cursor.getString (cursor.getColumnIndex ("TrangThaiHD"));
+            int trangthai = Integer.parseInt (cursor.getString (cursor.getColumnIndex ("TrangThaiHD")));
             list.add(new HopDong(idhopdong,ngaybatdau,ngayketthuc,songuoi,soluongxe,tiencoc,trangthai,idphong,idkhachthue));
             cursor.moveToNext ();
         }

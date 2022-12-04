@@ -7,14 +7,14 @@ public class HopDong {
     private int SoNguoi;
     private int SoLuongXe;
     private int TiecCoc;
-    private String TrangThaiHD;
+    private int TrangThaiHD;
     private int IdPhong;
     private int IdKhachThue;
 
     public HopDong() {
     }
 
-    public HopDong(int idHopDong, String ngayBatDau, String ngayKetThuc, int soNguoi, int soLuongXe, int tiecCoc, String trangThaiHD, int idPhong, int idKhachThue) {
+    public HopDong(int idHopDong, String ngayBatDau, String ngayKetThuc, int soNguoi, int soLuongXe, int tiecCoc, int trangThaiHD, int idPhong, int idKhachThue) {
         IdHopDong = idHopDong;
         NgayBatDau = ngayBatDau;
         NgayKetThuc = ngayKetThuc;
@@ -76,11 +76,11 @@ public class HopDong {
         TiecCoc = tiecCoc;
     }
 
-    public String getTrangThaiHD() {
+    public int getTrangThaiHD() {
         return TrangThaiHD;
     }
 
-    public void setTrangThaiHD(String trangThaiHD) {
+    public void setTrangThaiHD(int trangThaiHD) {
         TrangThaiHD = trangThaiHD;
     }
 

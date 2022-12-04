@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
@@ -33,7 +34,7 @@ import longvtph16016.poly.appquanlyphongtro.R;
 public class KhachThueAdapter extends BaseAdapter {
     private Context context;
     private List<KhachThue> list;
-
+    private LinearLayout ln_item_dv;
 
     public KhachThueAdapter(Context context, List<KhachThue> list  ) {
         this.context = context;
@@ -82,8 +83,19 @@ public class KhachThueAdapter extends BaseAdapter {
         } else {
             myViewHolder = (MyViewHolder) view.getTag();
         }
-        LinearLayout ln_item_dv = view.findViewById(R.id.ln_menu_khachthue);
         myViewHolder.tv_KhachThue.setText("Khách Thuê"+": "+list.get(i).getHoTen());
+        PhongDAO phongDAO=new PhongDAO(context);
+        Phong phong=phongDAO.getUserById(String.valueOf(list.get(i).getIdPhong()));
+        ln_item_dv=view.findViewById(R.id.ln_menu_khachthue);
+        if(phong==null)
+        {
+            ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#CBCBBE")));
+        }
+        else {
+            ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00FF00")));
+        }
+
+
         ln_item_dv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

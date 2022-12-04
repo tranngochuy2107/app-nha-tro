@@ -21,47 +21,6 @@
         android:layout_marginBottom="10sp"
         android:background="@color/colorDividerView"
         />
-    <LinearLayout
-        android:id="@+id/edit_layout_dh"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8sp">
-
-        <ImageView
-            android:layout_width="30sp"
-            android:layout_height="30sp"
-            android:src="@drawable/ic_update" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30sp"
-            android:text="Sửa"
-            android:textColor="@color/black"
-            android:textSize="22sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/delete_layout_hp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8sp">
-
-        <ImageView
-            android:layout_width="30sp"
-            android:layout_height="30sp"
-            android:src="@drawable/ic_delete" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30sp"
-            android:text="Xóa"
-            android:textColor="@color/black"
-            android:textSize="22sp" />
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/view_layout_hd"
@@ -82,5 +41,47 @@
             android:text="Xem Hợp Đồng"
             android:textColor="@color/black"
             android:textSize="21sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:visibility="visible"
+        android:id="@+id/edit_layout_dh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8sp">
+
+        <ImageView
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:src="@drawable/ic_update" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30sp"
+            android:text="Gia Hạn"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
+    </LinearLayout>
+    <LinearLayout
+
+        android:id="@+id/huyGiaHan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8sp">
+
+        <ImageView
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:src="@drawable/ic_update" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30sp"
+            android:text="Chấm dứt hợp đồng"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
     </LinearLayout>
 </LinearLayout>

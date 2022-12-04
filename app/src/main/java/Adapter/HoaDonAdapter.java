@@ -3,6 +3,7 @@ package Adapter;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
@@ -86,7 +87,13 @@ public class HoaDonAdapter extends BaseAdapter {
         }
         LinearLayout ln_item_dv = view.findViewById(R.id.ln_menu_hoadon);
         myViewHolder.tv_sohoadon.setText(list.get(i).getTenHoaDOn());
+        if(list.get(i).getTrangThai()==2) {
+            ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00FF2B")));
 
+        }
+        else if(list.get(i).getTrangThai()==1){
+            ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFF00")));
+        }
         ln_item_dv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
