@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
                         hopDongList.get(i).setTrangThaiHD(2);
                         Log.d("TAG", "checkData: "+"đã hết hạn");
                         hopDongDAO.updateHopDong(hopDongList.get(i));
+
                     }
                     else {
                         Log.d("TAG", "checkData: "+hopDongList.get(i).getTrangThaiHD()+hopDongList.get(i).getIdHopDong());

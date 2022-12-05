@@ -44,6 +44,7 @@
         <entry key="..\:/DuAn1/AppQuanLyPhongTro/app/src/main/res/layout/tao_hop_dong.xml" value="0.25" />
         <entry key="..\:/DuAn1/AppQuanLyPhongTro/app/src/main/res/layout/themkhachthue_dialog.xml" value="0.25" />
         <entry key="..\:/DuAn1/AppQuanLyPhongTro/app/src/main/res/menu/menu.xml" value="0.10989583333333333" />
+        <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/drawable-v24/ic_baseline_search_24.xml" value="0.3075" />
         <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/drawable/bg_white_conor_10_border_gary.xml" value="0.306" />
         <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/drawable/bg_white_conor_10_wh.xml" value="0.306" />
         <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/drawable/item_coler.xml" value="0.274" />
@@ -51,6 +52,8 @@
         <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/layout/activity_doanh_thu_thang.xml" value="0.19895833333333332" />
         <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/layout/activity_hello.xml" value="0.19895833333333332" />
         <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/layout/activity_login.xml" value="0.22735507246376813" />
+        <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/layout/activity_main.xml" value="0.3663949275362319" />
+        <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/layout/activity_main2.xml" value="0.3663949275362319" />
         <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/layout/activity_splash_screen.xml" value="0.30480072463768115" />
         <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/layout/bottom_layout_hdong.xml" value="0.22" />
         <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/layout/dialog_bottom_doanhthu.xml" value="0.20833333333333334" />
@@ -59,13 +62,16 @@
         <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/layout/dialog_sua_hop_dong.xml" value="0.22552083333333334" />
         <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/layout/dialog_xem_hoa_don.xml" value="0.30480072463768115" />
         <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/layout/fragment_doanh_thuragment.xml" value="0.30480072463768115" />
+        <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/layout/fragment_hop_dong.xml" value="0.3663949275362319" />
+        <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/layout/fragment_phong.xml" value="0.3663949275362319" />
         <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/layout/giahanhopdong.xml" value="0.22552083333333334" />
-        <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/layout/iteam_hoadon.xml" value="0.30480072463768115" />
+        <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/layout/iteam_hoadon.xml" value="0.25" />
         <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/layout/item_hopdong.xml" value="0.1" />
         <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/layout/item_khachthue.xml" value="0.1" />
         <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/layout/item_phong.xml" value="0.25" />
         <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/layout/itemcoler.xml" value="0.30480072463768115" />
         <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/layout/tao_hop_dong.xml" value="0.30480072463768115" />
+        <entry key="..\:/app_quan_ly_phong_tro/app/src/main/res/menu/main_menu.xml" value="0.37395833333333334" />
       </map>
     </option>
   </component>

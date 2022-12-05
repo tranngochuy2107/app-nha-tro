@@ -1,11 +1,11 @@
 package Adapter;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -15,24 +15,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
 
 import DAO.HoaDonDao;
 import DAO.HopDongDAO;
@@ -43,84 +42,54 @@ import Model.HopDong;
 import Model.KhachThue;
 import Model.Phong;
 import longvtph16016.poly.appquanlyphongtro.R;
-import longvtph16016.poly.appquanlyphongtro.interfaceDeleteClickdistioner;
 
-public class PhongAdapter extends BaseAdapter {
-    private Context context;
-    KhachThueDAO khachThueDAO;
+public class AdapterPhong  extends RecyclerView.Adapter<AdapterPhong.MyViewHolder> {
+    List<Phong> phongList;
+    Context context;
     HopDongDAO hopDongDAO;
+    KhachThueDAO khachThueDAO;
     PhongDAO phongDAO;
     HoaDonDao hoaDonDao;
-    // biến tạo hóa đơn
     String tenhoadon,ngaytao,ghiChu;
     int sodien,sonuoc,chiphikhac,tongtien;
-    private List<Phong> list;
-    private interfaceDeleteClickdistioner interfaceDeleteClickdistioner;
-
-
-
-    public PhongAdapter(Context context, interfaceDeleteClickdistioner interfaceDeleteClickdistioner) {
+    public AdapterPhong(List<Phong> phongs, Context context) {
+        this.phongList = phongs;
         this.context = context;
-        this.interfaceDeleteClickdistioner = interfaceDeleteClickdistioner;
     }
 
-    public void setData(List<Phong> arrayList){
-        this.list= arrayList;
-        notifyDataSetChanged();// có tác dụng refresh lại data
-    }
-
-    public final class MyViewHolder {
-        //khai báo các thành phần view có trong layoutitem
-        private TextView tv_sophong,giaphong,giadien,gianuoc,giawifi,trangthai;
-
-    }
-    public int getCount() {
-        if(list!=null)
-            return list.size();
-        return 0;
-    }
-    public Object getItem(int i) {
-        return null;
+    @NonNull
+    @Override
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_phong,parent,false);
+        return new MyViewHolder(view);
     }
 
     @Override
-    public long getItemId(int i) {
-        return 0;
-    }
-
-    @SuppressLint("ResourceAsColor")
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        MyViewHolder myViewHolder = null;
-        if (view == null) {
-            myViewHolder = new MyViewHolder();
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.item_phong, null);
-            myViewHolder.tv_sophong = view.findViewById(R.id.tv_ssophong);
-            view.setTag(myViewHolder);
-        } else {
-            myViewHolder = (MyViewHolder) view.getTag();
-        }
-        LinearLayout ln_item_dv = view.findViewById(R.id.ln_menu_phong);
-        ImageView imageView=view.findViewById(R.id.thHopDong);
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+         hopDongDAO=new HopDongDAO(context);
+         hoaDonDao=new HoaDonDao(context);
+         khachThueDAO=new KhachThueDAO(context);
+         phongDAO=new PhongDAO(context);
+        Phong phonghienTai=phongList.get(position);
         try {
-            if(hopDongDAO.getHopDongByIdPhong(String.valueOf(list.get(i).getIdPhong())).getTrangThaiHD()==1){
-                imageView.setVisibility(View.VISIBLE);
+            if(hopDongDAO.getHopDongByIdPhong(String.valueOf(phongList.get(position).getIdPhong()),"1")!=null){
+                holder.imageView.setVisibility(View.VISIBLE);
             }
             else {
-                imageView.setVisibility(View.GONE);
+                holder.imageView.setVisibility(View.GONE);
             }
         }catch (Exception e){
-            imageView.setVisibility(View.GONE);
+           holder.imageView.setVisibility(View.GONE);
         }
-        myViewHolder.tv_sophong.setText("Phòng"+": "+list.get(i).getSoPhong());
-        if(list.get(i).getTrangThai()==1) {
-            ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00FF2B")));
+        holder.tv_sophong.setText("Phòng"+": "+phongList.get(position).getSoPhong());
+        if(phongList.get(position).getTrangThai()==1) {
+            holder.ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00FF2B")));
 
         }
-        else if(list.get(i).getTrangThai()!=1){
-            ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFE5CC")));
+        else if(phongList.get(position).getTrangThai()!=1){
+            holder.ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFE5CC")));
         }
-        ln_item_dv.setOnClickListener(new View.OnClickListener() {
+        holder.ln_item_dv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Dialog dialog = new Dialog(context);
@@ -135,24 +104,56 @@ public class PhongAdapter extends BaseAdapter {
                 LinearLayout ThemKhachThue = dialog.findViewById(R.id.edt_ThemKhachThue);
 
                 TextView textView = dialog.findViewById(R.id.tv_title);
-                textView.setText("Phòng "+list.get(i).getSoPhong());
+                textView.setText("Phòng "+phonghienTai.getSoPhong());
 
                 dialog.show();
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
                 dialog.getWindow().setGravity(Gravity.BOTTOM);
+                delete_layout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        androidx.appcompat.app.AlertDialog.Builder builder= new androidx.appcompat.app.AlertDialog.Builder(context);
+                        builder.setTitle("bạn có chắc chắn muốn xóa không?");
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if(phonghienTai.getTrangThai()!=1){
+                                    Toast.makeText(context, "Phòng đang có người ở, không thể xóa", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                if(phongDAO.deletePhong(phonghienTai)>0){
+                                    phongList.remove(phonghienTai);
+                                    notifyDataSetChanged();
+                                    Toast.makeText(context,"xóa thành công",
+                                            Toast.LENGTH_LONG).show();
+                                }else {
+                                    Toast.makeText(context,"xóa không thành công",
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+                        builder.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
+                        builder.show();
+                    }
+                });
                 detail.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        ThongTinPhong(i);
+                        ThongTinPhong(phonghienTai);
                     }
                 });
                 ThemKhachThue.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Phong phong=list.get(i);
-                        if(phong.getTrangThai()!=1){
+
+                        if(phonghienTai.getTrangThai()!=1){
                             Toast.makeText(context, "Phòng đã có người thuê", Toast.LENGTH_SHORT).show();
                             return;
                         }
@@ -160,13 +161,13 @@ public class PhongAdapter extends BaseAdapter {
                         LayoutInflater inflater = ((Activity) context).getLayoutInflater();
                         View view = inflater.inflate(R.layout.themkhachthue_dialog, null);
                         TextView edsophong = view.findViewById(R.id.tv_SoPhong_ThemKhachThu);
-                        int idphong=list.get(i).getIdPhong();
+
                         EditText edtenKT = view.findViewById(R.id.edTenK);
                         EditText edSdt = view.findViewById(R.id.edSd);
                         EditText edCccd = view.findViewById(R.id.edCcc);
                         Button btnCancel = view.findViewById(R.id.btnCance);
                         Button btnSave = view.findViewById(R.id.btnSav);
-                        edsophong.setText(""+list.get(i).getSoPhong());
+                        edsophong.setText(""+phonghienTai.getSoPhong());
                         builder.setView(view);
                         Dialog dialog = builder.create();
                         dialog.show();
@@ -195,15 +196,15 @@ public class PhongAdapter extends BaseAdapter {
                                 }
                                 khachThueDAO = new KhachThueDAO(context);
                                 KhachThue khach = new KhachThue();
-                                khach.setIdPhong(idphong);
+                                khach.setIdPhong(phonghienTai.getIdPhong());
                                 khach.setHoTen(edTenK);
                                 khach.setSdt(sdt);
                                 khach.setCccd(cccd);
                                 if (khachThueDAO.insertKhachThue(khach)>0){
                                     Toast.makeText(context, "thêm mới thành công", Toast.LENGTH_SHORT).show();
-                                    phong.setTrangThai(2);
+                                    phonghienTai.setTrangThai(2);
                                     phongDAO=new PhongDAO(context);
-                                    phongDAO.updatePhong(phong);
+                                    phongDAO.updatePhong(phonghienTai);
                                     dialog.dismiss();
                                     notifyDataSetChanged();
                                 }else {
@@ -233,31 +234,36 @@ public class PhongAdapter extends BaseAdapter {
                         Button btn_Cancel = vieww.findViewById(R.id.btn_huy_phong_update);
                         Button btn_update = vieww.findViewById(R.id.btn_them_phong_update);
 
-                        edt_update_sophong.setText(list.get(i).getSoPhong()+ "");
-                        edt_update_giaphong.setText(list.get(i).getGiaPhong()+ "");
-                        edt_update_giadien.setText(list.get(i).getGiaDien()+ "");
-                        edt_update_gianuoc.setText(list.get(i).getGiaNuoc()+ "");
-                        edt_update_wifi.setText(list.get(i).getGiaWifi()+ "");
+                        edt_update_sophong.setText(phonghienTai.getSoPhong()+ "");
+                        edt_update_giaphong.setText(phonghienTai.getGiaPhong()+ "");
+                        edt_update_giadien.setText(phonghienTai.getGiaDien()+ "");
+                        edt_update_gianuoc.setText(phonghienTai.getGiaNuoc()+ "");
+                        edt_update_wifi.setText(phonghienTai.getGiaWifi()+ "");
 
                         builder.setView(vieww);
                         Dialog dialog = builder.create();
                         dialog.show();
+                        btn_Cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                            }
+                        });
                         btn_update.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 PhongDAO phongDAO = new PhongDAO(context);
-                                Phong phong;
-                                phong = list.get(i);
-                                phong.setSoPhong(Integer.parseInt(edt_update_sophong.getText().toString()));
-                                phong.setGiaPhong(Integer.parseInt(edt_update_giaphong.getText().toString()));
-                                phong.setGiaDien(Integer.parseInt(edt_update_giadien.getText().toString()));
-                                phong.setGiaNuoc(Integer.parseInt(edt_update_gianuoc.getText().toString()));
-                                phong.setGiaWifi(Integer.parseInt(edt_update_wifi.getText().toString()));
-                                if (phongDAO.updatePhong(phong)>0){
+
+                                phonghienTai.setSoPhong(Integer.parseInt(edt_update_sophong.getText().toString()));
+                                phonghienTai.setGiaPhong(Integer.parseInt(edt_update_giaphong.getText().toString()));
+                                phonghienTai.setGiaDien(Integer.parseInt(edt_update_giadien.getText().toString()));
+                                phonghienTai.setGiaNuoc(Integer.parseInt(edt_update_gianuoc.getText().toString()));
+                                phonghienTai.setGiaWifi(Integer.parseInt(edt_update_wifi.getText().toString()));
+                                if (phongDAO.updatePhong(phonghienTai)>0){
                                     Toast.makeText(context,"Sửa thành công",Toast.LENGTH_LONG).show();
                                     dialog.dismiss();
-                                    list.clear();
-                                    list.addAll(phongDAO.getAll());
+                                    phongList.clear();
+                                    phongList.addAll(phongDAO.getAll());
                                     notifyDataSetChanged();
                                 }else {
                                     Toast.makeText(context,"Sửa ko thành công",Toast.LENGTH_LONG).show();
@@ -274,73 +280,77 @@ public class PhongAdapter extends BaseAdapter {
                         View view = inflater.inflate(R.layout.tao_hop_dong, null);
                         hopDongDAO=new HopDongDAO(context);
                         khachThueDAO=new KhachThueDAO(context);
-                        int idphong =list.get(i).getIdPhong();
 
-                        if(list.get(i).getTrangThai()==1){
+                        if(phonghienTai.getTrangThai()==1){
                             Toast.makeText(context, "Phòng chưa add có người thuê", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                       else if(hopDongDAO.getHopDongByIdPhong(String.valueOf(idphong))!=null){
+                        else if(hopDongDAO.getHopDongByIdPhong(String.valueOf(phonghienTai.getIdPhong()),"1")!=null){
                             Toast.makeText(context, "Phòng đã tạo hợp đồng thành công", Toast.LENGTH_SHORT).show();
                             return;
-                        }else {
+                        }
+                        else if(hopDongDAO.getHopDongByIdPhong(String.valueOf(phonghienTai.getIdPhong()),"2")!=null){
+                            Toast.makeText(context, "Phòng đang có hợp đồng quá hạn, hãy gia hạn", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        else {
 
 
-                        khachThueDAO = new KhachThueDAO(context);
-                        KhachThue khachThue = khachThueDAO.getUserByIdPhong(String.valueOf(idphong));
+                            khachThueDAO = new KhachThueDAO(context);
+                            KhachThue khachThue = khachThueDAO.getUserByIdPhong(String.valueOf(phonghienTai.getIdPhong()));
 
-                        TextView edsophong = view.findViewById(R.id.edt_SoPhong_HopDong);
-                        TextView edtTenKhachThue = view.findViewById(R.id.edt_TenKhachThue_HopDong);
-                        EditText edt_ngaybatdau_hopdong = view.findViewById(R.id.edt_NgayBatDau_HopDong);
-                        EditText edt_ngayketthuc_hopdong = view.findViewById(R.id.edt_NgayKetThuc_HopDong);
-                        ImageView img_a = view.findViewById(R.id.img_ngay_bat_dau_HopDong);
-                        ImageView img_b = view.findViewById(R.id.img_Ngay_Ket_Thuc_HopDong);
-                        EditText edt_songuoi = view.findViewById(R.id.edt_SoNguoi_HopDong);
-                        EditText edt_soluongxe = view.findViewById(R.id.edt_SoLuongXe_HopDong);
-                        EditText edt_tiencoc = view.findViewById(R.id.edt_TienCoc_HopDong);
-                        TextView edt_trangthai = view.findViewById(R.id.edt_TrangThai_HopDong);
-                        Button btnCancel = view.findViewById(R.id.btn_huy_HopDong);
-                        Button btnSavet = view.findViewById(R.id.btn_Tao_HopDong);
+                            TextView edsophong = view.findViewById(R.id.edt_SoPhong_HopDong);
+                            TextView edtTenKhachThue = view.findViewById(R.id.edt_TenKhachThue_HopDong);
+                            EditText edt_ngaybatdau_hopdong = view.findViewById(R.id.edt_NgayBatDau_HopDong);
+                            EditText edt_ngayketthuc_hopdong = view.findViewById(R.id.edt_NgayKetThuc_HopDong);
+                            ImageView img_a = view.findViewById(R.id.img_ngay_bat_dau_HopDong);
+                            ImageView img_b = view.findViewById(R.id.img_Ngay_Ket_Thuc_HopDong);
+                            EditText edt_songuoi = view.findViewById(R.id.edt_SoNguoi_HopDong);
+                            EditText edt_soluongxe = view.findViewById(R.id.edt_SoLuongXe_HopDong);
+                            EditText edt_tiencoc = view.findViewById(R.id.edt_TienCoc_HopDong);
+                            TextView edt_trangthai = view.findViewById(R.id.edt_TrangThai_HopDong);
+                            Button btnCancel = view.findViewById(R.id.btn_huy_HopDong);
+                            Button btnSavet = view.findViewById(R.id.btn_Tao_HopDong);
 
-                        //----
-                        Calendar calendar = Calendar.getInstance();//Lay time
-                        final int year = calendar.get(Calendar.YEAR);
-                        final int month = calendar.get(Calendar.MONTH);
-                        final int day = calendar.get(calendar.DAY_OF_MONTH);
+                            //----
+                            Calendar calendar = Calendar.getInstance();//Lay time
+                            final int year = calendar.get(Calendar.YEAR);
+                            final int month = calendar.get(Calendar.MONTH);
+                            final int day = calendar.get(calendar.DAY_OF_MONTH);
 
-                        //datePicker
-                        img_a.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
-                                    @Override
-                                    public void onDateSet(DatePicker view, int y, int m, int d) {
-                                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                                        calendar.set(y, m, d);
-                                        String dateString = sdf.format(calendar.getTime());
-                                        edt_ngaybatdau_hopdong.setText(dateString);
-                                    }
-                                }, year, month, day);
-                                datePickerDialog.show();
-                            }
-                        });
-                        //datePicker
-                        img_b.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
-                                    @Override
-                                    public void onDateSet(DatePicker view, int y, int m, int d) {
-                                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                                        calendar.set(y, m, d);
-                                        String dateString = sdf.format(calendar.getTime());
-                                        edt_ngayketthuc_hopdong.setText(dateString);
-                                    }
-                                }, year, month, day);
-                                datePickerDialog.show();
-                            }
-                        });
-                            edsophong.setText(""+list.get(i).getSoPhong());
+                            //datePicker
+                            img_a.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                                        @Override
+                                        public void onDateSet(DatePicker view, int y, int m, int d) {
+                                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                            calendar.set(y, m, d);
+                                            String dateString = sdf.format(calendar.getTime());
+                                            edt_ngaybatdau_hopdong.setText(dateString);
+                                        }
+                                    }, year, month, day);
+                                    datePickerDialog.show();
+                                }
+                            });
+                            //datePicker
+                            img_b.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                                        @Override
+                                        public void onDateSet(DatePicker view, int y, int m, int d) {
+                                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                            calendar.set(y, m, d);
+                                            String dateString = sdf.format(calendar.getTime());
+                                            edt_ngayketthuc_hopdong.setText(dateString);
+                                        }
+                                    }, year, month, day);
+                                    datePickerDialog.show();
+                                }
+                            });
+                            edsophong.setText(""+phonghienTai.getSoPhong());
                             edtTenKhachThue.setText(khachThue.getHoTen());
                             builder.setView(view);
                             Dialog dialog = builder.create();
@@ -367,7 +377,7 @@ public class PhongAdapter extends BaseAdapter {
                                         Date date2=sdf.parse(edt_ngayketthuc_hopdong.getText().toString());
                                         if(date1.compareTo(date2)<0){
                                             HopDong hopDong = new HopDong();
-                                            hopDong.setIdPhong(idphong);
+                                            hopDong.setIdPhong(phonghienTai.getIdPhong());
                                             hopDong.setIdKhachThue(khachThue.getIdKhachThue());
                                             hopDong.setNgayBatDau((edt_ngaybatdau_hopdong.getText().toString()));
                                             hopDong.setNgayKetThuc((edt_ngayketthuc_hopdong.getText().toString()));
@@ -379,6 +389,7 @@ public class PhongAdapter extends BaseAdapter {
 
                                                 Toast.makeText(context, "thêm mới thành công", Toast.LENGTH_SHORT).show();
                                                 notifyDataSetChanged();
+                                                checkData();
                                                 dialog.dismiss();
                                             }else {
                                                 Toast.makeText(context, "thêm mới k thành công", Toast.LENGTH_SHORT).show();
@@ -392,8 +403,6 @@ public class PhongAdapter extends BaseAdapter {
                                         Log.d("ssssssss", "onClick: "+e);
                                     }
 
-
-
                                 }
                             });
                             btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -403,7 +412,7 @@ public class PhongAdapter extends BaseAdapter {
                                 }
                             });
                         }
-                        }
+                    }
 
 
                 });
@@ -412,40 +421,101 @@ public class PhongAdapter extends BaseAdapter {
                     public void onClick(View view) {
                         HopDongDAO hopDongDAO=new HopDongDAO(context);
 
-
-
-
-
                         try {
-                            if(hopDongDAO.getHopDongByIdPhong(String.valueOf(list.get(i).getIdPhong())).getTrangThaiHD()==1){
-                                ThemHoadon(i);
+                            if(hopDongDAO.getHopDongByIdPhong(String.valueOf(phonghienTai.getIdPhong()),"1")!=null){
+                                ThemHoadon(phonghienTai);
                                 notifyDataSetChanged();
                             }
                         }catch (Exception e){
-                        Toast.makeText(context, "Kiểm Tra hợp đồng của phòng", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Hãy tạo hợp đồng cho khách ở phòng này", Toast.LENGTH_SHORT).show();
                         }
 
                     }
                 });
-                delete_layout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        interfaceDeleteClickdistioner.OnClickDelete(i);
-                        dialog.dismiss();
-                    }
-                });
             }
         });
-        return view;
     }
 
-    private void ThemHoadon(int position) {
+    private void ThongTinPhong(Phong phong) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_thongtinphong);
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+
+        TextView tvSophong=dialog.findViewById(R.id.tvsophong);
+        TextView tvGiaPhong=dialog.findViewById(R.id.tvGiaPhong);
+        TextView tvGiadien=dialog.findViewById(R.id.tvGiaDien);
+        TextView tvGianuoc=dialog.findViewById(R.id.tvGiaNuoc);
+        TextView tvWifi=dialog.findViewById(R.id.tvGiaWifi);
+        TextView tvtrangthai=dialog.findViewById(R.id.tinhTrang);
+        TextView tvnguoithue=dialog.findViewById(R.id.tvnguoiThue);
+        Button button = dialog.findViewById(R.id.btn_dissmiss_phong);
+        tvSophong.setText("Số phòng: "+phong.getSoPhong());
+        tvGiaPhong.setText("Giá Phòng: "+phong.getGiaPhong());
+        tvGiadien.setText("Giá Điện: "+phong.getGiaDien());
+        tvGianuoc.setText("Giá Nước: "+phong.getGiaNuoc());
+        tvWifi.setText("Giá Wifi: "+phong.getGiaWifi());
+        if(phong.getTrangThai()==1){
+            tvtrangthai.setText("Trạng Thái: chưa ai thuê ");
+        }
+        else {
+            tvtrangthai.setText("Trạng Thái: đã có người thuê ");
+            KhachThue khachThue=khachThueDAO.getUserByIdPhong(String.valueOf(phong.getIdPhong()));
+            tvnguoithue.setText("Người Thuê: "+khachThue.getHoTen());
+
+        }
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+    }
+    private void checkData(){
+        hopDongDAO=new HopDongDAO(context);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+        String date = sdf.format(new Date());
+
+
+
+        List<HopDong> hopDongList=hopDongDAO.getAll();
+        if(hopDongList.size()>0){
+            for(int i=0;i<hopDongList.size();i++){
+                String ngayhethan=hopDongList.get(i).getNgayKetThuc();
+                try {
+                    Date date1=sdf.parse(date);
+                    Date date2=sdf.parse(ngayhethan);
+                    if(date2.compareTo(date1)<0){
+                        if(hopDongList.get(i).getTrangThaiHD()==1){
+                            hopDongList.get(i).setTrangThaiHD(2);
+                            Log.d("TAG", "checkData: "+"đã hết hạn");
+                            hopDongDAO.updateHopDong(hopDongList.get(i));
+                        }
+
+                    }
+                    else {
+                        Log.d("TAG", "checkData: "+hopDongList.get(i).getTrangThaiHD()+hopDongList.get(i).getIdHopDong());
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+    private void ThemHoadon(Phong phong) {
         final Dialog dialog = new Dialog(context, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_tao_hoa_don);
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialog.show();
-        EditText  Ed_NgayTao_HDon, Ed_NhapSoDien_HDon, Ed_NhapSoNuoc_HDon, Ed_ChiPhiKhac_HDon,Ed_TongTien_HDon,Ed_GhiChu_HDon,ed_tenhoaDon;
+        EditText Ed_NgayTao_HDon, Ed_NhapSoDien_HDon, Ed_NhapSoNuoc_HDon, Ed_ChiPhiKhac_HDon,Ed_TongTien_HDon,Ed_GhiChu_HDon,ed_tenhoaDon;
         TextView tvsophong;
         ImageView image_ngay;
         TextView tvtongtien;
@@ -453,11 +523,12 @@ public class PhongAdapter extends BaseAdapter {
         //ánh xạ
         Ed_NgayTao_HDon = dialog.findViewById(R.id.ed_NgayTao_HDon);
         ed_tenhoaDon = dialog.findViewById(R.id.ed_tenHoaDon);
+
         Ed_NhapSoDien_HDon = dialog.findViewById(R.id.ed_NhapSoDien_HDon);
         Ed_NhapSoNuoc_HDon = dialog.findViewById(R.id.ed_NhapSoNuoc_HDon);
         Ed_ChiPhiKhac_HDon = dialog.findViewById(R.id.ed_ChiPhiKhac_HDon);
         tvsophong=dialog.findViewById(R.id.tvsophong_hd);
-        tvsophong.setText("Phòng: "+list.get(position).getSoPhong());
+        tvsophong.setText("Phòng: "+phong.getSoPhong());
         Ed_GhiChu_HDon = dialog.findViewById(R.id.ed_GhiChu_HDon);
         image_ngay= dialog.findViewById(R.id.image_NgayTao_HDon);
         Btn_them_HDon= dialog.findViewById(R.id.btn_them_HDon);
@@ -470,6 +541,7 @@ public class PhongAdapter extends BaseAdapter {
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
         final int day = calendar.get(calendar.DAY_OF_MONTH);
+        ed_tenhoaDon.setText("Hóa Đơn tháng "+ (month)+" phòng " +phong.getSoPhong());
         image_ngay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -489,7 +561,7 @@ public class PhongAdapter extends BaseAdapter {
 
 
 
-                 ghiChu=Ed_GhiChu_HDon.getText().toString();
+                ghiChu=Ed_GhiChu_HDon.getText().toString();
                 try {
                     sodien= Integer.parseInt(Ed_NhapSoDien_HDon.getText().toString());
                     sonuoc= Integer.parseInt(Ed_NhapSoDien_HDon.getText().toString());
@@ -500,15 +572,12 @@ public class PhongAdapter extends BaseAdapter {
                     return;
                 }
 
-
-                 phongDAO=new PhongDAO(context);
-                 Phong phong=phongDAO.getUserById(String.valueOf(list.get(position).getIdPhong()));
-                 int giadien=phong.getGiaDien();
-                 int giaphong=phong.getGiaPhong();
-                 int gianuoc=phong.getGiaNuoc();
-                 int giawifi=phong.getGiaWifi();
-                 tongtien=(giadien*sodien)+(gianuoc*sonuoc)+giaphong+giawifi+chiphikhac;
-                 tvtongtien.setText("Tổng Hóa Đơn: "+tongtien);
+                int giadien=phong.getGiaDien();
+                int giaphong=phong.getGiaPhong();
+                int gianuoc=phong.getGiaNuoc();
+                int giawifi=phong.getGiaWifi();
+                tongtien=(giadien*sodien)+(gianuoc*sonuoc)+giaphong+giawifi+chiphikhac;
+                tvtongtien.setText("Tổng Hóa Đơn: "+tongtien);
             }
         });
         Btn_them_HDon.setOnClickListener(new View.OnClickListener() {
@@ -530,10 +599,10 @@ public class PhongAdapter extends BaseAdapter {
                 }
                 //ínert
                 hopDongDAO=new HopDongDAO(context);
-                HopDong hopDong=hopDongDAO.getHopDongByIdPhong(String.valueOf(list.get(position).getIdPhong()));
+                HopDong hopDong=hopDongDAO.getHopDongByIdPhong(String.valueOf(phong.getIdPhong()),"1");
                 hoaDonDao=new HoaDonDao(context);
                 HoaDon hoaDon=new HoaDon();
-                hoaDon.setIdPhong(list.get(position).getIdPhong());
+                hoaDon.setIdPhong(phong.getIdPhong());
                 hoaDon.setTenHoaDOn(tenhoadon);
                 hoaDon.setGhiChu(ghiChu);
                 hoaDon.setChiPhiKhac(chiphikhac);
@@ -546,7 +615,7 @@ public class PhongAdapter extends BaseAdapter {
                 Log.d("sssssss", "onClick: "+trangthai);
                 if (trangthai){
                     //đã thanh toán
-                   trangTHai=2;
+                    trangTHai=2;
                 }
                 else {
 //                    chưa thanh toan
@@ -571,49 +640,20 @@ public class PhongAdapter extends BaseAdapter {
             }
         });
     }
+    @Override
+    public int getItemCount() {
+        return phongList.size();
+    }
 
-    private void ThongTinPhong(int pos) {
-        final Dialog dialog = new Dialog(context);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_thongtinphong);
-
-        dialog.show();
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-        dialog.getWindow().setGravity(Gravity.BOTTOM);
-
-        TextView tvSophong=dialog.findViewById(R.id.tvsophong);
-        TextView tvGiaPhong=dialog.findViewById(R.id.tvGiaPhong);
-        TextView tvGiadien=dialog.findViewById(R.id.tvGiaDien);
-        TextView tvGianuoc=dialog.findViewById(R.id.tvGiaNuoc);
-        TextView tvWifi=dialog.findViewById(R.id.tvGiaWifi);
-        TextView tvtrangthai=dialog.findViewById(R.id.tinhTrang);
-        TextView tvnguoithue=dialog.findViewById(R.id.tvnguoiThue);
-        Button button = dialog.findViewById(R.id.btn_dissmiss_phong);
-
-        Phong phong=list.get(pos);
-        tvSophong.setText("Số phòng: "+phong.getSoPhong());
-        tvGiaPhong.setText("Giá Phòng: "+phong.getGiaPhong());
-        tvGiadien.setText("Giá Điện: "+phong.getGiaDien());
-        tvGianuoc.setText("Giá Nước: "+phong.getGiaNuoc());
-        tvWifi.setText("Giá Wifi: "+phong.getGiaWifi());
-        if(phong.getTrangThai()==1){
-            tvtrangthai.setText("Trạng Thái: chưa ai thuê ");
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        LinearLayout ln_item_dv;
+        TextView tv_sophong;
+        ImageView imageView;
+        public MyViewHolder(@NonNull View view) {
+            super(view);
+            ln_item_dv = view.findViewById(R.id.ln_menu_phong);
+            imageView=view.findViewById(R.id.thHopDong);
+            tv_sophong = view.findViewById(R.id.tv_ssophong);
         }
-        else {
-            tvtrangthai.setText("Trạng Thái: đã có người thuê ");
-            khachThueDAO=new KhachThueDAO(context);
-            KhachThue khachThue=khachThueDAO.getUserByIdPhong(String.valueOf(phong.getIdPhong()));
-            tvnguoithue.setText("Người Thuê: "+khachThue.getHoTen());
-
-        }
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
     }
 }

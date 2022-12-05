@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,17 +29,20 @@ import java.util.Calendar;
 import java.util.List;
 
 import DAO.HoaDonDao;
+import DAO.HopDongDAO;
 import DAO.KhachThueDAO;
 import DAO.PhongDAO;
 import Model.HoaDon;
+import Model.HopDong;
 import Model.KhachThue;
 import Model.Phong;
 import longvtph16016.poly.appquanlyphongtro.R;
 import longvtph16016.poly.appquanlyphongtro.interfaceDeleteClickdistioner;
 
-public class HoaDonAdapter extends BaseAdapter {
+public class HoaDonAdapter extends BaseAdapter implements Filterable {
     private Context context;
     private List<HoaDon> list;
+    private List<HoaDon> listold;
     private longvtph16016.poly.appquanlyphongtro.interfaceDeleteClickdistioner interfaceDeleteClickdistioner;
 
     // biến tạo hóa đơn
@@ -52,7 +57,43 @@ public class HoaDonAdapter extends BaseAdapter {
 
     public void setData(List<HoaDon> arrayList){
         this.list= arrayList;
+        this.listold=list;
         notifyDataSetChanged();// có tác dụng refresh lại data
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String strSrearch=charSequence.toString();
+                if(strSrearch.isEmpty()){
+                    list=listold;
+                }
+                else {
+                    List<HoaDon> hoaDonList=new ArrayList<>();
+                    for(HoaDon hoaDon: listold){
+                        if(hoaDon.getTenHoaDOn().toLowerCase().contains(strSrearch.toLowerCase())){
+                            hoaDonList.add(hoaDon);
+                        }
+                    }
+                    list=hoaDonList;
+                }
+                FilterResults filterResults=new FilterResults();
+                filterResults.values=list;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                try {
+                    list= (List<HoaDon>) filterResults;
+                    notifyDataSetChanged();
+                }catch (Exception e){
+
+                }
+            }
+        };
     }
 
     public final class MyViewHolder {
@@ -85,18 +126,20 @@ public class HoaDonAdapter extends BaseAdapter {
         } else {
             myViewHolder = (MyViewHolder) view.getTag();
         }
+        HoaDon hoaDonhientai=list.get(i);
         LinearLayout ln_item_dv = view.findViewById(R.id.ln_menu_hoadon);
         myViewHolder.tv_sohoadon.setText(list.get(i).getTenHoaDOn());
-        if(list.get(i).getTrangThai()==2) {
+        if(hoaDonhientai.getTrangThai()==2) {
             ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00FF2B")));
 
         }
-        else if(list.get(i).getTrangThai()==1){
-            ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFF00")));
+        else if(hoaDonhientai.getTrangThai()==1){
+            ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF0000")));
         }
         ln_item_dv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("sssssssss", "trang thai hoa don: "+hoaDonhientai.getTrangThai());
                 final Dialog dialog = new Dialog(context);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.dialog_bottom_hoadon);

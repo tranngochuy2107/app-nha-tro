@@ -4,19 +4,15 @@
     android:layout_height="match_parent"
     tools:context="Fragment.HopDongFragment">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" >
-
     <ListView
         android:id="@+id/rec_HopDong"
+
         android:layout_width="match_parent"
+        android:layout_marginTop="20sp"
         android:layout_height="match_parent"
+        />
 
-        android:layout_alignParentTop="true" />
 
 
-    </RelativeLayout>
 
 </FrameLayout>

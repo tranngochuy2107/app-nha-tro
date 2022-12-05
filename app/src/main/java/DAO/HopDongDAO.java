@@ -59,26 +59,28 @@ public class HopDongDAO {
     }
     //getAll
     public List<HopDong> getAll(){
-        String sql="SELECT * FROM HopDong";
+        String sql="SELECT * FROM HopDong ORDER BY TrangThaiHD ASC ";
         return getData(sql);
     }
-    //get hợp đồng by id
-    public HopDong getHopDongByIdPhong(String Id){
-        String sql="SELECT * FROM HopDong WHERE IdPhong=? AND TrangThaiHD = 1";
-        List<HopDong> list = getData(sql,Id);
-        if(list.size()>0){
-            return list.get(0);
-        }
-        return null;
-    }
-    public List<HopDong> getAllHopDOngByid(String Id){
-        String sql="SELECT * FROM HopDong WHERE IdPhong=?";
+    //getAllbýoPhong
+    public List<HopDong> getAllTimKiem(String Id){
+        String sql="SELECT * FROM HopDong JOIN Phong ON HopDong.IdPhong = Phong.IdPhong WHERE Phong.SoPhong = ? ORDER BY TrangThaiHD ASC ";
         List<HopDong> list = getData(sql,Id);
         if(list.size()>0){
             return list;
         }
         return null;
     }
+    //get hợp đồng by id
+    public HopDong getHopDongByIdPhong(String Id, String trangthai){
+        String sql="SELECT * FROM HopDong WHERE IdPhong=? AND TrangThaiHD = ?";
+        List<HopDong> list = getData(sql,Id,trangthai);
+        if(list.size()>0){
+            return list.get(0);
+        }
+        return null;
+    }
+
     @SuppressLint("Range")
     public List<HopDong>getData(String sql, String...SelectArgs){
         List<HopDong> list= new ArrayList<>();

@@ -9,36 +9,44 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-import Adapter.PhongAdapter;
+import Adapter.AdapterPhong;
+import DAO.HopDongDAO;
 import DAO.PhongDAO;
+import Model.HopDong;
 import Model.Phong;
 import longvtph16016.poly.appquanlyphongtro.R;
 import longvtph16016.poly.appquanlyphongtro.interfaceDeleteClickdistioner;
 
 
-public class PhongFragment extends Fragment implements interfaceDeleteClickdistioner {
+public class PhongFragment extends Fragment  {
 
     EditText edt_themsophong,edt_themgiaphong,edt_themgiadien,edt_themgianuoc,edt_themgiawifi,edt_trangthai;
     Button btn_themphong,btn_huyphong;
     FloatingActionButton fab;
-    ListView rcv_phong;
-
-    PhongAdapter phongAdapter;
+    RecyclerView rcv_phong;
+    HopDongDAO hopDongDAO;
+    AdapterPhong adapterPhong;
     private PhongDAO phongDAO;
-    private ArrayList<Phong> list = new ArrayList<>();
+    List<Phong> lists;
     Context context;
 
 
@@ -49,19 +57,23 @@ public class PhongFragment extends Fragment implements interfaceDeleteClickdisti
         rcv_phong = view.findViewById(R.id.rec_Phong);
 
         context = this.getActivity();
-
+        lists=new ArrayList<>();
+        checkData();
         phongDAO = new PhongDAO(context);
-        list = (ArrayList<Phong>) phongDAO.getAll();
-        phongAdapter = new PhongAdapter(context,this::OnClickDelete);
-        phongAdapter.setData(list);
-        rcv_phong.setAdapter(phongAdapter);
+        lists=phongDAO.getAll();
 
+        adapterPhong=new AdapterPhong(lists,context);
+        rcv_phong.setAdapter(adapterPhong);
+        RecyclerView.LayoutManager layoutManager=new GridLayoutManager(context,3);
+        rcv_phong.setLayoutManager(layoutManager);
+        rcv_phong.setHasFixedSize(true);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openDialog(getContext());
             }
         });
+
     }
 
 
@@ -225,9 +237,9 @@ public class PhongFragment extends Fragment implements interfaceDeleteClickdisti
                     if (phongDAO.insertPhong(soPhong,giaphong,giadien,gianuoc,giawifi,1)){
                         Toast.makeText(context, "thêm mới thành công", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
-                        list.clear();
-                        list.addAll(phongDAO.getAll());
-                        phongAdapter.notifyDataSetChanged();
+                        lists.clear();
+                        lists.addAll(phongDAO.getAll());
+                        adapterPhong.notifyDataSetChanged();
                     }else {
                         Toast.makeText(context, "thêm mới k thành công", Toast.LENGTH_SHORT).show();
                     }
@@ -246,7 +258,39 @@ public class PhongFragment extends Fragment implements interfaceDeleteClickdisti
 
 
     }
+    private void checkData(){
+        hopDongDAO=new HopDongDAO(getContext());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+        String date = sdf.format(new Date());
 
+
+
+        List<HopDong> hopDongList=hopDongDAO.getAll();
+        if(hopDongList.size()>0){
+            for(int i=0;i<hopDongList.size();i++){
+                String ngayhethan=hopDongList.get(i).getNgayKetThuc();
+                try {
+                    Date date1=sdf.parse(date);
+                    Date date2=sdf.parse(ngayhethan);
+                    if(date2.compareTo(date1)<0){
+                        if(hopDongList.get(i).getTrangThaiHD()==1){
+                            hopDongList.get(i).setTrangThaiHD(2);
+                            Log.d("TAG", "checkData: "+"đã hết hạn");
+                            hopDongDAO.updateHopDong(hopDongList.get(i));
+
+                        }
+
+                    }
+                    else {
+                        Log.d("TAG", "checkData: "+hopDongList.get(i).getTrangThaiHD()+hopDongList.get(i).getIdHopDong());
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
 
 
     @Override
@@ -254,38 +298,6 @@ public class PhongFragment extends Fragment implements interfaceDeleteClickdisti
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_phong, container, false);
-    }
-
-
-    @Override
-    public void OnClickDelete(int index) {
-        deletedialog(index);
-    }
-    public void deletedialog(int index){
-        androidx.appcompat.app.AlertDialog.Builder builder= new androidx.appcompat.app.AlertDialog.Builder(context);
-        builder.setTitle("bạn có chắc chắn muốn xóa không?");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                if(phongDAO.deletePhong(list.get(index))>0){
-                    list.remove(index);
-                    phongAdapter.setData(list);
-                    Toast.makeText(context,"xóa thành công",
-                            Toast.LENGTH_LONG).show();
-                }else {
-                    Toast.makeText(context,"xóa không thành công",
-                            Toast.LENGTH_LONG).show();
-                }
-
-            }
-        });
-        builder.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        builder.show();
     }
 
 }

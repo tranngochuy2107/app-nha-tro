@@ -10,7 +10,7 @@
         android:id="@+id/toolBar_"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#FFEB3B"
+        android:background="#40C5E6"
         app:titleTextColor="@color/white"
         />
     <androidx.drawerlayout.widget.DrawerLayout

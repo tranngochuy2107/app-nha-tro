@@ -18,6 +18,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,10 +43,10 @@ import Model.Phong;
 import longvtph16016.poly.appquanlyphongtro.R;
 import longvtph16016.poly.appquanlyphongtro.interfaceDeleteClickdistioner;
 
-public class HopDongAdapter extends BaseAdapter {
+public class HopDongAdapter extends BaseAdapter implements Filterable {
     private Context context;
     private List<HopDong> list;
-
+    private List<HopDong> listold;
     private Button btnthemHopDong;
     EditText edtNgayBatDau;
     EditText edtNgayKetThuc;
@@ -56,13 +58,15 @@ public class HopDongAdapter extends BaseAdapter {
     public HopDongAdapter(Context context, List<HopDong> list  ) {
         this.context = context;
         this.list = list;
-
+        this.listold=list;
     }
 
     public void setData(List<HopDong> list){
         this.list= list;
         notifyDataSetChanged();// có tác dụng refresh lại data
     }
+
+
     public final class MyViewHolder {
         //khai báo các thành phần view có trong layoutitem
         private TextView tv_HopDong,giaphong,giadien,gianuoc,giawifi,trangthai;
@@ -116,7 +120,6 @@ public class HopDongAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 HopDong hopDong=list.get(i);
-                Log.d("sssssssssssss", "onClick: "+hopDong.getTrangThaiHD());
                 final Dialog dialog = new Dialog(context);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.bottom_layout_hdong);
@@ -273,5 +276,42 @@ public class HopDongAdapter extends BaseAdapter {
         builder.show();
 
     }
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String strSrearch=charSequence.toString();
+                if(strSrearch.isEmpty()){
+                    list=listold;
+                }
+                else {
+
+                    try {
+                        HopDongDAO hopDongDAO=new HopDongDAO(context);
+                        list=hopDongDAO.getAllTimKiem(strSrearch);
+                    }
+                    catch (Exception e){
+                        list=listold;
+                    }
+                }
+                FilterResults filterResults=new FilterResults();
+                filterResults.values=list;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                try {
+                    list= (List<HopDong>) filterResults;
+                    notifyDataSetChanged();
+                }catch (Exception e){
+
+                }
+
+            }
+        };
+    }
+
 
 }
