@@ -139,7 +139,7 @@ public class HoaDonAdapter extends BaseAdapter implements Filterable {
         ln_item_dv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("sssssssss", "trang thai hoa don: "+hoaDonhientai.getTrangThai());
+
                 final Dialog dialog = new Dialog(context);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.dialog_bottom_hoadon);

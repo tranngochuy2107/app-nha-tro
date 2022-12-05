@@ -548,7 +548,10 @@ public class AdapterPhong  extends RecyclerView.Adapter<AdapterPhong.MyViewHolde
                 DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int y, int m, int d) {
-                        Ed_NgayTao_HDon.setText( y+"-" + (m + 1) + "-"+d );
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        calendar.set(y, m, d);
+                        String dateString = sdf.format(calendar.getTime());
+                        Ed_NgayTao_HDon.setText(dateString);
                     }
                 }, year, month, day);
                 datePickerDialog.show();

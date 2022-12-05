@@ -138,7 +138,7 @@ public class HopDongAdapter extends BaseAdapter implements Filterable {
                 detailLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        detail();
+                        detail(list.get(i));
                     }
                 });
                 giahanLayuot.setOnClickListener(new View.OnClickListener() {
@@ -170,10 +170,42 @@ public class HopDongAdapter extends BaseAdapter implements Filterable {
 
         return view;
     }
-    public void detail() {
+    public void detail(HopDong hopDong) {
         final Dialog dialog = new Dialog(context, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
         dialog.setContentView(R.layout.detail_hop_dong);
+        TextView tvNgayTaoHd,tvTenKhachThue,tvCCCd,tvSdt,tvSoPhong,tvGiaPhong,tvGiaDien,tvGianuoc,
+                tvGiawifi,tvtienCoc,tvThoiHan,tvchuky,vtnameChuky;
+        tvNgayTaoHd=dialog.findViewById(R.id.thoigianTaoHD);
+        tvTenKhachThue=dialog.findViewById(R.id.nameKhachThue);
+        tvCCCd=dialog.findViewById(R.id.cccdKhachThue);
+        tvSdt=dialog.findViewById(R.id.sdtKhachThue);
+        tvSoPhong=dialog.findViewById(R.id.soPhongHopDong);
+        tvGiaPhong=dialog.findViewById(R.id.HopDongGIaPhong);
+        tvGiaDien=dialog.findViewById(R.id.TienDienHopDong);
+        tvGianuoc=dialog.findViewById(R.id.TienNuocHopDong);
+        tvGiawifi=dialog.findViewById(R.id.TienWifiHopDong);
+        tvtienCoc=dialog.findViewById(R.id.TienCocHopDong);
+        tvThoiHan=dialog.findViewById(R.id.ThoiHanHopDong);
+        tvchuky=dialog.findViewById(R.id.chuKyKhachThue);
+        vtnameChuky=dialog.findViewById(R.id.kytenKhachThue);
+        KhachThueDAO khachThueDAO=new KhachThueDAO(context);
+        KhachThue khachThue=khachThueDAO.getUserById(hopDong.getIdPhong()+"");
+        PhongDAO phongDAO=new PhongDAO(context);
+        Phong phong=phongDAO.getUserById(hopDong.getIdPhong()+"");
+        tvNgayTaoHd.setText("Ngày: "+hopDong.getNgayBatDau());
 
+        tvTenKhachThue.setText("Ông/Bà: "+khachThue.getHoTen());
+        tvSdt.setText("Số CCCD: "+khachThue.getSdt());
+        tvSdt.setText("Số điện thoại :"+khachThue.getSdt());
+        tvSoPhong.setText(phong.getSoPhong()+"");
+        tvGiaPhong.setText("Giá Thuê" +phong.getGiaPhong());
+        tvGiaDien.setText("Tiền điện: "+phong.getGiaDien() +" đ/kwh");
+        tvGianuoc.setText("Tiền Nước: "+phong.getGiaNuoc() +" đ/khối");
+        tvGiawifi.setText("Tiền Wifi: "+phong.getGiaWifi() +" đ/Tháng");
+        tvtienCoc.setText("Tiền Cọc: "+hopDong.getTiecCoc() +" đ");
+        tvThoiHan.setText("Hợp đồng có giá trị kể từ ngày " +hopDong.getNgayBatDau()+ " đến ngày "+ hopDong.getNgayKetThuc());
+        tvchuky.setText(khachThue.getHoTen());
+        vtnameChuky.setText(khachThue.getHoTen());
         dialog.show();
     }
     public void GiaHanHD(HopDong hopDong){

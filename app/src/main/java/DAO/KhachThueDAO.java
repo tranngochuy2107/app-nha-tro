@@ -58,6 +58,14 @@ public class KhachThueDAO {
             return list.get(0);
         }
         return null;
+    }    //get user by id
+    public KhachThue getUserById(String Id){
+        String sql="SELECT * FROM KhachThue WHERE IdKhachThue=?";
+        List<KhachThue> list = getData(sql,Id);
+        if(list.size()>0){
+            return list.get(0);
+        }
+        return null;
     }
 
     @SuppressLint("Range")

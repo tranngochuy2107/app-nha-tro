@@ -53,6 +53,7 @@
                 android:textSize="17sp" />
 
             <TextView
+                android:id="@+id/thoigianTaoHD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10sp"
@@ -93,7 +94,7 @@
                 android:layout_marginLeft="10sp"
                 android:layout_marginTop="5sp"
                 android:layout_marginBottom="7sp"
-                android:text="Ông/Bà: Nguyễn văn A"
+                android:text="Ông/Bà: Vi Thanh Long"
                 android:textColor="@color/black"
                 android:textSize="17sp" />
 
@@ -142,6 +143,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/nameKhachThue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10sp"
@@ -151,18 +153,10 @@
                 android:textColor="@color/black"
                 android:textSize="17sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5sp"
-                android:layout_marginTop="5sp"
-                android:layout_marginBottom="7sp"
-                android:text="Sinh ngày: 01/01/2002"
-                android:textColor="@color/black"
-                android:textSize="17sp" />
         </LinearLayout>
 
         <TextView
+            android:id="@+id/cccdKhachThue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
@@ -172,6 +166,7 @@
             android:textSize="17sp" />
 
         <TextView
+            android:id="@+id/sdtKhachThue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
@@ -206,6 +201,7 @@
                 android:textSize="17sp" />
 
             <TextView
+                android:id="@+id/soPhongHopDong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5sp"
@@ -217,6 +213,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/HopDongGIaPhong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
@@ -226,6 +223,7 @@
             android:textSize="17sp" />
 
         <TextView
+            android:id="@+id/TienDienHopDong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
@@ -234,6 +232,7 @@
             android:textColor="@color/black"
             android:textSize="17sp" />
         <TextView
+            android:id="@+id/TienNuocHopDong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
@@ -243,6 +242,7 @@
             android:textSize="17sp" />
 
         <TextView
+            android:id="@+id/TienWifiHopDong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
@@ -250,15 +250,9 @@
             android:text="Tiền wifi: 100000 đ/stháng "
             android:textColor="@color/black"
             android:textSize="17sp" />
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10sp"
-            android:layout_marginBottom="7sp"
-            android:text="Rác: 30000 đ/tháng"
-            android:textColor="@color/black"
-            android:textSize="17sp" />
-        <TextView
+            android:id="@+id/TienCocHopDong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
@@ -268,6 +262,7 @@
             android:textSize="17sp" />
 
         <TextView
+            android:id="@+id/ThoiHanHopDong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
@@ -414,12 +409,13 @@
                 android:layout_marginTop="5sp"
                 android:layout_marginBottom="7sp"
                 android:layout_weight="1"
-                android:text="A"
+                android:text="Long"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="17sp" />
 
             <TextView
+                android:id="@+id/chuKyKhachThue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10sp"
@@ -445,12 +441,13 @@
                 android:layout_marginTop="5sp"
                 android:layout_marginBottom="7sp"
                 android:layout_weight="1"
-                android:text="Nguyễn Văn A"
+                android:text="Vi Thanh Long"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="17sp" />
 
             <TextView
+                android:id="@+id/kytenKhachThue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10sp"
