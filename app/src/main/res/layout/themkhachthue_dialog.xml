@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:paddingBottom="20dp"
-    android:background="@drawable/bg_white_conor_10_border_gary"
+
     >
 
     <TextView
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30dp"
-        android:background="#DCBEE4"
+        android:background="@drawable/bg_white_conor_10_border_gary"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="50dp"
         android:layout_marginRight="20dp"/>
