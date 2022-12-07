@@ -20,8 +20,6 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         textInputUser = findViewById(R.id.text_in_put_user);
         textInputPassWord = findViewById(R.id.text_in_put_pass_word);
-
-
         btnLogin = findViewById(R.id.btn_log_in);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,12 +42,12 @@ public class Login extends AppCompatActivity {
         if (userName.isEmpty()){
             textInputUser.setError("Field can't be empty");
             return false;
-        }else if (userName.length() >15){
-            textInputUser.setError("username too long");
-            return false;
-        }else {
+        }else if (userName.equals("admin")){
             textInputUser.setError(null);
             return true;
+        }else {
+            textInputUser.setError("sai tên tk");
+            return false;
         }
     }
 
@@ -59,9 +57,14 @@ public class Login extends AppCompatActivity {
         if (passWordInPut.isEmpty()){
             textInputPassWord.setError("Field can't be empty");
             return false;
-        }else {
+        }
+        else if(passWordInPut.equals("123")){
             textInputPassWord.setError(null);
             return true;
+        }
+        else {
+            textInputPassWord.setError("sai mật khẩu");
+            return false;
         }
     }
 }
