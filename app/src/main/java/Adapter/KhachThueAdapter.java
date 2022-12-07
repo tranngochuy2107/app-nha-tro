@@ -17,33 +17,41 @@ import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import DAO.HopDongDAO;
 import DAO.KhachThueDAO;
 import DAO.PhongDAO;
+import Model.HoaDon;
+import Model.HopDong;
 import Model.KhachThue;
 import Model.Phong;
 import longvtph16016.poly.appquanlyphongtro.R;
 
-public class KhachThueAdapter extends BaseAdapter {
+public class KhachThueAdapter extends BaseAdapter implements Filterable {
     private Context context;
     private List<KhachThue> list;
+    private List<KhachThue> listold;
     private LinearLayout ln_item_dv;
 
     public KhachThueAdapter(Context context, List<KhachThue> list  ) {
         this.context = context;
         this.list = list;
-
+        this.listold=list;
     }
 
-    public void setData(List<KhachThue> list){
-        this.list= list;
+    public void setData(List<KhachThue> lists){
+        this.list= lists;
+
         notifyDataSetChanged();// có tác dụng refresh lại data
     }
 
@@ -147,8 +155,14 @@ public class KhachThueAdapter extends BaseAdapter {
         Button btnhuy=dialog.findViewById(R.id.btnCancee_update);
 
         PhongDAO phongDAO=new PhongDAO(context);
+        Phong phong=phongDAO.getUserById(list.get(i).getIdPhong()+"");
+        if(phong==null){
+            tv_SoPhong_ThemKhachThue_update.setText("Khách đã ngừng thuê");
+        }
+        else {
+            tv_SoPhong_ThemKhachThue_update.setText("Phòng: "+phong.getSoPhong()+"");
+        }
 
-        tv_SoPhong_ThemKhachThue_update.setText("Phòng: "+phongDAO.getUserById(String.valueOf(list.get(i).getIdPhong())).getSoPhong()+"");
         edTenK_update.setText(list.get(i).getHoTen()+ "");
         edtsdt.setText(list.get(i).getSdt()+ "");
         edtcccd.setText(list.get(i).getCccd()+ "");
@@ -179,9 +193,6 @@ public class KhachThueAdapter extends BaseAdapter {
                     Toast.makeText(context, "Cccd không hợp lệ", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-
-
 
                 list.get(i).setHoTen(edTenK);
                 list.get(i).setSdt(sdt);
@@ -252,5 +263,42 @@ public class KhachThueAdapter extends BaseAdapter {
                 dialog.dismiss();
             }
         });
+    }
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String strSrearch=charSequence.toString();
+                if(strSrearch.isEmpty()){
+                    list=listold;
+                }
+                else {
+
+
+                    List<KhachThue> khachThueList=new ArrayList<>();
+                    for(KhachThue khachThue: listold){
+                        if(khachThue.getHoTen().toLowerCase().contains(strSrearch.toLowerCase())){
+                            khachThueList.add(khachThue);
+                        }
+                    }
+                    list=khachThueList;
+                }
+                FilterResults filterResults=new FilterResults();
+                filterResults.values=list;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                try {
+                    list= (List<KhachThue>) filterResults;
+                    notifyDataSetChanged();
+                }catch (Exception e){
+
+                }
+
+            }
+        };
     }
 }

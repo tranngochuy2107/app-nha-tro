@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
@@ -67,9 +68,19 @@ public class hoaonDoanhThuAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.iteam_hoadon, null);
             myViewHolder.tvHoadon = view.findViewById(R.id.tv_sohoadon);
             myViewHolder.tvHoadon.setText(list.get(i).getTenHoaDOn());
+
             view.setTag(myViewHolder);
         } else {
             myViewHolder = (MyViewHolder) view.getTag();
+        }
+        HoaDon hoaDonhientai=list.get(i);
+        LinearLayout ln_item_dv = view.findViewById(R.id.ln_menu_hoadon);
+        if(hoaDonhientai.getTrangThai()==2) {
+            ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00FF2B")));
+
+        }
+        else if(hoaDonhientai.getTrangThai()==1){
+            ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF0000")));
         }
         view.setOnClickListener(new View.OnClickListener() {
             @Override

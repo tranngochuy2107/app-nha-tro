@@ -19,6 +19,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,6 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -43,8 +46,9 @@ import Model.KhachThue;
 import Model.Phong;
 import longvtph16016.poly.appquanlyphongtro.R;
 
-public class AdapterPhong  extends RecyclerView.Adapter<AdapterPhong.MyViewHolder> {
+public class AdapterPhong  extends RecyclerView.Adapter<AdapterPhong.MyViewHolder> implements Filterable {
     List<Phong> phongList;
+    List<Phong> phongListold;
     Context context;
     HopDongDAO hopDongDAO;
     KhachThueDAO khachThueDAO;
@@ -55,6 +59,7 @@ public class AdapterPhong  extends RecyclerView.Adapter<AdapterPhong.MyViewHolde
     public AdapterPhong(List<Phong> phongs, Context context) {
         this.phongList = phongs;
         this.context = context;
+        this.phongListold=phongList;
     }
 
     @NonNull
@@ -100,7 +105,7 @@ public class AdapterPhong  extends RecyclerView.Adapter<AdapterPhong.MyViewHolde
                 LinearLayout detail = dialog.findViewById(R.id.edt_detailphong);
                 LinearLayout themhopdong = dialog.findViewById(R.id.edt_ThemHopDong);
                 LinearLayout themhoadon = dialog.findViewById(R.id.edt_ThemHoaDon);
-                LinearLayout delete_layout = dialog.findViewById(R.id.edt_delete_dv);
+
                 LinearLayout ThemKhachThue = dialog.findViewById(R.id.edt_ThemKhachThue);
 
                 TextView textView = dialog.findViewById(R.id.tv_title);
@@ -111,38 +116,6 @@ public class AdapterPhong  extends RecyclerView.Adapter<AdapterPhong.MyViewHolde
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
                 dialog.getWindow().setGravity(Gravity.BOTTOM);
-                delete_layout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        androidx.appcompat.app.AlertDialog.Builder builder= new androidx.appcompat.app.AlertDialog.Builder(context);
-                        builder.setTitle("bạn có chắc chắn muốn xóa không?");
-                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                if(phonghienTai.getTrangThai()!=1){
-                                    Toast.makeText(context, "Phòng đang có người ở, không thể xóa", Toast.LENGTH_SHORT).show();
-                                    return;
-                                }
-                                if(phongDAO.deletePhong(phonghienTai)>0){
-                                    phongList.remove(phonghienTai);
-                                    notifyDataSetChanged();
-                                    Toast.makeText(context,"xóa thành công",
-                                            Toast.LENGTH_LONG).show();
-                                }else {
-                                    Toast.makeText(context,"xóa không thành công",
-                                            Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        });
-                        builder.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        });
-                        builder.show();
-                    }
-                });
                 detail.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -646,6 +619,41 @@ public class AdapterPhong  extends RecyclerView.Adapter<AdapterPhong.MyViewHolde
     @Override
     public int getItemCount() {
         return phongList.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String strSrearch=charSequence.toString();
+                if(strSrearch.isEmpty()){
+                    phongList=phongListold;
+                }
+                else {
+                    List<Phong> phongs=new ArrayList<>();
+                    for(Phong phong: phongListold){
+                        if((phong.getSoPhong()+"").toLowerCase().contains(strSrearch.toLowerCase())){
+                            phongs.add(phong);
+                        }
+                    }
+                    phongList=phongs;
+                }
+                FilterResults filterResults=new FilterResults();
+                filterResults.values=phongList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                try {
+                    phongList= (List<Phong>) filterResults;
+                    notifyDataSetChanged();
+                }catch (Exception e){
+
+                }
+            }
+        };
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
