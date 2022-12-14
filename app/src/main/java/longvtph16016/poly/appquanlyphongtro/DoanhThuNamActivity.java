@@ -1,26 +1,20 @@
 package longvtph16016.poly.appquanlyphongtro;
 
-import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-import Adapter.hoaonDoanhThuAdapter;
+import Adapter.HoaDonAdapter;
 import DAO.HoaDonDao;
 import Model.HoaDon;
 
@@ -29,7 +23,7 @@ public class DoanhThuNamActivity extends AppCompatActivity {
     Button btn_xemDTN;
     Spinner namDoanThu;
     String nams;
-    TextView textViewDoanhThu;
+    TextView textViewDoanhThu,txtslHD;
     ListView listView;
     List<HoaDon> list=new ArrayList<>();
     @Override
@@ -38,11 +32,13 @@ public class DoanhThuNamActivity extends AppCompatActivity {
         setContentView(R.layout.activity_doanh_thu_nam);
         namDoanThu=findViewById(R.id.id_spinner_namDt);
         btn_xemDTN = findViewById(R.id.btn_xemDTN);
+        txtslHD=findViewById(R.id.txtsl);
         listnam = new ArrayList<>();
         for (int i=2015;i<2100;i++){
             listnam.add(i+"");
         }
         textViewDoanhThu=findViewById(R.id.tvdoanhthu);
+
         listView=findViewById(R.id.listDoanhThunam);
         namDoanThu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -70,16 +66,20 @@ public class DoanhThuNamActivity extends AppCompatActivity {
                 list =donDao.gethoadonByNgay(daunam,cuoinam);
                 if (list.size()==0){
                     textViewDoanhThu.setText("Doanh Thu Năm "+nams+": "+doanhthu+" đ");
+                    txtslHD.setVisibility(View.VISIBLE);
                 }
                 else {
                     for(int i=0; i<list.size();i++){
                         doanhthu=doanhthu+list.get(i).getTong();
-                        textViewDoanhThu.setText("Doanh Thu Năm "+nams+": "+doanhthu+" đ");
+
                     }
+                    textViewDoanhThu.setText("Doanh Thu Năm "+nams+": "+doanhthu+" đ");
+                    txtslHD.setVisibility(View.GONE);
                 }
 
 
-                hoaonDoanhThuAdapter adapter=new hoaonDoanhThuAdapter(DoanhThuNamActivity.this,list);
+                HoaDonAdapter adapter=new HoaDonAdapter(DoanhThuNamActivity.this);
+                adapter.setData(list);
                 listView.setAdapter(adapter);
             }
         });

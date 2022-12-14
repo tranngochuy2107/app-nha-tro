@@ -1,48 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
+    >
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="Số hóa đơn: 0"
         android:gravity="center"
-        android:padding="15sp"
-        android:text="Doanh Thu Năm"
-        android:textColor="@android:color/black"
-        android:textSize="25sp" />
-
-    <TextView
-        android:layout_marginLeft="10sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="start"
-        android:text="Chọn Năm" />
-    <Spinner
-        android:id="@+id/id_spinner_namDt"
-        android:layout_width="match_parent"
-        android:layout_height="40dp">
-    </Spinner>
-
-
-    <Button
-        android:id="@+id/btn_xemDTN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20sp"
-        android:backgroundTint="@color/black"
-        android:text="Xem" />
-    <TextView
-        android:id="@+id/tvdoanhthu"
-        android:layout_width="match_parent"
-        android:text="Doanh thu theo Năm:"
-        android:textSize="24sp"
+        android:textSize="20dp"
+        android:id="@+id/txtsl"
+        android:textStyle="bold"
+        android:visibility="visible"
         android:layout_height="wrap_content"/>
-    <ListView
-        android:id="@+id/listDoanhThunam"
-        android:layout_marginTop="10dp"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="15sp"
+            android:text="Doanh Thu Năm"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_marginLeft="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Chọn Năm" />
+        <Spinner
+            android:id="@+id/id_spinner_namDt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+        </Spinner>
+
+
+        <Button
+            android:id="@+id/btn_xemDTN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20sp"
+            android:backgroundTint="@color/black"
+            android:text="Xem" />
+        <TextView
+            android:id="@+id/tvdoanhthu"
+            android:layout_width="match_parent"
+            android:text="Doanh thu theo Năm:"
+            android:textSize="24sp"
+            android:layout_height="wrap_content"/>
+        <ListView
+            android:id="@+id/listDoanhThunam"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</RelativeLayout>

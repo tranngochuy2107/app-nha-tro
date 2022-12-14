@@ -1,34 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="10dp"
+    android:id="@+id/ln_menu_hoadon"
     android:layout_marginTop="10dp"
     android:orientation="vertical"
-
     app:cardElevation="10dp"
     app:cardCornerRadius="10dp">
-    <LinearLayout
-        android:id="@+id/ln_menu_hoadon"
-        app:cardElevation="10dp"
-        android:background="@drawable/bg_white_conor_10_border_gary"
-        android:layout_marginBottom="10dp"
-        android:orientation="vertical"
-        android:backgroundTint="@color/yellow"
-        app:cardCornerRadius="10dp"
+    <RelativeLayout
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/txtIDhoaDon"
+            android:text="#01"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@android:color/holo_red_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/txtTongTien"
+            android:text="20000000 Đ"
+            android:layout_alignParentEnd="true"
+
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:textColor="@android:color/holo_red_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:drawableLeft="@drawable/ic_baseline_home_24"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_sohoadon"
-            android:padding="10dp"
+            android:id="@+id/txtnamehd"
+            android:layout_below="@id/txtIDhoaDon"
             android:text="123"
+            android:layout_marginBottom="5dp"
             android:textColor="@color/black"
-            android:textSize="20dp"/>
+            android:textSize="16dp"/>
+        <TextView
+            android:layout_marginBottom="5dp"
+            android:id="@+id/txt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtnamehd"
+            android:text="Tiền phòng:"
+            android:textColor="@color/black"
+            android:textSize="12dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txttienphong"
+            android:layout_below="@id/txtnamehd"
+            android:layout_alignParentEnd="true"
+            android:text="2.000.000 Đ"
+            android:textColor="@color/black"
+            android:textSize="12dp"/>
+        <TextView
 
-    </LinearLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt1"
+            android:text="Tổng dịch vụ:"
+            android:textColor="@color/black"
+            android:textSize="12dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtDichVU"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@id/txt1"
+            android:layout_alignParentEnd="true"
+            android:text="2.000.000 Đ"
+            android:textColor="@color/black"
+            android:textSize="12dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtTrangThai"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@id/txtDichVU"
+            android:text="Trạng Thái"
+            android:textColor="@color/black"
+            android:textSize="12dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtGiChu"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@id/txtTrangThai"
+            android:text="Ghi chú: "
+            android:textColor="@color/black"
+            android:textSize="12dp"/>
+    </RelativeLayout>
 
 
-</LinearLayout>
+
+</androidx.cardview.widget.CardView>

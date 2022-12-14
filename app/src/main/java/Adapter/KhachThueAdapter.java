@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +42,7 @@ public class KhachThueAdapter extends BaseAdapter implements Filterable {
     private Context context;
     private List<KhachThue> list;
     private List<KhachThue> listold;
-    private LinearLayout ln_item_dv;
+    private CardView ln_item_dv;
 
     public KhachThueAdapter(Context context, List<KhachThue> list  ) {
         this.context = context;
@@ -91,17 +92,54 @@ public class KhachThueAdapter extends BaseAdapter implements Filterable {
         } else {
             myViewHolder = (MyViewHolder) view.getTag();
         }
-        myViewHolder.tv_KhachThue.setText("Khách Thuê"+": "+list.get(i).getHoTen());
+        myViewHolder.tv_KhachThue.setText((i+1)+" .Khách Thuê"+": "+list.get(i).getHoTen());
         PhongDAO phongDAO=new PhongDAO(context);
-        Phong phong=phongDAO.getUserById(String.valueOf(list.get(i).getIdPhong()));
+        Phong phong=phongDAO.getPhongById(String.valueOf(list.get(i).getIdPhong()));
         ln_item_dv=view.findViewById(R.id.ln_menu_khachthue);
-        if(phong==null)
-        {
-            ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#CBCBBE")));
+        TextView txtCCCD=view.findViewById(R.id.txtCCCD);
+        TextView txtPhongTro=view.findViewById(R.id.txtPhongTro);
+        TextView txtsdt=view.findViewById(R.id.txtSDT);
+        ImageView imgHd=view.findViewById(R.id.HDKhachThue);
+        HopDongDAO hopDongDAO=new HopDongDAO(context);
+
+        KhachThue khachThue=list.get(i);
+        HopDong hopDong=hopDongDAO.getHopDongByIdKT(khachThue.getIdKhachThue()+"");
+        if(hopDong==null){
+            ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#94F589")));
+            txtPhongTro.setText("Phòng trọ: "+phong.getSoPhong());
+            txtCCCD.setText("CCCD: "+khachThue.getCccd());
+            txtsdt.setText("SĐT: "+khachThue.getSdt());
+            imgHd.setVisibility(View.INVISIBLE);
         }
         else {
-            ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00FF00")));
+            if(hopDong.getTrangThaiHD()==3)
+            {
+                ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E8A5A7")));
+                txtPhongTro.setText("Đã từng thuê Phòng : "+ phongDAO.getPhongById(String.valueOf(hopDong.getIdPhong())).getSoPhong());
+                txtCCCD.setText("CCCD: "+khachThue.getCccd());
+                txtsdt.setText("SĐT: "+khachThue.getSdt());
+                imgHd.setVisibility(View.VISIBLE);
+                imgHd.setImageResource(R.drawable.unhd);
+            }
+            else if(hopDong.getTrangThaiHD()==2){
+                ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#94F589")));
+                txtPhongTro.setText("Phòng Trọ: "+phong.getSoPhong());
+                txtCCCD.setText("CCCD: "+khachThue.getCccd());
+                txtsdt.setText("SĐT: "+khachThue.getSdt());
+                imgHd.setVisibility(View.VISIBLE);
+                imgHd.setImageResource(R.drawable.ic_baseline_announcement_24);
+            }
+            else {
+                ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#94F589")));
+                txtPhongTro.setText("Phòng Trọ: "+phong.getSoPhong());
+                txtCCCD.setText("CCCD: "+khachThue.getCccd());
+                txtsdt.setText("SĐT: "+khachThue.getSdt());
+                imgHd.setVisibility(View.VISIBLE);
+                imgHd.setImageResource(R.drawable.hopdong);
+
+            }
         }
+
 
 
         ln_item_dv.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +149,6 @@ public class KhachThueAdapter extends BaseAdapter implements Filterable {
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.bottom_layout_khachthue);
                 LinearLayout editLayout = dialog.findViewById(R.id.edit_layout_khachthue);
-                LinearLayout detailLayout = dialog.findViewById(R.id.view_layout_khachthue);
 
                 dialog.show();
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -119,12 +156,6 @@ public class KhachThueAdapter extends BaseAdapter implements Filterable {
                 dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
                 dialog.getWindow().setGravity(Gravity.BOTTOM);
 
-                detailLayout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        detail(i);
-                    }
-                });
 
                 editLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -155,7 +186,7 @@ public class KhachThueAdapter extends BaseAdapter implements Filterable {
         Button btnhuy=dialog.findViewById(R.id.btnCancee_update);
 
         PhongDAO phongDAO=new PhongDAO(context);
-        Phong phong=phongDAO.getUserById(list.get(i).getIdPhong()+"");
+        Phong phong=phongDAO.getPhongById(list.get(i).getIdPhong()+"");
         if(phong==null){
             tv_SoPhong_ThemKhachThue_update.setText("Khách đã ngừng thuê");
         }
@@ -245,7 +276,7 @@ public class KhachThueAdapter extends BaseAdapter implements Filterable {
         tvsdt.setText("Số CCCD: "+list.get(i).getCccd());
         PhongDAO phongDAO=new PhongDAO(context);
         Log.d("cccc", "detail: "+list.get(i).getIdKhachThue());
-        Phong phong=phongDAO.getUserById(String.valueOf(list.get(i).getIdPhong()));
+        Phong phong=phongDAO.getPhongById(String.valueOf(list.get(i).getIdPhong()));
 
         if(phong==null)
         {

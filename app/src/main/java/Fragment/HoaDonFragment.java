@@ -57,18 +57,15 @@ public class HoaDonFragment extends Fragment implements interfaceDeleteClickdist
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         rcv_hoadon = view.findViewById(R.id.rec_HoaDon);
         context = this.getActivity();
         hoaDonDao = new HoaDonDao(context);
         list = hoaDonDao.getAll();
-        HoaDonAdapter = new HoaDonAdapter(context, this::OnClickDelete);
+        HoaDonAdapter = new HoaDonAdapter(context);
         HoaDonAdapter.setData(list);
         rcv_hoadon.setAdapter(HoaDonAdapter);
-
-
-
     }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);

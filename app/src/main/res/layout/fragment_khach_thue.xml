@@ -6,16 +6,16 @@
     tools:context="Fragment.KhachThueFragment">
     <RelativeLayout
         android:layout_width="match_parent"
+        android:paddingBottom="20dp"
         android:layout_height="wrap_content">
-
         <ListView
             android:id="@+id/rec_KhachThue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:paddingBottom="8dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="0dp" />
+             />
 
 
     </RelativeLayout>

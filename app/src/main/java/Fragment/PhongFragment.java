@@ -68,7 +68,7 @@ public class PhongFragment extends Fragment  {
 
         adapterPhong=new AdapterPhong(lists,context);
         rcv_phong.setAdapter(adapterPhong);
-        RecyclerView.LayoutManager layoutManager=new GridLayoutManager(context,3);
+        RecyclerView.LayoutManager layoutManager=new GridLayoutManager(context,2);
         rcv_phong.setLayoutManager(layoutManager);
         rcv_phong.setHasFixedSize(true);
         fab.setOnClickListener(new View.OnClickListener() {

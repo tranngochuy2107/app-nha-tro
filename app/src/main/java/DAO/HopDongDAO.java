@@ -80,7 +80,15 @@ public class HopDongDAO {
         }
         return null;
     }
-
+    //get hợp đồng by id
+    public HopDong getHopDongByIdKT(String Id){
+        String sql="SELECT * FROM HopDong WHERE IdKhachThue=? ";
+        List<HopDong> list = getData(sql,Id);
+        if(list.size()>0){
+            return list.get(0);
+        }
+        return null;
+    }
     @SuppressLint("Range")
     public List<HopDong>getData(String sql, String...SelectArgs){
         List<HopDong> list= new ArrayList<>();
