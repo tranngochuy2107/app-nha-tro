@@ -41,25 +41,4 @@
             android:textColor="@color/black"
             android:textSize="22sp" />
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/view_layout_khachthue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8sp">
-
-        <ImageView
-            android:layout_width="30sp"
-            android:layout_height="30sp"
-            android:src="@drawable/ic_baseline_visibility_24" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30sp"
-            android:text="Xem Thông Tin"
-            android:textColor="@color/black"
-            android:textSize="21sp" />
-    </LinearLayout>
 </LinearLayout>

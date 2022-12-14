@@ -103,7 +103,7 @@ public class HopDongAdapter extends BaseAdapter implements Filterable {
         }
         LinearLayout ln_item_dv = view.findViewById(R.id.linear_item_hd);
         PhongDAO phongDAO = new PhongDAO(context);
-        Phong phong = phongDAO.getUserById(String.valueOf(list.get(i).getIdPhong()));
+        Phong phong = phongDAO.getPhongById(String.valueOf(list.get(i).getIdPhong()));
         myViewHolder.tv_HopDong.setText("Hợp Đồng Phòng: "+phong.getSoPhong());
         if(list.get(i).getTrangThaiHD()==1) {
             ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00FF2B")));
@@ -191,7 +191,7 @@ public class HopDongAdapter extends BaseAdapter implements Filterable {
         KhachThueDAO khachThueDAO=new KhachThueDAO(context);
         KhachThue khachThue=khachThueDAO.getUserById(hopDong.getIdPhong()+"");
         PhongDAO phongDAO=new PhongDAO(context);
-        Phong phong=phongDAO.getUserById(hopDong.getIdPhong()+"");
+        Phong phong=phongDAO.getPhongById(hopDong.getIdPhong()+"");
         tvNgayTaoHd.setText("Ngày: "+hopDong.getNgayBatDau());
 
         tvTenKhachThue.setText("Ông/Bà: "+khachThue.getHoTen());
@@ -290,7 +290,7 @@ public class HopDongAdapter extends BaseAdapter implements Filterable {
                 khachThue.setIdPhong(0);
                 khachThueDAO.updateKhachThue(khachThue);
                 PhongDAO phongDAO=new PhongDAO(context);
-                Phong phong=phongDAO.getUserById(String.valueOf(idPhong));
+                Phong phong=phongDAO.getPhongById(String.valueOf(idPhong));
                 phong.setTrangThai(1);
                 phongDAO.updatePhong(phong);
                 hopDong.setTrangThaiHD(3);

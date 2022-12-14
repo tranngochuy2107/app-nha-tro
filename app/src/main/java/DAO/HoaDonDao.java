@@ -41,16 +41,10 @@ public class HoaDonDao {
     //update
     public static int updateHoaDon(HoaDon HoaDon){
         ContentValues values = new ContentValues();
-        values.put("IdPhong",HoaDon.getIdPhong());
-        values.put("TenHoaDon",HoaDon.getTenHoaDOn());
-        values.put("Ngay",HoaDon.getNgay());
-        values.put("SoDien",HoaDon.getSoDien());
-        values.put("SoNuoc",HoaDon.getSoNuoc());
-        values.put("Tong",HoaDon.getTong());
-        values.put("ChiPhiKhac",HoaDon.getChiPhiKhac());
-        values.put("TrangThai",HoaDon.getChiPhiKhac());
-        values.put("GhiChu",HoaDon.getGhiChu());
-        String Id = String.valueOf(HoaDon.getIdPhong());
+
+        values.put("TrangThai",HoaDon.getTrangThai());
+
+        String Id = String.valueOf(HoaDon.getIdHoaDon());
         return db.update("HoaDon",values,"IdHoaDon=?",new String[]{Id});
     }
 
@@ -115,7 +109,8 @@ public class HoaDonDao {
         while (cursor.moveToNext()){
             HoaDon hoaDon= new HoaDon();
             hoaDon.setIdPhong(cursor.getInt(cursor.getColumnIndex("IdPhong")));
-//            hoaDon.setNgay(cursor.getString(cursor.getColumnIndex("Ngay")));
+            hoaDon.setIdHoaDon(cursor.getInt(cursor.getColumnIndex("IdHoaDon")));
+            hoaDon.setNgay(cursor.getString (cursor.getColumnIndex ("Ngay")));
             hoaDon.setNgay(cursor.getString(2));
             hoaDon.setTenHoaDOn(cursor.getString(cursor.getColumnIndex("TenHoaDon")));
             hoaDon.setSoDien(cursor.getInt(cursor.getColumnIndex("SoDien")));

@@ -56,7 +56,7 @@ public class PhongDAO {
         return getData(sql);
     }
     //get user by id
-    public Phong getUserById(String Id){
+    public Phong getPhongById(String Id){
         String sql="SELECT * FROM Phong WHERE IdPhong=?";
         List<Phong> list = getData(sql,Id);
         if(list.size()>0){

@@ -17,7 +17,7 @@
 
             android:gravity="center"
             android:padding="15sp"
-            android:text="Sửa hóa đơn"
+            android:text="Thông tin hóa đơn"
             android:textColor="@android:color/black"
             android:textSize="25sp"/>
 
@@ -73,7 +73,7 @@
                         android:src="@drawable/calendar_24"
                         />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/ed_NgayTao_HDon"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -93,9 +93,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"
-                    android:text="nhập số điện" />
+                    android:text=" số điện" />
 
-                <EditText
+                <TextView
                     android:id="@+id/ed_NhapSoDien_HDon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -113,9 +113,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"
-                    android:text="nhập số nước" />
+                    android:text=" số nước" />
 
-                <EditText
+                <TextView
                     android:id="@+id/ed_NhapSoNuoc_HDon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -135,7 +135,7 @@
                     android:gravity="start"
                     android:text="chi phí khác" />
 
-                <EditText
+                <TextView
                     android:id="@+id/ed_ChiPhiKhac_HDon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -155,12 +155,6 @@
                     android:text="Tổng tiền :"
                     android:textSize="20sp" />
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tinhtongtien"
-                    android:layout_alignParentRight="true"
-                    android:text="tổng tiền" />
             </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -199,7 +193,7 @@
                     android:layout_margin="10sp"
                     android:layout_weight="1"
                     app:cornerRadius="20sp"
-                    android:text="Sửa" />
+                    android:text="Cập nhập" />
 
                 <Button
                     android:id="@+id/btn_huy_HDon"

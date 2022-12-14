@@ -29,6 +29,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -79,6 +80,11 @@ public class AdapterPhong  extends RecyclerView.Adapter<AdapterPhong.MyViewHolde
         try {
             if(hopDongDAO.getHopDongByIdPhong(String.valueOf(phongList.get(position).getIdPhong()),"1")!=null){
                 holder.imageView.setVisibility(View.VISIBLE);
+                holder.imageView.setImageResource(R.drawable.hopdong);
+            }
+            else if(hopDongDAO.getHopDongByIdPhong(String.valueOf(phongList.get(position).getIdPhong()),"2")!=null){
+                holder.imageView.setVisibility(View.VISIBLE);
+                holder.imageView.setImageResource(R.drawable.ic_baseline_announcement_24);
             }
             else {
                 holder.imageView.setVisibility(View.GONE);
@@ -398,9 +404,13 @@ public class AdapterPhong  extends RecyclerView.Adapter<AdapterPhong.MyViewHolde
                             if(hopDongDAO.getHopDongByIdPhong(String.valueOf(phonghienTai.getIdPhong()),"1")!=null){
                                 ThemHoadon(phonghienTai);
                                 notifyDataSetChanged();
+                            }else {
+                                Toast.makeText(context, "Hãy tạo hợp đồng cho khách ở phòng này", Toast.LENGTH_SHORT).show();
+                                return;
                             }
                         }catch (Exception e){
                             Toast.makeText(context, "Hãy tạo hợp đồng cho khách ở phòng này", Toast.LENGTH_SHORT).show();
+                            return;
                         }
 
                     }
@@ -428,11 +438,12 @@ public class AdapterPhong  extends RecyclerView.Adapter<AdapterPhong.MyViewHolde
         TextView tvtrangthai=dialog.findViewById(R.id.tinhTrang);
         TextView tvnguoithue=dialog.findViewById(R.id.tvnguoiThue);
         Button button = dialog.findViewById(R.id.btn_dissmiss_phong);
+        DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
         tvSophong.setText("Số phòng: "+phong.getSoPhong());
-        tvGiaPhong.setText("Giá Phòng: "+phong.getGiaPhong());
-        tvGiadien.setText("Giá Điện: "+phong.getGiaDien());
-        tvGianuoc.setText("Giá Nước: "+phong.getGiaNuoc());
-        tvWifi.setText("Giá Wifi: "+phong.getGiaWifi());
+        tvGiaPhong.setText("Giá Phòng: "+decimalFormat.format(phong.getGiaPhong())+"dĐ");
+        tvGiadien.setText("Giá Điện: "+decimalFormat.format(phong.getGiaDien())+"dĐ");
+        tvGianuoc.setText("Giá Nước: "+decimalFormat.format(phong.getGiaNuoc())+"dĐ");
+        tvWifi.setText("Giá Wifi: "+decimalFormat.format(phong.getGiaWifi())+"dĐ");
         if(phong.getTrangThai()==1){
             tvtrangthai.setText("Trạng Thái: chưa ai thuê ");
         }
@@ -514,7 +525,7 @@ public class AdapterPhong  extends RecyclerView.Adapter<AdapterPhong.MyViewHolde
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
         final int day = calendar.get(calendar.DAY_OF_MONTH);
-        ed_tenhoaDon.setText("Hóa Đơn tháng "+ (month)+" phòng " +phong.getSoPhong());
+        ed_tenhoaDon.setText("Hóa Đơn tháng "+ (month+1)+" phòng " +phong.getSoPhong());
         image_ngay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
