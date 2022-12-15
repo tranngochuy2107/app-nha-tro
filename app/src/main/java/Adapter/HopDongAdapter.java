@@ -101,19 +101,38 @@ public class HopDongAdapter extends BaseAdapter implements Filterable {
         } else {
             myViewHolder = (MyViewHolder) view.getTag();
         }
-        LinearLayout ln_item_dv = view.findViewById(R.id.linear_item_hd);
+        CardView ln_item_dv = view.findViewById(R.id.linear_item_hd);
+        HopDong hopDong=list.get(i);
         PhongDAO phongDAO = new PhongDAO(context);
         Phong phong = phongDAO.getPhongById(String.valueOf(list.get(i).getIdPhong()));
-        myViewHolder.tv_HopDong.setText("Hợp Đồng Phòng: "+phong.getSoPhong());
-        if(list.get(i).getTrangThaiHD()==1) {
-            ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00FF2B")));
+        KhachThueDAO khachThueDAO=new KhachThueDAO(context);
+        KhachThue khachThue=khachThueDAO.getUserById(String.valueOf(hopDong.getIdKhachThue()));
 
+        myViewHolder.tv_HopDong.setText("#"+(i+1)+". Hợp Đồng Phòng: "+phong.getSoPhong());
+        TextView txtNguoithue,txtNgayBatdau,txtNgayKetThuc,txtSoNGuoi,txtSoxe;
+        ImageView imageView;
+        txtNguoithue=view.findViewById(R.id.txtKhachThue);
+        txtNgayBatdau=view.findViewById(R.id.txtNgayBatdau);
+        txtNgayKetThuc=view.findViewById(R.id.txtNgayketthuc);
+        txtSoNGuoi=view.findViewById(R.id.txtcPerson);
+        txtSoxe=view.findViewById(R.id.txtCar);
+        imageView=view.findViewById(R.id.imghd);
+        txtNguoithue.setText("Người Thuê: "+khachThue.getHoTen());
+        txtNgayBatdau.setText("Ngày bắt đầu: "+hopDong.getNgayBatDau());
+        txtNgayKetThuc.setText("Ngày kết thúc: "+hopDong.getNgayKetThuc());
+        txtSoNGuoi.setText("Ngày bắt đầu: "+hopDong.getSoNguoi());
+        txtSoxe.setText("Ngày bắt đầu: "+hopDong.getSoLuongXe());
+        if(list.get(i).getTrangThaiHD()==1) {
+            ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#94F589")));
+            imageView.setImageResource(R.drawable.hopdong);
         }
         else if(list.get(i).getTrangThaiHD()==2){
             ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F7FF00")));
+            imageView.setImageResource(R.drawable.ic_baseline_announcement_24);
         }
         else if(list.get(i).getTrangThaiHD()==3){
-            ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF0000")));
+            ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E8A5A7")));
+            imageView.setImageResource(R.drawable.unhd);
         }
 
         ln_item_dv.setOnClickListener(new View.OnClickListener() {
