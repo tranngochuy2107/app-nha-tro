@@ -65,6 +65,7 @@ public class HoaDonAdapter extends BaseAdapter implements Filterable {
         notifyDataSetChanged();// có tác dụng refresh lại data
     }
 
+    // tim kiem
     @Override
     public Filter getFilter() {
         return new Filter() {
@@ -243,6 +244,7 @@ public class HoaDonAdapter extends BaseAdapter implements Filterable {
         });
         HoaDonDao hoaDonDao = new HoaDonDao(context);
 
+        //suahd
         Btn_sua_HDon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
