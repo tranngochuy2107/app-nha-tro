@@ -217,11 +217,11 @@ public class HopDongAdapter extends BaseAdapter implements Filterable {
         tvSdt.setText("Số CCCD: "+khachThue.getSdt());
         tvSdt.setText("Số điện thoại :"+khachThue.getSdt());
         tvSoPhong.setText(phong.getSoPhong()+"");
-        tvGiaPhong.setText("Giá Thuê" +phong.getGiaPhong());
-        tvGiaDien.setText("Tiền điện: "+phong.getGiaDien() +" đ/kwh");
-        tvGianuoc.setText("Tiền Nước: "+phong.getGiaNuoc() +" đ/khối");
-        tvGiawifi.setText("Tiền Wifi: "+phong.getGiaWifi() +" đ/Tháng");
-        tvtienCoc.setText("Tiền Cọc: "+hopDong.getTiecCoc() +" đ");
+        tvGiaPhong.setText("Giá Thuê: " +phong.getGiaPhong());
+        tvGiaDien.setText("Tiền điện: "+phong.getGiaDien() +" Vnđ/kwh");
+        tvGianuoc.setText("Tiền Nước: "+phong.getGiaNuoc() +" Vnđ/khối");
+        tvGiawifi.setText("Tiền Wifi: "+phong.getGiaWifi() +" Vnđ/Tháng");
+        tvtienCoc.setText("Tiền Cọc: "+hopDong.getTiecCoc() +" Vnđ");
         tvThoiHan.setText("Hợp đồng có giá trị kể từ ngày " +hopDong.getNgayBatDau()+ " đến ngày "+ hopDong.getNgayKetThuc());
         tvchuky.setText(khachThue.getHoTen());
         vtnameChuky.setText(khachThue.getHoTen());
