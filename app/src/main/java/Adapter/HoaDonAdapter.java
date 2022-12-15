@@ -244,6 +244,7 @@ public class HoaDonAdapter extends BaseAdapter implements Filterable {
         });
         HoaDonDao hoaDonDao = new HoaDonDao(context);
 
+        //suahd
         Btn_sua_HDon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
