@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Thêm Phòng"
+        android:text="Sửa Phòng"
         android:textSize="36dp"
         android:background="@color/yellow"
         android:gravity="center"/>
