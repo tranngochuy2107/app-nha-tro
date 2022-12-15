@@ -120,8 +120,8 @@ public class HopDongAdapter extends BaseAdapter implements Filterable {
         txtNguoithue.setText("Người Thuê: "+khachThue.getHoTen());
         txtNgayBatdau.setText("Ngày bắt đầu: "+hopDong.getNgayBatDau());
         txtNgayKetThuc.setText("Ngày kết thúc: "+hopDong.getNgayKetThuc());
-        txtSoNGuoi.setText("Ngày bắt đầu: "+hopDong.getSoNguoi());
-        txtSoxe.setText("Ngày bắt đầu: "+hopDong.getSoLuongXe());
+        txtSoNGuoi.setText("Số người ở: "+hopDong.getSoNguoi());
+        txtSoxe.setText("Số Lượng xe: "+hopDong.getSoLuongXe());
         if(list.get(i).getTrangThaiHD()==1) {
             ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#94F589")));
             imageView.setImageResource(R.drawable.hopdong);
