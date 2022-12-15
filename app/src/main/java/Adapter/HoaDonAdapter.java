@@ -65,6 +65,7 @@ public class HoaDonAdapter extends BaseAdapter implements Filterable {
         notifyDataSetChanged();// có tác dụng refresh lại data
     }
 
+    // tim kiem
     @Override
     public Filter getFilter() {
         return new Filter() {

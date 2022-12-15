@@ -440,10 +440,10 @@ public class AdapterPhong  extends RecyclerView.Adapter<AdapterPhong.MyViewHolde
         Button button = dialog.findViewById(R.id.btn_dissmiss_phong);
         DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
         tvSophong.setText("Số phòng: "+phong.getSoPhong());
-        tvGiaPhong.setText("Giá Phòng: "+decimalFormat.format(phong.getGiaPhong())+"dĐ");
-        tvGiadien.setText("Giá Điện: "+decimalFormat.format(phong.getGiaDien())+"dĐ");
-        tvGianuoc.setText("Giá Nước: "+decimalFormat.format(phong.getGiaNuoc())+"dĐ");
-        tvWifi.setText("Giá Wifi: "+decimalFormat.format(phong.getGiaWifi())+"dĐ");
+        tvGiaPhong.setText("Giá Phòng: "+decimalFormat.format(phong.getGiaPhong())+"VndĐ");
+        tvGiadien.setText("Giá Điện: "+decimalFormat.format(phong.getGiaDien())+"VndĐ");
+        tvGianuoc.setText("Giá Nước: "+decimalFormat.format(phong.getGiaNuoc())+"VndĐ");
+        tvWifi.setText("Giá Wifi: "+decimalFormat.format(phong.getGiaWifi())+"VndĐ");
         if(phong.getTrangThai()==1){
             tvtrangthai.setText("Trạng Thái: chưa ai thuê ");
         }
@@ -545,8 +545,6 @@ public class AdapterPhong  extends RecyclerView.Adapter<AdapterPhong.MyViewHolde
             @Override
             public void onClick(View view) {
                 // check vavidate
-
-
 
                 ghiChu=Ed_GhiChu_HDon.getText().toString();
                 try {
