@@ -120,8 +120,8 @@ public class HopDongAdapter extends BaseAdapter implements Filterable {
         txtNguoithue.setText("Người Thuê: "+khachThue.getHoTen());
         txtNgayBatdau.setText("Ngày bắt đầu: "+hopDong.getNgayBatDau());
         txtNgayKetThuc.setText("Ngày kết thúc: "+hopDong.getNgayKetThuc());
-        txtSoNGuoi.setText("Ngày bắt đầu: "+hopDong.getSoNguoi());
-        txtSoxe.setText("Ngày bắt đầu: "+hopDong.getSoLuongXe());
+        txtSoNGuoi.setText("Số người ở: "+hopDong.getSoNguoi());
+        txtSoxe.setText("Số Lượng xe: "+hopDong.getSoLuongXe());
         if(list.get(i).getTrangThaiHD()==1) {
             ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#94F589")));
             imageView.setImageResource(R.drawable.hopdong);
@@ -217,11 +217,11 @@ public class HopDongAdapter extends BaseAdapter implements Filterable {
         tvSdt.setText("Số CCCD: "+khachThue.getSdt());
         tvSdt.setText("Số điện thoại :"+khachThue.getSdt());
         tvSoPhong.setText(phong.getSoPhong()+"");
-        tvGiaPhong.setText("Giá Thuê" +phong.getGiaPhong());
-        tvGiaDien.setText("Tiền điện: "+phong.getGiaDien() +" đ/kwh");
-        tvGianuoc.setText("Tiền Nước: "+phong.getGiaNuoc() +" đ/khối");
-        tvGiawifi.setText("Tiền Wifi: "+phong.getGiaWifi() +" đ/Tháng");
-        tvtienCoc.setText("Tiền Cọc: "+hopDong.getTiecCoc() +" đ");
+        tvGiaPhong.setText("Giá Thuê: " +phong.getGiaPhong());
+        tvGiaDien.setText("Tiền điện: "+phong.getGiaDien() +" Vnđ/kwh");
+        tvGianuoc.setText("Tiền Nước: "+phong.getGiaNuoc() +" Vnđ/khối");
+        tvGiawifi.setText("Tiền Wifi: "+phong.getGiaWifi() +" Vnđ/Tháng");
+        tvtienCoc.setText("Tiền Cọc: "+hopDong.getTiecCoc() +" Vnđ");
         tvThoiHan.setText("Hợp đồng có giá trị kể từ ngày " +hopDong.getNgayBatDau()+ " đến ngày "+ hopDong.getNgayKetThuc());
         tvchuky.setText(khachThue.getHoTen());
         vtnameChuky.setText(khachThue.getHoTen());
