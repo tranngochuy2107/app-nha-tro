@@ -47,7 +47,7 @@ import Model.KhachThue;
 import Model.Phong;
 import longvtph16016.poly.appquanlyphongtro.R;
 
-public class AdapterPhong  extends RecyclerView.Adapter<AdapterPhong.MyViewHolder> implements Filterable {
+public class PhongAdapter  extends RecyclerView.Adapter<PhongAdapter.MyViewHolder> implements Filterable {
     List<Phong> phongList;
     List<Phong> phongListold;
     Context context;
@@ -57,7 +57,7 @@ public class AdapterPhong  extends RecyclerView.Adapter<AdapterPhong.MyViewHolde
     HoaDonDao hoaDonDao;
     String tenhoadon,ngaytao,ghiChu;
     int sodien,sonuoc,chiphikhac,tongtien;
-    public AdapterPhong(List<Phong> phongs, Context context) {
+    public PhongAdapter(List<Phong> phongs, Context context) {
         this.phongList = phongs;
         this.context = context;
         this.phongListold=phongList;
@@ -72,10 +72,10 @@ public class AdapterPhong  extends RecyclerView.Adapter<AdapterPhong.MyViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-         hopDongDAO=new HopDongDAO(context);
-         hoaDonDao=new HoaDonDao(context);
-         khachThueDAO=new KhachThueDAO(context);
-         phongDAO=new PhongDAO(context);
+        hopDongDAO=new HopDongDAO(context);
+        hoaDonDao=new HoaDonDao(context);
+        khachThueDAO=new KhachThueDAO(context);
+        phongDAO=new PhongDAO(context);
         Phong phonghienTai=phongList.get(position);
         try {
             if(hopDongDAO.getHopDongByIdPhong(String.valueOf(phongList.get(position).getIdPhong()),"1")!=null){
@@ -90,7 +90,7 @@ public class AdapterPhong  extends RecyclerView.Adapter<AdapterPhong.MyViewHolde
                 holder.imageView.setVisibility(View.GONE);
             }
         }catch (Exception e){
-           holder.imageView.setVisibility(View.GONE);
+            holder.imageView.setVisibility(View.GONE);
         }
         holder.tv_sophong.setText("Phòng"+": "+phongList.get(position).getSoPhong());
         if(phongList.get(position).getTrangThai()==1) {
