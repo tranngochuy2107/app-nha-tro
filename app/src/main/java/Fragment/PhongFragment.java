@@ -3,7 +3,6 @@ package Fragment;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -32,13 +31,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import Adapter.AdapterPhong;
+import Adapter.PhongAdapter;
 import DAO.HopDongDAO;
 import DAO.PhongDAO;
 import Model.HopDong;
 import Model.Phong;
 import longvtph16016.poly.appquanlyphongtro.R;
-import longvtph16016.poly.appquanlyphongtro.interfaceDeleteClickdistioner;
 
 
 public class PhongFragment extends Fragment  {
@@ -48,7 +46,7 @@ public class PhongFragment extends Fragment  {
     FloatingActionButton fab;
     RecyclerView rcv_phong;
     HopDongDAO hopDongDAO;
-    AdapterPhong adapterPhong;
+    PhongAdapter adapterPhong;
     private PhongDAO phongDAO;
     List<Phong> lists;
     Context context;
@@ -66,7 +64,7 @@ public class PhongFragment extends Fragment  {
         phongDAO = new PhongDAO(context);
         lists=phongDAO.getAll();
 
-        adapterPhong=new AdapterPhong(lists,context);
+        adapterPhong=new PhongAdapter(lists,context);
         rcv_phong.setAdapter(adapterPhong);
         RecyclerView.LayoutManager layoutManager=new GridLayoutManager(context,2);
         rcv_phong.setLayoutManager(layoutManager);
