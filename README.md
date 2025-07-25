@@ -1,15 +1,29 @@
-# App Quản Lý Nhà Trọ
+# 🏠 App Quản Lý Nhà Trọ (Android)
 
-Ứng dụng Android giúp quản lý nhà trọ dễ dàng với các chức năng:
+Ứng dụng Android giúp chủ trọ dễ dàng quản lý nhà trọ, người thuê và chi phí một cách trực quan, tiện lợi và hiện đại.
 
-- Quản lý phòng
-- Quản lý người thuê
-- Thu tiền trọ
-- Gửi thông báo
-- ... và nhiều tính năng khác
+---
 
-## Công nghệ sử dụng
+## 🚀 Tính năng chính
 
-- Java / Android SDK
-- SQLite / Room Database
-- Material Design
+- ✅ Quản lý danh sách **phòng trọ**
+- ✅ Thêm, sửa, xóa **người thuê trọ**
+- ✅ Theo dõi **tiền điện, tiền nước, tiền phòng**
+- ✅ **Thống kê** doanh thu hàng tháng
+- ✅ Gửi **thông báo** cho người thuê (tùy chọn)
+- ✅ Lưu trữ dữ liệu bằng **SQLite/Room**
+
+---
+
+## 🛠️ Công nghệ sử dụng
+
+| Thành phần       | Mô tả                          |
+|------------------|-------------------------------|
+| 🧠 Ngôn ngữ       | Java                          |
+| 📱 Nền tảng       | Android SDK                  |
+| 💾 Cơ sở dữ liệu  | SQLite (Room Database)       |
+| 🎨 Giao diện      | XML Layout, Material Design  |
+
+```bash
+/screenshots/home_screen.png
+/screenshots/room_list.png
