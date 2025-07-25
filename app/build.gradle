@@ -3,12 +3,13 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    namespace'com.huy.appquanlyphongtro'
+    compileSdk 33
 
     defaultConfig {
-        applicationId "longvtph16016.poly.appquanlyphongtro"
+        applicationId "com.huy.appquanlyphongtro"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -28,7 +29,7 @@ android {
 }
 
 dependencies {
-
+    
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'

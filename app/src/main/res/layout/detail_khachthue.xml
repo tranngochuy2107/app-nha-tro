@@ -22,7 +22,7 @@
         android:id="@+id/thongtinname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tên:Ngô Mạnh Dũng"
+        android:text="Tên: Võ Quang Huy"
         android:background="@drawable/bg_white_conor_10_border_gary"
        />
 

@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
             android:layout_marginBottom="7sp"
-            android:text="Tại địa chỉ: 15 Phú Kiều, Kiều Mai, Nam Từ Niêm, Hà Nội"
+            android:text="Tại địa chỉ: đh nam cần thơ, phong điền, ninh kiều , cần thơ"
             android:textColor="@color/black"
             android:textSize="17sp" />
 
@@ -94,7 +94,7 @@
                 android:layout_marginLeft="10sp"
                 android:layout_marginTop="5sp"
                 android:layout_marginBottom="7sp"
-                android:text="Ông/Bà: Vi Thanh Long"
+                android:text="Ông/Bà: Trần Ngọc Huy"
                 android:textColor="@color/black"
                 android:textSize="17sp" />
 
@@ -104,7 +104,7 @@
                 android:layout_marginLeft="5sp"
                 android:layout_marginTop="5sp"
                 android:layout_marginBottom="7sp"
-                android:text="Sinh ngày: 01/01/1989"
+                android:text="Sinh ngày: 21/07/2003"
                 android:textColor="@color/black"
                 android:textSize="17sp" />
         </LinearLayout>
@@ -123,7 +123,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
             android:layout_marginBottom="7sp"
-            android:text="Số điện thoại: 09999999998"
+            android:text="Số điện thoại: 0813227344"
             android:textColor="@color/black"
             android:textSize="17sp" />
 
@@ -149,7 +149,7 @@
                 android:layout_marginLeft="10sp"
                 android:layout_marginTop="5sp"
                 android:layout_marginBottom="7sp"
-                android:text="Ông/Bà: Nguyễn văn B"
+                android:text="Ông/Bà: Nguyễn văn A"
                 android:textColor="@color/black"
                 android:textSize="17sp" />
 
@@ -409,7 +409,7 @@
                 android:layout_marginTop="5sp"
                 android:layout_marginBottom="7sp"
                 android:layout_weight="1"
-                android:text="Long"
+                android:text="huy"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="17sp" />
@@ -441,7 +441,7 @@
                 android:layout_marginTop="5sp"
                 android:layout_marginBottom="7sp"
                 android:layout_weight="1"
-                android:text="Vi Thanh Long"
+                android:text="Trần Ngọc Huy"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="17sp" />

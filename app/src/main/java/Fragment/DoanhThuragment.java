@@ -12,9 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import longvtph16016.poly.appquanlyphongtro.DoanhThuNamActivity;
-import longvtph16016.poly.appquanlyphongtro.DoanhThuThangActivity;
-import longvtph16016.poly.appquanlyphongtro.R;
+import com.huy.appquanlyphongtro.DoanhThuNamActivity;
+import com.huy.appquanlyphongtro.DoanhThuThangActivity;
+import com.huy.appquanlyphongtro.R;
 
 
 

@@ -1,8 +1,5 @@
 package Fragment;
 
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -19,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -29,15 +25,14 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 
 import Adapter.HoaDonAdapter;
 import DAO.HoaDonDao;
 import Model.HoaDon;
-import longvtph16016.poly.appquanlyphongtro.R;
-import longvtph16016.poly.appquanlyphongtro.interfaceDeleteClickdistioner;
+import com.huy.appquanlyphongtro.R;
+import com.huy.appquanlyphongtro.interfaceDeleteClickdistioner;
 
 
 public class HoaDonFragment extends Fragment implements interfaceDeleteClickdistioner {

@@ -36,7 +36,7 @@ import DAO.HopDongDAO;
 import DAO.PhongDAO;
 import Model.HopDong;
 import Model.Phong;
-import longvtph16016.poly.appquanlyphongtro.R;
+import com.huy.appquanlyphongtro.R;
 
 
 public class PhongFragment extends Fragment  {

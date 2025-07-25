@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +28,6 @@ import androidx.cardview.widget.CardView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -40,13 +38,12 @@ import DAO.PhongDAO;
 import Model.HopDong;
 import Model.KhachThue;
 import Model.Phong;
-import longvtph16016.poly.appquanlyphongtro.R;
-import longvtph16016.poly.appquanlyphongtro.interfaceDeleteClickdistioner;
+import com.huy.appquanlyphongtro.R;
 
 public class HopDongAdapter extends BaseAdapter implements Filterable {
     private Context context;
-    private List<HopDong> list;
-    private List<HopDong> listold;
+    private List<HopDong> list;// Danh sách hợp đồng hiện tại
+    private List<HopDong> listold;// Danh sách hợp đồng ban đầu
     private Button btnthemHopDong;
     EditText edtNgayBatDau;
     EditText edtNgayKetThuc;
@@ -58,20 +55,21 @@ public class HopDongAdapter extends BaseAdapter implements Filterable {
     public HopDongAdapter(Context context, List<HopDong> list  ) {
         this.context = context;
         this.list = list;
-        this.listold=list;
+        this.listold=list; // Lưu lại danh sách hợp đồng gốc
     }
-
+    // Cập nhật lại danh sách hợp đồng và làm mới UI
     public void setData(List<HopDong> list){
         this.list= list;
-        notifyDataSetChanged();// có tác dụng refresh lại data
+        notifyDataSetChanged();// // Cập nhật lại giao diện
     }
 
-
+    // ViewHolder dùng để lưu trữ các thành phần của mỗi item trong danh sách
     public final class MyViewHolder {
         //khai báo các thành phần view có trong layoutitem
         private TextView tv_HopDong,giaphong,giadien,gianuoc,giawifi,trangthai;
 
     }
+    // Trả về số lượng hợp đồng
     @Override
     public int getCount() {
         if(list!=null)
@@ -88,10 +86,11 @@ public class HopDongAdapter extends BaseAdapter implements Filterable {
     public long getItemId(int i) {
         return 0;
     }
-
+    // Hàm tạo view cho từng item trong listview
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         HopDongAdapter.MyViewHolder myViewHolder = null;
+        // Nếu view chưa được tạo, tạo mới view và ViewHolder
         if (view == null) {
             myViewHolder = new MyViewHolder();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -101,13 +100,14 @@ public class HopDongAdapter extends BaseAdapter implements Filterable {
         } else {
             myViewHolder = (MyViewHolder) view.getTag();
         }
+        // Khởi tạo các đối tượng cần thiết để lấy thông tin hợp đồng
         CardView ln_item_dv = view.findViewById(R.id.linear_item_hd);
-        HopDong hopDong=list.get(i);
+        HopDong hopDong=list.get(i);  // Lấy hợp đồng tại vị trí i trong danh sách
         PhongDAO phongDAO = new PhongDAO(context);
-        Phong phong = phongDAO.getPhongById(String.valueOf(list.get(i).getIdPhong()));
+        Phong phong = phongDAO.getPhongById(String.valueOf(list.get(i).getIdPhong()));  // Lấy phòng theo id
         KhachThueDAO khachThueDAO=new KhachThueDAO(context);
-        KhachThue khachThue=khachThueDAO.getUserById(String.valueOf(hopDong.getIdKhachThue()));
-
+        KhachThue khachThue=khachThueDAO.getUserById(String.valueOf(hopDong.getIdKhachThue()));// Lấy khách thuê
+        // Cập nhật thông tin hợp đồng vào giao diện
         myViewHolder.tv_HopDong.setText("#"+(i+1)+". Hợp Đồng Phòng: "+phong.getSoPhong());
         TextView txtNguoithue,txtNgayBatdau,txtNgayKetThuc,txtSoNGuoi,txtSoxe;
         ImageView imageView;
@@ -122,6 +122,7 @@ public class HopDongAdapter extends BaseAdapter implements Filterable {
         txtNgayKetThuc.setText("Ngày kết thúc: "+hopDong.getNgayKetThuc());
         txtSoNGuoi.setText("Số người ở: "+hopDong.getSoNguoi());
         txtSoxe.setText("Số Lượng xe: "+hopDong.getSoLuongXe());
+        // Thay đổi màu sắc và hình ảnh của item theo trạng thái hợp đồng
         if(list.get(i).getTrangThaiHD()==1) {
             ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#94F589")));
             imageView.setImageResource(R.drawable.hopdong);
@@ -134,7 +135,7 @@ public class HopDongAdapter extends BaseAdapter implements Filterable {
             ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E8A5A7")));
             imageView.setImageResource(R.drawable.unhd);
         }
-
+// Xử lý sự kiện khi click vào item hợp đồng
         ln_item_dv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,18 +143,17 @@ public class HopDongAdapter extends BaseAdapter implements Filterable {
                 final Dialog dialog = new Dialog(context);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.bottom_layout_hdong);
+                // Các layout con trong dialog
                 LinearLayout giahanLayuot = dialog.findViewById(R.id.edit_layout_dh);
                 LinearLayout chamDutHD = dialog.findViewById(R.id.huyGiaHan);
-
                 LinearLayout detailLayout = dialog.findViewById(R.id.view_layout_hd);
 
                 dialog.show();
-
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
                 dialog.getWindow().setGravity(Gravity.BOTTOM);
-
+                // Xử lý sự kiện cho các nút trong dialog
                 detailLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -189,9 +189,11 @@ public class HopDongAdapter extends BaseAdapter implements Filterable {
 
         return view;
     }
+    // Hiển thị chi tiết hợp đồng
     public void detail(HopDong hopDong) {
         final Dialog dialog = new Dialog(context, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
         dialog.setContentView(R.layout.detail_hop_dong);
+        // Khởi tạo các thành phần trong dialog
         TextView tvNgayTaoHd,tvTenKhachThue,tvCCCd,tvSdt,tvSoPhong,tvGiaPhong,tvGiaDien,tvGianuoc,
                 tvGiawifi,tvtienCoc,tvThoiHan,tvchuky,vtnameChuky;
         tvNgayTaoHd=dialog.findViewById(R.id.thoigianTaoHD);
@@ -212,7 +214,7 @@ public class HopDongAdapter extends BaseAdapter implements Filterable {
         PhongDAO phongDAO=new PhongDAO(context);
         Phong phong=phongDAO.getPhongById(hopDong.getIdPhong()+"");
         tvNgayTaoHd.setText("Ngày: "+hopDong.getNgayBatDau());
-
+        // Điền thông tin hợp đồng vào các TextView
         tvTenKhachThue.setText("Ông/Bà: "+khachThue.getHoTen());
         tvSdt.setText("Số CCCD: "+khachThue.getSdt());
         tvSdt.setText("Số điện thoại :"+khachThue.getSdt());
@@ -227,6 +229,7 @@ public class HopDongAdapter extends BaseAdapter implements Filterable {
         vtnameChuky.setText(khachThue.getHoTen());
         dialog.show();
     }
+    // Hàm gia hạn hợp đồng
     public void GiaHanHD(HopDong hopDong){
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -234,12 +237,14 @@ public class HopDongAdapter extends BaseAdapter implements Filterable {
         dialog.show();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        // Hiển thị ngày hết hạn hợp đồng hiện tại
         TextView tvNgayhethan=dialog.findViewById(R.id.tvngayHetHan);
         tvNgayhethan.setText("Hạn Hợp Đồng: "+hopDong.getNgayKetThuc());
         ImageView imageView=dialog.findViewById(R.id.image_NgayTao_GiaHan);
         EditText editText=dialog.findViewById(R.id.ed_NgayGiaHan);
         Button update=dialog.findViewById(R.id.btn_giaHanHd);
         Button cannel=dialog.findViewById(R.id.btn_HuygiaHanHd);
+        // Lựa chọn ngày gia hạn hợp đồng
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -253,12 +258,13 @@ public class HopDongAdapter extends BaseAdapter implements Filterable {
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                         calendar.set(y, m, d);
                         String dateString = sdf.format(calendar.getTime());
-                        editText.setText(dateString);
+                        editText.setText(dateString);// Cập nhật ngày gia hạn vào EditText
                     }
                 }, year, month, day);
                 datePickerDialog.show();
             }
         });
+        // Xử lý khi người dùng nhấn nút "Cập nhật"
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -274,7 +280,7 @@ public class HopDongAdapter extends BaseAdapter implements Filterable {
                         hopDong.setNgayKetThuc(editText.getText().toString());
                         hopDong.setTrangThaiHD(1);
                         HopDongDAO hopDongDAO=new HopDongDAO(context);
-                        hopDongDAO.updateHopDong(hopDong);
+                        hopDongDAO.updateHopDong(hopDong);// Cập nhật hợp đồng gia hạn vào database
                         Toast.makeText(context,"Gia hạn thành công",Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                         notifyDataSetChanged();

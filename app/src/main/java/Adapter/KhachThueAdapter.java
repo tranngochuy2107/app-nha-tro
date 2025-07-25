@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -32,11 +31,10 @@ import java.util.List;
 import DAO.HopDongDAO;
 import DAO.KhachThueDAO;
 import DAO.PhongDAO;
-import Model.HoaDon;
 import Model.HopDong;
 import Model.KhachThue;
 import Model.Phong;
-import longvtph16016.poly.appquanlyphongtro.R;
+import com.huy.appquanlyphongtro.R;
 
 public class KhachThueAdapter extends BaseAdapter implements Filterable {
     private Context context;

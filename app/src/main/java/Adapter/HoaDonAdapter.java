@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.Gravity;
@@ -17,7 +16,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -33,15 +31,10 @@ import java.util.Calendar;
 import java.util.List;
 
 import DAO.HoaDonDao;
-import DAO.HopDongDAO;
-import DAO.KhachThueDAO;
 import DAO.PhongDAO;
 import Model.HoaDon;
-import Model.HopDong;
-import Model.KhachThue;
 import Model.Phong;
-import longvtph16016.poly.appquanlyphongtro.R;
-import longvtph16016.poly.appquanlyphongtro.interfaceDeleteClickdistioner;
+import com.huy.appquanlyphongtro.R;
 
 public class HoaDonAdapter extends BaseAdapter implements Filterable {
     private Context context;
@@ -53,19 +46,20 @@ public class HoaDonAdapter extends BaseAdapter implements Filterable {
     String tenhoadon,ngaytao,ghiChu;
     int sodien,sonuoc,chiphikhac,tongtien;
 
-
+    // Constructor để khởi tạo context
     public HoaDonAdapter(Context context  ) {
         this.context = context;
 
     }
 
+    // Hàm set dữ liệu cho adapter
     public void setData(List<HoaDon> arrayList){
         this.list= arrayList;
         this.listold=list;
         notifyDataSetChanged();// có tác dụng refresh lại data
     }
 
-    // tim kiem
+    // Cung cấp chức năng tìm kiếm cho danh sách hóa đơn
     @Override
     public Filter getFilter() {
         return new Filter() {
@@ -73,13 +67,13 @@ public class HoaDonAdapter extends BaseAdapter implements Filterable {
             protected FilterResults performFiltering(CharSequence charSequence) {
                 String strSrearch=charSequence.toString();
                 if(strSrearch.isEmpty()){
-                    list=listold;
+                    list=listold;// Nếu không có tìm kiếm, hiển thị tất cả các hóa đơn
                 }
                 else {
                     List<HoaDon> hoaDonList=new ArrayList<>();
                     for(HoaDon hoaDon: listold){
                         if(hoaDon.getTenHoaDOn().toLowerCase().contains(strSrearch.toLowerCase())){
-                            hoaDonList.add(hoaDon);
+                            hoaDonList.add(hoaDon);// Thêm những hóa đơn phù hợp vào danh sách
                         }
                     }
                     list=hoaDonList;
@@ -92,7 +86,7 @@ public class HoaDonAdapter extends BaseAdapter implements Filterable {
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 try {
-                    list= (List<HoaDon>) filterResults;
+                    list= (List<HoaDon>) filterResults; // Cập nhật lại danh sách sau khi lọc
                     notifyDataSetChanged();
                 }catch (Exception e){
 
@@ -100,40 +94,42 @@ public class HoaDonAdapter extends BaseAdapter implements Filterable {
             }
         };
     }
-
+    // Lớp ViewHolder để giữ các tham chiếu đến các view trong mỗi mục của danh sách
     public final class MyViewHolder {
         //khai báo các thành phần view có trong layoutitem
         private TextView tv_sohoadon, Ngay,SoDien,SoNuoc,Tong,ChiPhiKhac, GhiChu;
 
     }
+    // Trả về số lượng phần tử trong danh sách
     public int getCount() {
         if(list!=null)
             return list.size();
         return 0;
     }
+    // Trả về một mục trong danh sách (không sử dụng trong trường hợp này)
     public Object getItem(int i) {
         return null;
     }
-
+    // Trả về id của mục (không sử dụng trong trường hợp này)
     @Override
     public long getItemId(int i) {
         return 0;
     }
-
+    // Tạo giao diện cho mỗi mục trong danh sách
     public View getView(int i, View view, ViewGroup viewGroup) {
         MyViewHolder myViewHolder = null;
         if (view == null) {
             myViewHolder = new MyViewHolder();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.iteam_hoadon, null);
-            myViewHolder.tv_sohoadon = view.findViewById(R.id.txtnamehd);
-            view.setTag(myViewHolder);
+            view = inflater.inflate(R.layout.iteam_hoadon, null);// Nạp layout cho mỗi mục
+            myViewHolder.tv_sohoadon = view.findViewById(R.id.txtnamehd);// Khởi tạo các view
+            view.setTag(myViewHolder);// Gán view holder để tái sử dụng
         } else {
             myViewHolder = (MyViewHolder) view.getTag();
         }
-        HoaDon hoaDonhientai=list.get(i);
+        HoaDon hoaDonhientai=list.get(i); // Lấy hóa đơn hiện tại
         PhongDAO phongDAO=new PhongDAO(context);
-        Phong phong=phongDAO.getPhongById(String.valueOf(hoaDonhientai.getIdPhong()));
+        Phong phong=phongDAO.getPhongById(String.valueOf(hoaDonhientai.getIdPhong()));// Lấy thông tin phòng liên quan
         DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
         CardView ln_item_dv = view.findViewById(R.id.ln_menu_hoadon);
         TextView txtIDhoaDon=view.findViewById(R.id.txtIDhoaDon);
@@ -142,7 +138,7 @@ public class HoaDonAdapter extends BaseAdapter implements Filterable {
         TextView txtDichVU=view.findViewById(R.id.txtDichVU);
         TextView txtTrangThai=view.findViewById(R.id.txtTrangThai);
         TextView txtGiChu=view.findViewById(R.id.txtGiChu);
-        //hien thong tin
+        // Hiển thị thông tin hóa đơn
         txtIDhoaDon.setText("#"+(i+1));
         txtTongTien.setText(decimalFormat.format(hoaDonhientai.getTong())+" Đ");
         txttienphong.setText(decimalFormat.format(phong.getGiaPhong())+" Đ");
@@ -151,6 +147,7 @@ public class HoaDonAdapter extends BaseAdapter implements Filterable {
 
         int tiendichvu=hoaDonhientai.getChiPhiKhac()+(hoaDonhientai.getSoDien()*phong.getGiaDien())+(hoaDonhientai.getSoNuoc()+phong.getGiaDien())+phong.getGiaWifi();
         txtDichVU.setText(decimalFormat.format(tiendichvu)+" Đ");
+        // Thiết lập màu nền tùy thuộc vào trạng thái thanh toán
         if(hoaDonhientai.getTrangThai()==2) {
             ln_item_dv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#66FFB2")));
             txtTrangThai.setText("Trạng Thái: đã thanh toán");
@@ -160,13 +157,14 @@ public class HoaDonAdapter extends BaseAdapter implements Filterable {
             txtTrangThai.setText("Trạng Thái: Chưa thanh toán");
         }
         txtDichVU.setText(decimalFormat.format(tiendichvu)+" Đ");
+        // Xử lý sự kiện khi người dùng click vào mục để sửa hóa đơn
         ln_item_dv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("TAG", "onClick: "+hoaDonhientai.getTrangThai());
                 final Dialog dialog = new Dialog(context);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setContentView(R.layout.dialog_bottom_hoadon);
+                dialog.setContentView(R.layout.dialog_bottom_hoadon);// Mở dialog hóa đơn
                 dialog.show();
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -185,11 +183,11 @@ public class HoaDonAdapter extends BaseAdapter implements Filterable {
         });
         return view;
     }
-
+    // Mở dialog để chỉnh sửa hóa đơn
     private void editHoaDon(HoaDon hoaDon) {
         final  Dialog dialog=new Dialog(context, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
         dialog.requestWindowFeature((Window.FEATURE_NO_TITLE));
-        dialog.setContentView(R.layout.dialog_sua_hoa_don);
+        dialog.setContentView(R.layout.dialog_sua_hoa_don);// Mở layout chỉnh sửa hóa đơn
         dialog.getWindow().getAttributes().windowAnimations=R.style.DialogAnimation;
         dialog.show();
         TextView  Ed_NgayTao_HDon, Ed_NhapSoDien_HDon, Ed_NhapSoNuoc_HDon, Ed_ChiPhiKhac_HDon,Ed_TongTien_HDon,Ed_GhiChu_HDon,ed_tenhoaDon;
@@ -197,7 +195,7 @@ public class HoaDonAdapter extends BaseAdapter implements Filterable {
         ImageView image_ngay;
         TextView tvtongtien;
         Button Btn_huy_HDon, Btn_sua_HDon,btn_tongtien;
-        //ánh xạ
+        // Ánh xạ các view
         Ed_NgayTao_HDon = dialog.findViewById(R.id.ed_NgayTao_HDon);
         ed_tenhoaDon = dialog.findViewById(R.id.ed_tenHoaDon);
         Ed_NhapSoDien_HDon = dialog.findViewById(R.id.ed_NhapSoDien_HDon);
@@ -210,6 +208,7 @@ public class HoaDonAdapter extends BaseAdapter implements Filterable {
         tvtongtien=dialog.findViewById(R.id.tvtongtien);
         CheckBox checkBox=dialog.findViewById(R.id.checkboxTrangthai);
 
+        // Điền dữ liệu vào các trường của dialog
         ed_tenhoaDon.setText(hoaDon.getTenHoaDOn());
         Ed_NgayTao_HDon.setText(hoaDon.getNgay());
         Ed_NhapSoDien_HDon.setText(hoaDon.getSoDien()+"");
@@ -218,6 +217,7 @@ public class HoaDonAdapter extends BaseAdapter implements Filterable {
         Ed_GhiChu_HDon.setText(hoaDon.getGhiChu());
         tongtien=hoaDon.getTong();
         tvtongtien.setText("Tổng Hóa Đơn: "+tongtien);
+        // Nếu trạng thái đã thanh toán thì checkbox được chọn
         if(hoaDon.getTrangThai()==1){
             checkBox.setChecked(false);
         }
@@ -225,12 +225,13 @@ public class HoaDonAdapter extends BaseAdapter implements Filterable {
             checkBox.setChecked(true);
         }
 
-        //---------------- an voa anh chon ngay
-        Calendar calendar = Calendar.getInstance();//Lay time
+        // Mở chọn ngày khi click vào icon
+        Calendar calendar = Calendar.getInstance();// Lấy ngày hiện tại
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
         final int day = calendar.get(calendar.DAY_OF_MONTH);
-        image_ngay.setOnClickListener(new View.OnClickListener() {
+        image_ngay.setOnClickListener(new View.OnClickListener() // Hiển thị DatePicker khi click vào icon ngày
+        {
             @Override
             public void onClick(View v) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
@@ -244,7 +245,7 @@ public class HoaDonAdapter extends BaseAdapter implements Filterable {
         });
         HoaDonDao hoaDonDao = new HoaDonDao(context);
 
-        //suahd
+        // Xử lý sự kiện khi nhấn nút sửa hóa đơn
         Btn_sua_HDon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -262,7 +263,7 @@ public class HoaDonAdapter extends BaseAdapter implements Filterable {
                 long err=hoaDonDao.updateHoaDon(hoaDon);
                 if(err>0){
                     Toast.makeText(context,"Cập nhập thành công",Toast.LENGTH_LONG).show();
-                    dialog.dismiss();
+                    dialog.dismiss();// Đóng dialog
                     notifyDataSetChanged();
                 }
                 else {
@@ -270,6 +271,7 @@ public class HoaDonAdapter extends BaseAdapter implements Filterable {
                 }
             }
         });
+        // Xử lý sự kiện khi nhấn nút hủy
         Btn_huy_HDon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
