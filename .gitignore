@@ -1,0 +1,17 @@
+# Gradle
+.gradle/
+build/
+
+# Local config
+local.properties
+
+# IDE
+.idea/
+*.iml
+
+# Output
+captures/
+output.json
+
+# MacOS
+.DS_Store
